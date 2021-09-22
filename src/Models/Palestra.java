@@ -1,6 +1,12 @@
 package Models;
 
 public class Palestra {
+    public Palestra(String descricao, float avaliacao, int quantidadeAvaliadores) {
+        this.descricao = descricao;
+        this.avaliacao = avaliacao;
+        this.quantidadeAvaliadores = quantidadeAvaliadores;
+    }
+
     private String descricao;
     private float avaliacao;
     private int quantidadeAvaliadores;
