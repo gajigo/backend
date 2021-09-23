@@ -47,7 +47,9 @@ public class Eventos {
         atual.addOrganizador(organizador2);
 
         System.out.println("Organizadores:");
-        System.out.println(atual.getOrganizadores());
+        for (Usuario organizadorAtual : atual.getOrganizadores()) {
+            System.out.println(organizadorAtual.getNome());
+        }
 
         // Adiciona palestra
         Palestra palestra1 = new Palestra("Aula de Java", "Aprenda mais sobre Java");
@@ -57,7 +59,9 @@ public class Eventos {
         atual.addPalestraAssociada(palestra2);
 
         System.out.println("Palestras: ");
-        System.out.println(atual.getPalestrasAssociadas());
+        for (Palestra palestraAtual : atual.getPalestrasAssociadas()) {
+            System.out.println(palestraAtual.getNome());
+        }
 
         // Printa evento
         System.out.println(atual);
