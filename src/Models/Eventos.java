@@ -7,7 +7,7 @@ import java.util.Date;
 public class Eventos {
     private String nomeEvento;
     private Date dataEvento;
-    private ArrayList<Organizador> organizadores;
+    private ArrayList<Usuario> organizadores;
     private String descricao;
     private ArrayList<Palestra> palestrasAssociadas;
     private String modalidade;
@@ -34,11 +34,38 @@ public class Eventos {
                 "Online"
         );
 
+        // Adiciona organizadores
+        Usuario organizador1 = new Usuario("Alice", "senhamassa");
+        Usuario organizador2 = new Usuario("Bob", "senhalegal");
+
+        // Adiciona o cargo de organizador
+        organizador1.addRole(Roles.ORGANIZADOR);
+        organizador2.addRole(Roles.ORGANIZADOR);
+
+        // Associa organizadores ao evento
+        atual.addOrganizador(organizador1);
+        atual.addOrganizador(organizador2);
+
+        System.out.println("Organizadores:");
+        System.out.println(atual.getOrganizadores());
+
+        // Adiciona palestra
+        Palestra palestra1 = new Palestra("Aula de Java", "Aprenda mais sobre Java");
+        Palestra palestra2 = new Palestra("Workshop de Arduino", "Aprenda a trabalhar com Arduinos na pratica");
+
+        atual.addPalestraAssociada(palestra1);
+        atual.addPalestraAssociada(palestra2);
+
+        System.out.println("Palestras: ");
+        System.out.println(atual.getPalestrasAssociadas());
+
         // Printa evento
         System.out.println(atual);
     }
 
     public Eventos() {
+        this.palestrasAssociadas = new ArrayList<>();
+        this.organizadores = new ArrayList<>();
     }
 
     public Eventos(String nomeEvento, Date dataEvento, String descricao, String modalidade) {
@@ -46,9 +73,11 @@ public class Eventos {
         this.dataEvento = dataEvento;
         this.descricao = descricao;
         this.modalidade = modalidade;
+        this.palestrasAssociadas = new ArrayList<>();
+        this.organizadores = new ArrayList<>();
     }
 
-    public Eventos(String nomeEvento, Date dataEvento, ArrayList<Organizador> organizadores, String descricao, ArrayList<Palestra> palestrasAssociadas, String modalidade) {
+    public Eventos(String nomeEvento, Date dataEvento, ArrayList<Usuario> organizadores, String descricao, ArrayList<Palestra> palestrasAssociadas, String modalidade) {
         this.nomeEvento = nomeEvento;
         this.dataEvento = dataEvento;
         this.organizadores = organizadores;
@@ -85,19 +114,19 @@ public class Eventos {
         this.dataEvento = dataEvento;
     }
 
-    public ArrayList<Organizador> getOrganizadores() {
+    public ArrayList<Usuario> getOrganizadores() {
         return organizadores;
     }
 
-    public void setOrganizadores(ArrayList<Organizador> organizadores) {
+    public void setOrganizadores(ArrayList<Usuario> organizadores) {
         this.organizadores = organizadores;
     }
 
-    public void addOrganizador(Organizador novoOrganizador) {
+    public void addOrganizador(Usuario novoOrganizador) {
         this.organizadores.add(novoOrganizador);
     }
 
-    public void removeOrganizador(Organizador organizador) {
+    public void removeOrganizador(Usuario organizador) {
         this.organizadores.remove(organizador);
     }
 
