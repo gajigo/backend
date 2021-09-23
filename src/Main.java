@@ -8,6 +8,70 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("----------------------------");
+        System.out.println("--      Demo Eventos      --");
+        System.out.println("----------------------------");
+        demoEvento();
+
+        System.out.println();
+        System.out.println("----------------------------");
+        System.out.println("--      Demo Usuario      --");
+        System.out.println("----------------------------");
+        demoUsuario();
+
+        System.out.println();
+        System.out.println("----------------------------");
+
+        menuUsuario();
+    }
+
+    public static void menuUsuario() {
+        Scanner ler = new Scanner(System.in);
+
+        System.out.println("Crie seu Usuario:");
+        System.out.println("Escreva um nome:");
+        String nome = ler.nextLine();
+
+        System.out.println("Escreva uma senha:");
+        String senha = ler.nextLine();
+
+        Usuario usuario = new Usuario(nome, senha);
+
+        System.out.println("Bem vindo " + usuario.getNome() + "!");
+
+        while (true) {
+            System.out.println("Roles atuais:");
+            System.out.println(usuario.getRoles());
+            System.out.println("Deseja adicionar roles? (s/sim/n/nao)");
+            String input = ler.nextLine();
+
+            if (input.startsWith("n")) {
+                System.out.println("Tchau!");
+                break;
+            }
+            if (input.startsWith("s")) {
+                System.out.println("Escolha um role: ");
+                System.out.println("1 - Organizador");
+                System.out.println("2 - Admin");
+                System.out.println("3 - Palestrante");
+                System.out.println("4 - Cliente");
+
+                int choice = ler.nextInt();
+                ler.nextLine();
+
+                Roles[] rolesPossiveis = Roles.values();
+
+                if (choice > 0 && choice < 5) {
+                    usuario.addRole(rolesPossiveis[choice-1]);
+                }
+                else {
+                    System.out.println("Nao existe essa opcao!");
+                }
+            }
+        }
+    }
+
+    public static void demoEvento() {
         // Data do Evento
         Calendar dataEvento = Calendar.getInstance();
 
@@ -60,9 +124,11 @@ public class Main {
 
         // Printa evento
         System.out.println(atual);
+    }
+
+    public static void demoUsuario() {
         Usuario usuarioTeste = new Usuario("Fabiano", "dQw4w9WgXcQ");
 
-        System.out.println("----------------------------");
         // Testa que cargos iniciam vazios
         System.out.println("Cargos Iniciais: ");
         System.out.println(usuarioTeste.getRoles());
@@ -82,48 +148,5 @@ public class Main {
 
         // Printa informacoes do usuario
         System.out.println(usuarioTeste);
-        System.out.println("----------------------------");
-
-        Scanner ler = new Scanner(System.in);
-
-        System.out.println("Crie seu Usuario:");
-        System.out.println("Escreva um nome:");
-        String nome = ler.nextLine();
-
-        System.out.println("Escreva uma senha:");
-        String senha = ler.nextLine();
-
-        Usuario usuario = new Usuario(nome, senha);
-
-        System.out.println("Bem vindo " + usuario.getNome() + "!");
-
-        while (true) {
-            System.out.println("Roles atuais:");
-            System.out.println(usuario.getRoles());
-            System.out.println("Deseja adicionar roles? (s/sim/n/nao)");
-            String input = ler.nextLine();
-
-            if (input.startsWith("n")) {
-                System.out.println("Tchau!");
-                break;
-            }
-            if (input.startsWith("s")) {
-                System.out.println("Escolha um role: ");
-                System.out.println("1 - Organizador");
-                System.out.println("2 - Admin");
-                System.out.println("3 - Palestrante");
-                System.out.println("4 - Cliente");
-
-                int choice = ler.nextInt();
-                ler.nextLine();
-
-                Roles[] rolesPossiveis = Roles.values();
-
-                if (choice > 0 && choice < 5) {
-                    usuario.addRole(rolesPossiveis[choice-1]);
-                }
-            }
-        }
-
     }
 }
