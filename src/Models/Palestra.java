@@ -6,22 +6,6 @@ public class Palestra {
     private float avaliacao;
     private int quantidadeAvaliadores;
 
-    public static void main(String[] args) {
-        Palestra novaPalestra = new Palestra("Aula de Java", "Aprenda Sobre Java Aqui");
-
-        // Pode adicionar avaliacoes a palestra
-        System.out.println("Avaliacao:");
-        novaPalestra.addAvaliacao(5);
-        System.out.println(novaPalestra.getAvaliacao());
-
-        // O valor que o get retorna e a media entre todas as avaliacoes recebidas
-        System.out.println("Avaliacao:");
-        novaPalestra.addAvaliacao(7);
-        System.out.println(novaPalestra.getAvaliacao());
-
-        System.out.println(novaPalestra);
-    }
-
     public Palestra() {
     }
 

@@ -11,9 +11,6 @@ public class Usuario {
     private String statusLogin;
     private ArrayList<Roles> roles;
 
-    public static void main(String[] args) {
-    }
-
     public Usuario() {
         this.roles = new ArrayList<>();
     }
