@@ -2,35 +2,35 @@ package Models;
 import java.util.ArrayList;
 
 public class Organizador {
-    private ArrayList<Eventos> eventosAssociados;
+    private ArrayList<Evento> eventoAssociados;
 
     public Organizador() {
     }
 
-    public Organizador(ArrayList<Eventos> eventosAssociados) {
-        this.eventosAssociados = eventosAssociados;
+    public Organizador(ArrayList<Evento> eventoAssociados) {
+        this.eventoAssociados = eventoAssociados;
     }
 
     @Override
     public String toString() {
         return "Organizador{" +
-                "eventosAssociados=" + eventosAssociados +
+                "eventosAssociados=" + eventoAssociados +
                 '}';
     }
 
-    public ArrayList<Eventos> getEventosAssociados() {
-        return eventosAssociados;
+    public ArrayList<Evento> getEventosAssociados() {
+        return eventoAssociados;
     }
 
-    public void setEventosAssociados(ArrayList<Eventos> eventosAssociados) {
-        this.eventosAssociados = eventosAssociados;
+    public void setEventosAssociados(ArrayList<Evento> eventoAssociados) {
+        this.eventoAssociados = eventoAssociados;
     }
 
-    public void addEventoAssociado(Eventos novoEvento) {
-        this.eventosAssociados.add(novoEvento);
+    public void addEventoAssociado(Evento novoEvento) {
+        this.eventoAssociados.add(novoEvento);
     }
 
-    public void removeEventoAssociado(Eventos evento) {
-        this.eventosAssociados.remove(evento);
+    public void removeEventoAssociado(Evento evento) {
+        this.eventoAssociados.remove(evento);
     }
 }

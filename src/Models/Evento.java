@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Eventos {
+public class Evento {
     private String nomeEvento;
     private Date dataEvento;
     private ArrayList<Usuario> organizadores;
@@ -27,7 +27,7 @@ public class Eventos {
         dataEvento.set(Calendar.SECOND, 0);
 
         // Inicializa o Evento
-        Eventos atual = new Eventos(
+        Evento atual = new Evento(
                 "Nasa Space Apps",
                 dataEvento.getTime(),
                 "NASA is inviting coders, designers, and technologists to come together in a global, virtual hackathon.",
@@ -67,12 +67,12 @@ public class Eventos {
         System.out.println(atual);
     }
 
-    public Eventos() {
+    public Evento() {
         this.palestrasAssociadas = new ArrayList<>();
         this.organizadores = new ArrayList<>();
     }
 
-    public Eventos(String nomeEvento, Date dataEvento, String descricao, String modalidade) {
+    public Evento(String nomeEvento, Date dataEvento, String descricao, String modalidade) {
         this.nomeEvento = nomeEvento;
         this.dataEvento = dataEvento;
         this.descricao = descricao;
@@ -81,7 +81,7 @@ public class Eventos {
         this.organizadores = new ArrayList<>();
     }
 
-    public Eventos(String nomeEvento, Date dataEvento, ArrayList<Usuario> organizadores, String descricao, ArrayList<Palestra> palestrasAssociadas, String modalidade) {
+    public Evento(String nomeEvento, Date dataEvento, ArrayList<Usuario> organizadores, String descricao, ArrayList<Palestra> palestrasAssociadas, String modalidade) {
         this.nomeEvento = nomeEvento;
         this.dataEvento = dataEvento;
         this.organizadores = organizadores;
