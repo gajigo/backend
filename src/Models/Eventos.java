@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Eventos {
@@ -12,10 +13,29 @@ public class Eventos {
     private String modalidade;
 
     public static void main(String[] args){
-        Eventos atual = new Eventos();
+        Calendar dataEvento = Calendar.getInstance();
+        dataEvento.set(Calendar.YEAR, 2021);
+        dataEvento.set(Calendar.MONTH, Calendar.OCTOBER);
+        dataEvento.set(Calendar.DAY_OF_MONTH, 1);
+
+        Eventos atual = new Eventos(
+                "Nasa Space Apps",
+                dataEvento.getTime(),
+                "NASA is inviting coders, designers, and technologists to come together in a global, virtual hackathon.",
+                "Online"
+        );
+
+        System.out.println(atual);
     }
 
     public Eventos() {
+    }
+
+    public Eventos(String nomeEvento, Date dataEvento, String descricao, String modalidade) {
+        this.nomeEvento = nomeEvento;
+        this.dataEvento = dataEvento;
+        this.descricao = descricao;
+        this.modalidade = modalidade;
     }
 
     public Eventos(String nomeEvento, Date dataEvento, ArrayList<Organizador> organizadores, String descricao, ArrayList<Palestra> palestrasAssociadas, String modalidade) {
