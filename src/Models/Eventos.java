@@ -1,5 +1,6 @@
 package Models;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Eventos {
@@ -13,6 +14,30 @@ public class Eventos {
     public static void main(String[] args){
         Eventos atual = new Eventos();
 
+    }
+
+    public Eventos() {
+    }
+
+    public Eventos(String nomeEvento, Date dataEvento, Organizador[] organizadores, String descricao, Palestra[] palestrasAssociadas, String modalidade) {
+        this.nomeEvento = nomeEvento;
+        this.dataEvento = dataEvento;
+        this.organizadores = organizadores;
+        this.descricao = descricao;
+        this.palestrasAssociadas = palestrasAssociadas;
+        this.modalidade = modalidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Eventos{" +
+                "nomeEvento='" + nomeEvento + '\'' +
+                ", dataEvento=" + dataEvento +
+                ", organizadores=" + Arrays.toString(organizadores) +
+                ", descricao='" + descricao + '\'' +
+                ", palestrasAssociadas=" + Arrays.toString(palestrasAssociadas) +
+                ", modalidade='" + modalidade + '\'' +
+                '}';
     }
 
     public String getNomeEvento() {
