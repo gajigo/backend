@@ -13,11 +13,20 @@ public class Eventos {
     private String modalidade;
 
     public static void main(String[] args){
+        // Data do Evento
         Calendar dataEvento = Calendar.getInstance();
+
+        // Seta Ano/Mes/Dia
         dataEvento.set(Calendar.YEAR, 2021);
         dataEvento.set(Calendar.MONTH, Calendar.OCTOBER);
         dataEvento.set(Calendar.DAY_OF_MONTH, 1);
 
+        // Reseta Hora/Minuto/Segundo
+        dataEvento.set(Calendar.HOUR_OF_DAY, 0);
+        dataEvento.set(Calendar.MINUTE, 0);
+        dataEvento.set(Calendar.SECOND, 0);
+
+        // Inicializa o Evento
         Eventos atual = new Eventos(
                 "Nasa Space Apps",
                 dataEvento.getTime(),
@@ -25,6 +34,7 @@ public class Eventos {
                 "Online"
         );
 
+        // Printa evento
         System.out.println(atual);
     }
 
