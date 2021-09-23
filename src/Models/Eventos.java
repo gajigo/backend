@@ -1,14 +1,15 @@
 package Models;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
 public class Eventos {
     private String nomeEvento;
     private Date dataEvento;
-    private Organizador[] organizadores;
+    private ArrayList<Organizador> organizadores;
     private String descricao;
-    private Palestra[] palestrasAssociadas;
+    private ArrayList<Palestra> palestrasAssociadas;
     private String modalidade;
 
     public static void main(String[] args){
@@ -19,7 +20,7 @@ public class Eventos {
     public Eventos() {
     }
 
-    public Eventos(String nomeEvento, Date dataEvento, Organizador[] organizadores, String descricao, Palestra[] palestrasAssociadas, String modalidade) {
+    public Eventos(String nomeEvento, Date dataEvento, ArrayList<Organizador> organizadores, String descricao, ArrayList<Palestra> palestrasAssociadas, String modalidade) {
         this.nomeEvento = nomeEvento;
         this.dataEvento = dataEvento;
         this.organizadores = organizadores;
@@ -33,9 +34,9 @@ public class Eventos {
         return "Eventos{" +
                 "nomeEvento='" + nomeEvento + '\'' +
                 ", dataEvento=" + dataEvento +
-                ", organizadores=" + Arrays.toString(organizadores) +
+                ", organizadores=" + organizadores +
                 ", descricao='" + descricao + '\'' +
-                ", palestrasAssociadas=" + Arrays.toString(palestrasAssociadas) +
+                ", palestrasAssociadas=" + palestrasAssociadas +
                 ", modalidade='" + modalidade + '\'' +
                 '}';
     }
@@ -56,11 +57,11 @@ public class Eventos {
         this.dataEvento = dataEvento;
     }
 
-    public Organizador[] getOrganizadores() {
+    public ArrayList<Organizador> getOrganizadores() {
         return organizadores;
     }
 
-    public void setOrganizadores(Organizador[] organizadores) {
+    public void setOrganizadores(ArrayList<Organizador> organizadores) {
         this.organizadores = organizadores;
     }
 
@@ -72,11 +73,11 @@ public class Eventos {
         this.descricao = descricao;
     }
 
-    public Palestra[] getPalestrasAssociadas() {
+    public ArrayList<Palestra> getPalestrasAssociadas() {
         return palestrasAssociadas;
     }
 
-    public void setPalestrasAssociadas(Palestra[] palestrasAssociadas) {
+    public void setPalestrasAssociadas(ArrayList<Palestra> palestrasAssociadas) {
         this.palestrasAssociadas = palestrasAssociadas;
     }
 
