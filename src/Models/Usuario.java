@@ -6,6 +6,26 @@ public class Usuario {
     private String senha;
     private String statusLogin;
 
+    public Usuario() {
+    }
+
+    public Usuario(int userId, String nome, String senha, String statusLogin) {
+        this.userId = userId;
+        this.nome = nome;
+        this.senha = senha;
+        this.statusLogin = statusLogin;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "userId=" + userId +
+                ", nome='" + nome + '\'' +
+                ", senha='" + senha + '\'' +
+                ", statusLogin='" + statusLogin + '\'' +
+                '}';
+    }
+
     public int getUserId() {
         return userId;
     }

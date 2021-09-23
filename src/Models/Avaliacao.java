@@ -6,11 +6,24 @@ public class Avaliacao {
     private Usuario avaliador;
     private boolean ativo;
 
+    public Avaliacao() {
+    }
+
     public Avaliacao(float nota, Palestra palestraAssociada, Usuario avaliador) {
         this.nota = nota;
         this.palestraAssociada = palestraAssociada;
         this.avaliador = avaliador;
         this.ativo = true;
+    }
+
+    @Override
+    public String toString() {
+        return "Avaliacao{" +
+                "nota=" + nota +
+                ", palestraAssociada=" + palestraAssociada +
+                ", avaliador=" + avaliador +
+                ", ativo=" + ativo +
+                '}';
     }
 
     public float getNota() {

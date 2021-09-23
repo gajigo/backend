@@ -1,15 +1,26 @@
 package Models;
 
 public class Palestra {
+    private String descricao;
+    private float avaliacao;
+    private int quantidadeAvaliadores;
+
+    public Palestra() {
+    }
     public Palestra(String descricao, float avaliacao, int quantidadeAvaliadores) {
         this.descricao = descricao;
         this.avaliacao = avaliacao;
         this.quantidadeAvaliadores = quantidadeAvaliadores;
     }
 
-    private String descricao;
-    private float avaliacao;
-    private int quantidadeAvaliadores;
+    @Override
+    public String toString() {
+        return "Palestra{" +
+                "descricao='" + descricao + '\'' +
+                ", avaliacao=" + avaliacao +
+                ", quantidadeAvaliadores=" + quantidadeAvaliadores +
+                '}';
+    }
 
     public String getDescricao() {
         return descricao;
