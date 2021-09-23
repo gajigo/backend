@@ -1,13 +1,37 @@
 package Models;
 
 public class Palestra {
+    private String nome;
     private String descricao;
     private float avaliacao;
     private int quantidadeAvaliadores;
 
+    public static void main(String[] args) {
+        Palestra novaPalestra = new Palestra("Aula de Java", "Aprenda Sobre Java Aqui");
+
+        // Pode adicionar avaliacoes a palestra
+        System.out.println("Avaliacao:");
+        novaPalestra.addAvaliacao(5);
+        System.out.println(novaPalestra.getAvaliacao());
+
+        // O valor que o get retorna e a media entre todas as avaliacoes recebidas
+        System.out.println("Avaliacao:");
+        novaPalestra.addAvaliacao(7);
+        System.out.println(novaPalestra.getAvaliacao());
+
+        System.out.println(novaPalestra);
+    }
+
     public Palestra() {
     }
-    public Palestra(String descricao, float avaliacao, int quantidadeAvaliadores) {
+
+    public Palestra(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+
+    public Palestra(String nome, String descricao, float avaliacao, int quantidadeAvaliadores) {
+        this.nome = nome;
         this.descricao = descricao;
         this.avaliacao = avaliacao;
         this.quantidadeAvaliadores = quantidadeAvaliadores;
@@ -16,10 +40,19 @@ public class Palestra {
     @Override
     public String toString() {
         return "Palestra{" +
+                "descricao='" + nome + '\'' +
                 "descricao='" + descricao + '\'' +
                 ", avaliacao=" + avaliacao +
                 ", quantidadeAvaliadores=" + quantidadeAvaliadores +
                 '}';
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
