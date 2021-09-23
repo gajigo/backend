@@ -1,7 +1,6 @@
 package Models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 public class Eventos {
@@ -14,7 +13,6 @@ public class Eventos {
 
     public static void main(String[] args){
         Eventos atual = new Eventos();
-
     }
 
     public Eventos() {
@@ -65,6 +63,14 @@ public class Eventos {
         this.organizadores = organizadores;
     }
 
+    public void addOrganizador(Organizador novoOrganizador) {
+        this.organizadores.add(novoOrganizador);
+    }
+
+    public void removeOrganizador(Organizador organizador) {
+        this.organizadores.remove(organizador);
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -79,6 +85,14 @@ public class Eventos {
 
     public void setPalestrasAssociadas(ArrayList<Palestra> palestrasAssociadas) {
         this.palestrasAssociadas = palestrasAssociadas;
+    }
+
+    public void addPalestraAssociada(Palestra novaPalestra) {
+        this.palestrasAssociadas.add(novaPalestra);
+    }
+
+    public void removePalestraAssociada(Palestra palestra) {
+        this.palestrasAssociadas.remove(palestra);
     }
 
     public String getModalidade() {
