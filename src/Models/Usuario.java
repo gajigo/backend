@@ -1,6 +1,8 @@
 package Models;
 
+import javax.management.relation.Role;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Usuario {
     private int userId;
@@ -10,27 +12,6 @@ public class Usuario {
     private ArrayList<Roles> roles;
 
     public static void main(String[] args) {
-        Usuario usuarioTeste = new Usuario("Fabiano", "dQw4w9WgXcQ");
-
-        // Testa que cargos iniciam vazios
-        System.out.println("Cargos Iniciais: ");
-        System.out.println(usuarioTeste.roles);
-
-        // Testa adicionar novos cargos
-        usuarioTeste.addRole(Roles.ORGANIZADOR);
-        usuarioTeste.addRole(Roles.PALESTRANTE);
-
-        System.out.println("Cargos apos adicionar: ");
-        System.out.println(usuarioTeste.roles);
-
-        // Testa se ignoramos cargos duplicados
-        usuarioTeste.addRole(Roles.ORGANIZADOR);
-
-        System.out.println("Cargos apos adicionar duplicado: ");
-        System.out.println(usuarioTeste.roles);
-
-        // Printa informacoes do usuario
-        System.out.println(usuarioTeste);
     }
 
     public Usuario() {
