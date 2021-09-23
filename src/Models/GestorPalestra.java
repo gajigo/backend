@@ -25,4 +25,9 @@ public class GestorPalestra {
         this.palestraAssociada = palestraAssociada;
     }
 
+    public void gerarQRCode() {
+    }
+
+    public void lerNFC() {
+    }
 }
