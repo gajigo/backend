@@ -7,32 +7,22 @@ import java.util.Date;
 public class Evento {
     private String nomeEvento;
     private Date dataEvento;
-    private ArrayList<Usuario> organizadores;
+    private ArrayList<Usuario> organizadores = new ArrayList<>();
     private String descricao;
-    private ArrayList<Palestra> palestrasAssociadas;
+    private ArrayList<Palestra> palestrasAssociadas = new ArrayList<>();
     private String modalidade;
-
-    public Evento() {
-        this.palestrasAssociadas = new ArrayList<>();
-        this.organizadores = new ArrayList<>();
-    }
 
     public Evento(String nomeEvento, Date dataEvento, String descricao, String modalidade) {
         this.nomeEvento = nomeEvento;
         this.dataEvento = dataEvento;
         this.descricao = descricao;
         this.modalidade = modalidade;
-        this.palestrasAssociadas = new ArrayList<>();
-        this.organizadores = new ArrayList<>();
     }
 
     public Evento(String nomeEvento, Date dataEvento, ArrayList<Usuario> organizadores, String descricao, ArrayList<Palestra> palestrasAssociadas, String modalidade) {
-        this.nomeEvento = nomeEvento;
-        this.dataEvento = dataEvento;
+        this(nomeEvento, dataEvento, descricao, modalidade);
         this.organizadores = organizadores;
-        this.descricao = descricao;
         this.palestrasAssociadas = palestrasAssociadas;
-        this.modalidade = modalidade;
     }
 
     @Override

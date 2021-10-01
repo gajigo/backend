@@ -38,6 +38,7 @@ public class Main {
         Usuario usuario = new Usuario(nome, senha);
 
         System.out.println("Bem vindo " + usuario.getNome() + "!");
+        //instant class
 
         while (true) {
             System.out.println("Roles atuais:");

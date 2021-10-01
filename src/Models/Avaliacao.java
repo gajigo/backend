@@ -6,9 +6,6 @@ public class Avaliacao {
     private Usuario avaliador;
     private boolean ativo;
 
-    public Avaliacao() {
-    }
-
     public Avaliacao(float nota, Palestra palestraAssociada, Usuario avaliador) {
         this.nota = nota;
         this.palestraAssociada = palestraAssociada;

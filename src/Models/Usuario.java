@@ -9,26 +9,18 @@ public class Usuario {
     private String nome;
     private String senha;
     private String statusLogin;
-    private ArrayList<Roles> roles;
+    private ArrayList<Roles> roles = new ArrayList<>();
 
-    public Usuario() {
-        this.roles = new ArrayList<>();
+    public Usuario(String nome, String senha) {
+        this.nome = nome;
+        this.senha = senha;
     }
 
     public Usuario(int userId, String nome, String senha, String statusLogin, ArrayList<Roles> roles) {
+        this(nome, senha);
         this.userId = userId;
-        this.nome = nome;
-        this.senha = senha;
         this.statusLogin = statusLogin;
         this.roles = roles;
-    }
-
-    public Usuario(String nome, String senha) {
-        this.userId = 0;
-        this.nome = nome;
-        this.senha = senha;
-        this.statusLogin = "logado";
-        this.roles = new ArrayList<>();
     }
 
     @Override

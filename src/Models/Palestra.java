@@ -6,17 +6,13 @@ public class Palestra {
     private float avaliacao;
     private int quantidadeAvaliadores;
 
-    public Palestra() {
-    }
-
     public Palestra(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
 
     public Palestra(String nome, String descricao, float avaliacao, int quantidadeAvaliadores) {
-        this.nome = nome;
-        this.descricao = descricao;
+        this(nome, descricao);
         this.avaliacao = avaliacao;
         this.quantidadeAvaliadores = quantidadeAvaliadores;
     }
