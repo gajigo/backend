@@ -9,6 +9,9 @@ public class Usuario {
     private String nome;
     private String senha;
     private String statusLogin;
+    private String email;
+    private String telefone;
+    private CartaoVisita cartao;
     private ArrayList<Roles> roles = new ArrayList<>();
 
     public Usuario(String nome, String senha) {

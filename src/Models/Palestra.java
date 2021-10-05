@@ -18,6 +18,11 @@ public class Palestra {
     public Palestra() {
     }
 
+    public Palestra(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+
     public String getNome() {
         return nome;
     }

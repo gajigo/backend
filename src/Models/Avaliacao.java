@@ -1,6 +1,7 @@
 package Models;
 
 public class Avaliacao {
+    private long id;
     private float nota;
     private Palestra palestraAssociada;
     private Usuario avaliador;
@@ -21,6 +22,14 @@ public class Avaliacao {
                 ", avaliador=" + avaliador +
                 ", ativo=" + ativo +
                 '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public float getNota() {
