@@ -95,11 +95,11 @@ public class Evento {
         this.palestras.remove(palestra);
     }
 
-    public void addOrganizadores(Usuario organizador){
+    public void addOrganizador(Usuario organizador){
         this.organizadores.add(organizador);
     }
 
-    public void removeOrganizadores(Usuario organizador){
+    public void removeOrganizador(Usuario organizador){
         this.organizadores.remove(organizador);
     }
 }
