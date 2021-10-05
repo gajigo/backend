@@ -12,8 +12,8 @@ public class Evento {
     private Modalidade modalidade;
     private long id;
     private Instant dataEvento;
-    private List<Usuario> organizadores;
-    private List<Palestra> palestras;
+    private List<Usuario> organizadores = new ArrayList<>();
+    private List<Palestra> palestras = new ArrayList<>();
 
     public Evento(String nomeEvento, String descricao, Modalidade modalidade) {
         this.nomeEvento = nomeEvento;
