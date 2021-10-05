@@ -1,6 +1,7 @@
 package Models;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Palestra {
@@ -10,10 +11,10 @@ public class Palestra {
     private Instant dataInicio;
     private Instant duracao;
     private Idioma idioma;
-    private List<Assunto> assunto;
-    private List<Avaliacao> avaliacao;
-    private List<Usuario> palestrante;
-    private List<DuvidaDaPalestra> perguntas;
+    private List<Assunto> assuntos = new ArrayList<>();
+    private List<Avaliacao> avaliacoes = new ArrayList<>();
+    private List<Usuario> palestrantes = new ArrayList<>();
+    private List<DuvidaPalestra> duvidas = new ArrayList<>();
 
     public Palestra() {
     }
@@ -71,35 +72,67 @@ public class Palestra {
         this.idioma = idioma;
     }
 
-    public List<Assunto> getAssunto() {
-        return assunto;
+    public List<Assunto> getAssuntos() {
+        return assuntos;
     }
 
-    public void setAssunto(List<Assunto> assunto) {
-        this.assunto = assunto;
+    public void setAssunto(List<Assunto> assuntos) {
+        this.assuntos = assuntos;
     }
 
-    public List<Avaliacao> getAvaliacao() {
-        return avaliacao;
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
     }
 
-    public void setAvaliacao(List<Avaliacao> avaliacao) {
-        this.avaliacao = avaliacao;
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
     }
 
-    public List<Usuario> getPalestrante() {
-        return palestrante;
+    public List<Usuario> getPalestrantes() {
+        return palestrantes;
     }
 
-    public void setPalestrante(List<Usuario> palestrante) {
-        this.palestrante = palestrante;
+    public void setPalestrantes(List<Usuario> palestrantes) {
+        this.palestrantes = palestrantes;
     }
 
-    public List<DuvidaDaPalestra> getPerguntas() {
-        return perguntas;
+    public List<DuvidaPalestra> getDuvidas() {
+        return duvidas;
     }
 
-    public void setPerguntas(List<DuvidaDaPalestra> perguntas) {
-        this.perguntas = perguntas;
+    public void setDuvidas(List<DuvidaPalestra> duvidas) {
+        this.duvidas = duvidas;
+    }
+
+    public void addAssunto(Assunto assunto) {
+        this.assuntos.add(assunto);
+    }
+
+    public void removeAssunto(Assunto assunto) {
+        this.assuntos.remove(assunto);
+    }
+
+    public void addAvaliacao(Avaliacao avaliacao) {
+        this.avaliacoes.add(avaliacao);
+    }
+
+    public void removeAvaliacao(Avaliacao avaliacao) {
+        this.avaliacoes.remove(avaliacao);
+    }
+
+    public void addPalestrante(Usuario palestrante) {
+        this.palestrantes.add(palestrante);
+    }
+
+    public void removePalestrante(Usuario palestrante) {
+        this.palestrantes.remove(palestrante);
+    }
+
+    public void addDuvida(DuvidaPalestra duvida) {
+        this.duvidas.add(duvida);
+    }
+
+    public void removeDuvida(DuvidaPalestra duvida) {
+        this.duvidas.remove(duvida);
     }
 }
