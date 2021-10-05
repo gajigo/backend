@@ -1,7 +1,4 @@
-import Models.Evento;
-import Models.Palestra;
-import Models.Roles;
-import Models.Usuario;
+import Models.*;
 
 import java.util.Calendar;
 import java.util.Scanner;
@@ -89,9 +86,8 @@ public class Main {
         // Inicializa o Evento
         Evento atual = new Evento(
                 "Nasa Space Apps",
-                dataEvento.getTime(),
                 "NASA is inviting coders, designers, and technologists to come together in a global, virtual hackathon.",
-                "Online"
+                Modalidade.ONLINE
         );
 
         // Adiciona organizadores

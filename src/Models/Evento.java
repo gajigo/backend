@@ -1,40 +1,34 @@
 package Models;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Evento {
     private String nomeEvento;
-    private Date dataEvento;
-    private ArrayList<Usuario> organizadores = new ArrayList<>();
     private String descricao;
-    private ArrayList<Palestra> palestrasAssociadas = new ArrayList<>();
-    private String modalidade;
+    private Modalidade modalidade;
+    private long id;
+    private Instant dataEvento;
+    private List<Usuario> organizadores;
+    private List<Palestra> palestras;
 
-    public Evento(String nomeEvento, Date dataEvento, String descricao, String modalidade) {
+    public Evento(String nomeEvento, String descricao, Modalidade modalidade) {
         this.nomeEvento = nomeEvento;
-        this.dataEvento = dataEvento;
         this.descricao = descricao;
         this.modalidade = modalidade;
     }
 
-    public Evento(String nomeEvento, Date dataEvento, ArrayList<Usuario> organizadores, String descricao, ArrayList<Palestra> palestrasAssociadas, String modalidade) {
-        this(nomeEvento, dataEvento, descricao, modalidade);
+    public Evento(String nomeEvento, String descricao, Modalidade modalidade, long id, Instant dataEvento, List<Usuario> organizadores, List<Palestra> palestras) {
+        this.nomeEvento = nomeEvento;
+        this.descricao = descricao;
+        this.modalidade = modalidade;
+        this.id = id;
+        this.dataEvento = dataEvento;
         this.organizadores = organizadores;
-        this.palestrasAssociadas = palestrasAssociadas;
-    }
-
-    @Override
-    public String toString() {
-        return "Eventos{" +
-                "nomeEvento='" + nomeEvento + '\'' +
-                ", dataEvento=" + dataEvento +
-                ", organizadores=" + organizadores +
-                ", descricao='" + descricao + '\'' +
-                ", palestrasAssociadas=" + palestrasAssociadas +
-                ", modalidade='" + modalidade + '\'' +
-                '}';
+        this.palestras = palestras;
     }
 
     public String getNomeEvento() {
@@ -45,30 +39,6 @@ public class Evento {
         this.nomeEvento = nomeEvento;
     }
 
-    public Date getDataEvento() {
-        return dataEvento;
-    }
-
-    public void setDataEvento(Date dataEvento) {
-        this.dataEvento = dataEvento;
-    }
-
-    public ArrayList<Usuario> getOrganizadores() {
-        return organizadores;
-    }
-
-    public void setOrganizadores(ArrayList<Usuario> organizadores) {
-        this.organizadores = organizadores;
-    }
-
-    public void addOrganizador(Usuario novoOrganizador) {
-        this.organizadores.add(novoOrganizador);
-    }
-
-    public void removeOrganizador(Usuario organizador) {
-        this.organizadores.remove(organizador);
-    }
-
     public String getDescricao() {
         return descricao;
     }
@@ -77,27 +47,59 @@ public class Evento {
         this.descricao = descricao;
     }
 
-    public ArrayList<Palestra> getPalestrasAssociadas() {
-        return palestrasAssociadas;
-    }
-
-    public void setPalestrasAssociadas(ArrayList<Palestra> palestrasAssociadas) {
-        this.palestrasAssociadas = palestrasAssociadas;
-    }
-
-    public void addPalestraAssociada(Palestra novaPalestra) {
-        this.palestrasAssociadas.add(novaPalestra);
-    }
-
-    public void removePalestraAssociada(Palestra palestra) {
-        this.palestrasAssociadas.remove(palestra);
-    }
-
-    public String getModalidade() {
+    public Modalidade getModalidade() {
         return modalidade;
     }
 
-    public void setModalidade(String modalidade) {
+    public void setModalidade(Modalidade modalidade) {
         this.modalidade = modalidade;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Instant getDataEvento() {
+        return dataEvento;
+    }
+
+    public void setDataEvento(Instant dataEvento) {
+        this.dataEvento = dataEvento;
+    }
+
+    public List<Usuario> getOrganizadores() {
+        return organizadores;
+    }
+
+    public void setOrganizadores(List<Usuario> organizadores) {
+        this.organizadores = organizadores;
+    }
+
+    public List<Palestra> getPalestras() {
+        return palestras;
+    }
+
+    public void setPalestras(List<Palestra> palestras) {
+        this.palestras = palestras;
+    }
+
+    public void addPalestra(Palestra palestra) {
+        this.palestras.add(palestra);
+    }
+
+    public void removePalestra(Palestra palestra) {
+        this.palestras.remove(palestra);
+    }
+
+    public void addOrganizador(Usuario organizador){
+        this.organizadores.add(organizador);
+    }
+
+    public void removeOrganizador(Usuario organizador){
+        this.organizadores.remove(organizador);
     }
 }
