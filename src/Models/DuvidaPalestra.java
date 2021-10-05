@@ -1,14 +1,14 @@
 package Models;
 
-public class DuvidaDaPalestra {
+public class DuvidaPalestra {
     private long id;
     private String duvida;
     private Usuario usuario;
 
-    public DuvidaDaPalestra() {
+    public DuvidaPalestra() {
     }
 
-    public DuvidaDaPalestra(long id, String duvida, Usuario usuario) {
+    public DuvidaPalestra(long id, String duvida, Usuario usuario) {
         this.id = id;
         this.duvida = duvida;
         this.usuario = usuario;
