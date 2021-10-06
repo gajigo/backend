@@ -1,5 +1,5 @@
 package Models;
-
+// categoria da palestra, ex: Palestra de Tecnologia
 public class Assunto {
     private long id;
     private String nome;

@@ -111,11 +111,11 @@ public class Main {
         Palestra palestra1 = new Palestra("Aula de Java", "Aprenda mais sobre Java");
         Palestra palestra2 = new Palestra("Workshop de Arduino", "Aprenda a trabalhar com Arduinos na pratica");
 
-        atual.addPalestraAssociada(palestra1);
-        atual.addPalestraAssociada(palestra2);
+        atual.addPalestra(palestra1);
+        atual.addPalestra(palestra2);
 
         System.out.println("Palestras: ");
-        for (Palestra palestraAtual : atual.getPalestrasAssociadas()) {
+        for (Palestra palestraAtual : atual.getPalestras()) {
             System.out.println(palestraAtual.getNome());
         }
 
