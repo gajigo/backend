@@ -14,6 +14,14 @@ public class CartaoVisita {
         this.links = links;
     }
 
+    @Override
+    public String toString() {
+        return "CartaoVisita{" +
+                "usuario=" + usuario +
+                ", links=" + links +
+                '}';
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }

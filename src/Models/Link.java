@@ -14,6 +14,15 @@ public class Link {
         this.identificado = identificado;
     }
 
+    @Override
+    public String toString() {
+        return "Link{" +
+                "id=" + id +
+                ", icone='" + icone + '\'' +
+                ", identificado='" + identificado + '\'' +
+                '}';
+    }
+
     public long getId() {
         return id;
     }

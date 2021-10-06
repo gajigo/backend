@@ -4,6 +4,22 @@ public class Assunto {
     private long id;
     private String nome;
 
+    public Assunto() {
+    }
+
+    public Assunto(long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Assunto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
+    }
+
     public long getId() {
         return id;
     }

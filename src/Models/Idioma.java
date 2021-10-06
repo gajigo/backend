@@ -12,6 +12,14 @@ public class Idioma {
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return "Idioma{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
+    }
+
     public long getId() {
         return id;
     }

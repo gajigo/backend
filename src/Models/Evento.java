@@ -31,6 +31,19 @@ public class Evento {
         this.palestras = palestras;
     }
 
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "nomeEvento='" + nomeEvento + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", modalidade=" + modalidade +
+                ", id=" + id +
+                ", dataEvento=" + dataEvento +
+                ", organizadores=" + organizadores +
+                ", palestras=" + palestras +
+                '}';
+    }
+
     public String getNomeEvento() {
         return nomeEvento;
     }

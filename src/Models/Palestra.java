@@ -14,6 +14,7 @@ public class Palestra {
     private List<Assunto> assuntos = new ArrayList<>();
     private List<Avaliacao> avaliacoes = new ArrayList<>();
     private List<Usuario> palestrantes = new ArrayList<>();
+    private List<Usuario> participantes = new ArrayList<>();
     private List<DuvidaPalestra> duvidas = new ArrayList<>();
 
     public Palestra() {
@@ -22,6 +23,23 @@ public class Palestra {
     public Palestra(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return "Palestra{" +
+                "nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", id=" + id +
+                ", dataInicio=" + dataInicio +
+                ", duracao=" + duracao +
+                ", idioma=" + idioma +
+                ", assuntos=" + assuntos +
+                ", avaliacoes=" + avaliacoes +
+                ", palestrantes=" + palestrantes +
+                ", participantes=" + participantes +
+                ", duvidas=" + duvidas +
+                '}';
     }
 
     public String getNome() {

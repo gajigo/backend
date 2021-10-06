@@ -14,6 +14,15 @@ public class DuvidaPalestra {
         this.usuario = usuario;
     }
 
+    @Override
+    public String toString() {
+        return "DuvidaPalestra{" +
+                "id=" + id +
+                ", duvida='" + duvida + '\'' +
+                ", usuario=" + usuario +
+                '}';
+    }
+
     public long getId() {
         return id;
     }
