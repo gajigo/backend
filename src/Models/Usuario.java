@@ -14,7 +14,12 @@ public class Usuario {
     private CartaoVisita cartao;
     private ArrayList<Roles> roles = new ArrayList<>();
 
+    public Usuario() {
+        statusLogin = "logado";
+    }
+
     public Usuario(String nome, String senha) {
+        this();
         this.nome = nome;
         this.senha = senha;
     }
