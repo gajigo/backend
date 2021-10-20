@@ -1,6 +1,11 @@
 package Models;
 
-public class Avaliacao {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Avaliacao implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private long id;
     private float nota;
     private Palestra palestraAssociada;

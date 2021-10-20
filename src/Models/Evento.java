@@ -1,12 +1,16 @@
 package Models;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class Evento {
+public class Evento implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String nomeEvento;
     private String descricao;
     private Modalidade modalidade;

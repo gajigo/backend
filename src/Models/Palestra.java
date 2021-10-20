@@ -1,10 +1,14 @@
 package Models;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Palestra {
+public class Palestra implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String nome;
     private String descricao;
     private long id;

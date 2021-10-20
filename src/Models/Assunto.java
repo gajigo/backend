@@ -1,6 +1,12 @@
 package Models;
+
+import java.io.Serial;
+import java.io.Serializable;
+
 // categoria da palestra, ex: Palestra de Tecnologia
-public class Assunto {
+public class Assunto implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private long id;
     private String nome;
 
