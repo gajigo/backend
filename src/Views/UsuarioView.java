@@ -87,15 +87,15 @@ public class UsuarioView {
                         collect(Collectors.toList());
 
                 System.out.println("Adicione um cargo:");
-                for (int i = 0; i < rolesPossiveis.toArray().length; i++) {
-                    System.out.printf("%d - %s\n", i+1, rolesPossiveis.toArray()[i]);
+                for (int i = 0; i < rolesPossiveis.size(); i++) {
+                    System.out.printf("%d - %s\n", i+1, rolesPossiveis.get(i));
                 }
 
-                int novoCargo = ler.nextInt();
+                int novoCargo = ler.nextInt() - 1;
                 ler.nextLine();
 
-                if (novoCargo > 0 && novoCargo < 5) {
-                    model.addRole(Roles.valueOf(rolesPossiveis.toArray()[novoCargo-1].toString()));
+                if (novoCargo >= 0 && novoCargo < rolesPossiveis.size()) {
+                    model.addRole(Roles.valueOf(rolesPossiveis.get(novoCargo)));
                 }
                 else {
                     System.out.println("Cargo invalido!");
