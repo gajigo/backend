@@ -38,6 +38,7 @@ public class UsuarioController {
             outfile.writeObject(model);
             outfile.flush();
             outfile.close();
+            file.close();
         } catch (Exception e) {
             System.out.println("Nao foi possivel salvar usuario");
             e.printStackTrace();
@@ -50,6 +51,7 @@ public class UsuarioController {
             ObjectInputStream infile = new ObjectInputStream(file);
             model = (Usuario) infile.readObject();
             infile.close();
+            file.close();
         } catch (Exception e) {
             System.out.println("Nao foi possivel carregar usuario");
         }
