@@ -4,8 +4,10 @@ import Controllers.UsuarioController;
 import Models.Roles;
 import Models.Usuario;
 
-import java.util.Locale;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UsuarioView {
     private Usuario model;
@@ -19,7 +21,6 @@ public class UsuarioView {
         this.model = model;
         this.controller = controller;
     }
-
 
     public void menu() {
         Scanner ler = new Scanner(System.in);
@@ -36,6 +37,11 @@ public class UsuarioView {
         System.out.println("Bem vindo " + model.getNome() + "!");
         System.out.println(model);
 
+        menuCargos();
+    }
+
+    public void menuCargos() {
+        Scanner ler = new Scanner(System.in);
         while (true) {
             System.out.println("Cargos atuais:");
             System.out.println(model.getRoles());
@@ -46,25 +52,32 @@ public class UsuarioView {
             if (escolha.toLowerCase().startsWith("n")) {
                 System.out.println("Tchau!");
                 System.out.println(model);
-                break;
+                return;
             }
-            if (escolha.toLowerCase().startsWith("s")) {
+
+            else if (escolha.toLowerCase().startsWith("s")) {
+                List<String> rolesPossiveis = Stream.of(Roles.values()).
+                        map(Roles::name).
+                        collect(Collectors.toList());
+
                 System.out.println("Adicione um cargo:");
-                System.out.println("1 - Organizador");
-                System.out.println("2 - Admin");
-                System.out.println("3 - Palestrante");
-                System.out.println("4 - Cliente");
+                for (int i = 0; i < rolesPossiveis.toArray().length; i++) {
+                    System.out.printf("%d - %s\n", i+1, rolesPossiveis.toArray()[i]);
+                }
 
                 int novoCargo = ler.nextInt();
                 ler.nextLine();
 
-                Roles[] rolesPossiveis = Roles.values();
                 if (novoCargo > 0 && novoCargo < 5) {
-                    model.addRole(rolesPossiveis[novoCargo-1]);
+                    model.addRole(Roles.valueOf(rolesPossiveis.toArray()[novoCargo-1].toString()));
                 }
                 else {
                     System.out.println("Cargo invalido!");
                 }
+            }
+
+            else {
+                System.out.println("Escolha invalida!");
             }
         }
     }
