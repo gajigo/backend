@@ -1,10 +1,12 @@
 package Models;
 
-import javax.management.relation.Role;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class Usuario {
+public class Usuario implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private int userId;
     private String nome;
     private String senha;

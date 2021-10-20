@@ -3,10 +3,7 @@ package Controllers;
 import Models.Usuario;
 import Views.UsuarioView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 public class UsuarioController {
@@ -27,7 +24,6 @@ public class UsuarioController {
             System.out.println(model);
         }
         save();
-        clean();
     }
 
     public void updateUsuario(String nome, String senha) {
@@ -36,53 +32,26 @@ public class UsuarioController {
     }
 
     public void save() {
-        File file = new File("usuario.txt");
-
         try {
-            if (!file.createNewFile()) {
-                return;
-            }
-        } catch (IOException e) {
+            FileOutputStream file = new FileOutputStream("usuario.txt");
+            ObjectOutputStream outfile = new ObjectOutputStream(file);
+            outfile.writeObject(model);
+            outfile.flush();
+            outfile.close();
+        } catch (Exception e) {
+            System.out.println("Nao foi possivel salvar usuario");
             e.printStackTrace();
         }
-
-        try {
-            PrintWriter pw = new PrintWriter(file);
-
-            pw.println(model.getUserId());
-            pw.println(model.getNome());
-            pw.println(model.getSenha());
-            pw.println(model.getStatusLogin());
-            pw.println(model.getRoles());
-
-            pw.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(file.getAbsolutePath());
     }
 
     public void load() {
-        File file = new File("usuario.txt");
-
-        if (!file.exists()) {
-            return;
-        }
-
-        // Em teoria nao precisaria do try/catch mas a IDE reclama :(
-        model = new Usuario();
         try {
-            Scanner ler = new Scanner(file);
-
-            model.setUserId(ler.nextInt());
-            ler.nextLine();
-
-            model.setNome(ler.nextLine());
-            model.setSenha(ler.nextLine());
-            model.setStatusLogin(ler.nextLine());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            FileInputStream file = new FileInputStream("usuario.txt");
+            ObjectInputStream infile = new ObjectInputStream(file);
+            model = (Usuario) infile.readObject();
+            infile.close();
+        } catch (Exception e) {
+            System.out.println("Nao foi possivel carregar usuario");
         }
     }
 
