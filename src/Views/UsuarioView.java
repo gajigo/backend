@@ -22,6 +22,33 @@ public class UsuarioView {
         this.controller = controller;
     }
 
+    public void novoMenu() {
+        while (true) {
+            System.out.println("-Menu Usuario-");
+            System.out.println("1 - Crie um Usuario");
+            System.out.println("2 - Edite um Usuario");
+            System.out.println("3 - Delete um Usuario");
+            System.out.println("4 - Sair");
+
+            Scanner ler = new Scanner(System.in);
+            int escolha = ler.nextInt() - 1;
+
+            switch (escolha) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("Escolha invalida!");
+                    break;
+            }
+        }
+    }
+
     public void menu() {
         Scanner ler = new Scanner(System.in);
 
@@ -33,9 +60,8 @@ public class UsuarioView {
         System.out.println("Escreva sua senha:");
         String senha = ler.nextLine();
 
-        controller.updateUsuario(nome, senha);
+        controller.registrar(nome, senha);
         System.out.println("Bem vindo " + model.getNome() + "!");
-        System.out.println(model);
 
         menuCargos();
     }

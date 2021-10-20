@@ -26,7 +26,7 @@ public class UsuarioController {
         save();
     }
 
-    public void updateUsuario(String nome, String senha) {
+    public void registrar(String nome, String senha) {
         model.setNome(nome);
         model.setSenha(senha);
     }
