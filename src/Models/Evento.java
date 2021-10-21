@@ -19,7 +19,7 @@ public class Evento implements Serializable {
     private List<Usuario> organizadores = new ArrayList<>();
     private List<Palestra> palestras = new ArrayList<>();
 
-    public Evento(String nomeEvento, String descricao, Modalidade modalidade) {
+    public Evento() {
         this.nomeEvento = nomeEvento;
         this.descricao = descricao;
         this.modalidade = modalidade;
