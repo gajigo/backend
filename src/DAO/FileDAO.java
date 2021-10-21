@@ -3,10 +3,10 @@ package DAO;
 import java.io.*;
 import java.util.List;
 
-public class AbstractDAO<T> {
+public class FileDAO<T> {
     private String filename;
 
-    public AbstractDAO(String filename) {
+    public FileDAO(String filename) {
         this.filename = filename;
     }
 
