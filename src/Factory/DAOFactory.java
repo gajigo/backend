@@ -6,15 +6,15 @@ import Models.Palestra;
 import Models.Usuario;
 
 public class DAOFactory {
-    public FileDAO<Usuario> getUsuariosDAO() {
+    public static FileDAO<Usuario> getUsuariosDAO() {
        return new FileDAO<>("usuarios.txt");
     }
 
-    public FileDAO<Palestra> getPalestrasDAO() {
+    public static FileDAO<Palestra> getPalestrasDAO() {
         return new FileDAO<>("palestras.txt");
     }
 
-    public FileDAO<Evento> getEventosDAO() {
+    public static FileDAO<Evento> getEventosDAO() {
         return new FileDAO<>("eventos.txt");
     }
 }

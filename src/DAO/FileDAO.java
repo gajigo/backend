@@ -1,6 +1,7 @@
 package DAO;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FileDAO<T> {
@@ -30,7 +31,7 @@ public class FileDAO<T> {
 
             // FODA SE
             @SuppressWarnings("unchecked")
-            List<T> models = (List<T>) infile.readObject();
+            List<T> models = (ArrayList<T>) infile.readObject();
 
             infile.close();
             file.close();
@@ -38,7 +39,7 @@ public class FileDAO<T> {
             return models;
         } catch (Exception e) {
             System.out.println("Nao foi possivel carregar usuarios");
-            return null;
+            return new ArrayList<>();
         }
     }
 

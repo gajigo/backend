@@ -1,67 +1,61 @@
 package Controllers;
 
+import DAO.FileDAO;
+import Factory.DAOFactory;
 import Models.Usuario;
 import Views.UsuarioView;
 
-import java.io.*;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioController {
-    private Usuario model;
+    private List<Usuario> models;
     private UsuarioView view;
 
     public UsuarioController() {
-        this.model = new Usuario();
-        this.view = new UsuarioView(model, this);
+        this.models = new ArrayList<>();
+        this.view = new UsuarioView(this);
     }
 
     public void start() {
         load();
-        if (model.getNome() == null) {
-            view.menu();
-        }
-        else {
-            System.out.println(model);
-        }
+        view.novoMenu();
         save();
     }
 
     public void registrar(String nome, String senha) {
-        model.setNome(nome);
-        model.setSenha(senha);
+        Usuario novo = new Usuario(nome, senha);
+        novo.setUserId(models.size() + 1);
+
+        this.models.add(novo);
     }
 
     public void save() {
-        try {
-            FileOutputStream file = new FileOutputStream("usuario.txt");
-            ObjectOutputStream outfile = new ObjectOutputStream(file);
-            outfile.writeObject(model);
-            outfile.flush();
-            outfile.close();
-            file.close();
-        } catch (Exception e) {
-            System.out.println("Nao foi possivel salvar usuario");
-            e.printStackTrace();
-        }
+        FileDAO<Usuario> dao = DAOFactory.getUsuariosDAO();
+        dao.save(this.models);
     }
 
     public void load() {
-        try {
-            FileInputStream file = new FileInputStream("usuario.txt");
-            ObjectInputStream infile = new ObjectInputStream(file);
-            model = (Usuario) infile.readObject();
-            infile.close();
-            file.close();
-        } catch (Exception e) {
-            System.out.println("Nao foi possivel carregar usuario");
-        }
+        FileDAO<Usuario> dao = DAOFactory.getUsuariosDAO();
+        this.models = dao.load();
     }
 
     public void clean() {
-        File file = new File("usuario.txt");
+        FileDAO<Usuario> dao = DAOFactory.getUsuariosDAO();
+        dao.clean();
+    }
 
-        if (!file.delete()) {
-            System.out.println("Erro ao limpar arquivo");
+    public List<Usuario> getModels() {
+        return this.models;
+    }
+
+    public Usuario getById(int id) {
+        for (Usuario usuario : models) {
+            if (usuario.getUserId() == id) {
+                return usuario;
+            }
         }
+
+        return null;
     }
 }
