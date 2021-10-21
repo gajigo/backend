@@ -58,4 +58,14 @@ public class UsuarioController {
 
         return null;
     }
+
+    public boolean deleteById(int id) {
+        for (Usuario usuario : models) {
+            if (usuario.getUserId() == id) {
+                models.remove(usuario);
+                return true;
+            }
+        }
+        return false;
+    }
 }

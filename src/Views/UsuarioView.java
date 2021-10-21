@@ -35,6 +35,7 @@ public class UsuarioView {
                     menuEditar();
                     break;
                 case 3:
+                    menuDeletar();
                     break;
                 case 4:
                     return;
@@ -76,6 +77,23 @@ public class UsuarioView {
         }
 
         System.out.println(escolha);
+    }
+
+    public void menuDeletar() {
+        Scanner ler = new Scanner(System.in);
+
+        System.out.println("-Deletar Usuario-");
+        listar();
+
+        System.out.println("Escolha um ID:");
+        int id = ler.nextInt();
+        ler.nextLine();
+
+        if (controller.deleteById(id)) {
+            System.out.println("Usuario deletado com sucesso!");
+        } else {
+            System.out.println("Nao foi possivel deletar o Usuario, confirme se escreveu o ID correto.");
+        }
     }
 
     public void listar() {
