@@ -10,15 +10,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class UsuarioView {
-    private Usuario model;
     private UsuarioController controller;
 
-    public UsuarioView(Usuario model) {
-        this.model = model;
-    }
-
-    public UsuarioView(Usuario model, UsuarioController controller) {
-        this.model = model;
+    public UsuarioView(UsuarioController controller) {
         this.controller = controller;
     }
 
@@ -31,14 +25,17 @@ public class UsuarioView {
             System.out.println("4 - Sair");
 
             Scanner ler = new Scanner(System.in);
-            int escolha = ler.nextInt() - 1;
+            int escolha = ler.nextInt();
 
             switch (escolha) {
                 case 1:
+                    menuRegistrar();
                     break;
                 case 2:
+                    menuEditar();
                     break;
                 case 3:
+                    menuDeletar();
                     break;
                 case 4:
                     return;
@@ -49,62 +46,59 @@ public class UsuarioView {
         }
     }
 
-    public void menu() {
+    public void menuRegistrar() {
         Scanner ler = new Scanner(System.in);
 
-        System.out.println("-Crie seu Usuario-");
-
-        System.out.println("Escreva seu nome:");
+        System.out.println("-Criar Usuario-");
+        System.out.println("Escreva um nome:");
         String nome = ler.nextLine();
 
-        System.out.println("Escreva sua senha:");
+        System.out.println("Escreva uma senha:");
         String senha = ler.nextLine();
 
         controller.registrar(nome, senha);
-        System.out.println("Bem vindo " + model.getNome() + "!");
-
-        menuCargos();
+        System.out.println("Usuario " + nome + " registrado com sucesso!");
     }
 
-    public void menuCargos() {
+    public void menuEditar() {
         Scanner ler = new Scanner(System.in);
-        while (true) {
-            System.out.println("Cargos atuais:");
-            System.out.println(model.getRoles());
 
-            System.out.println("Deseja adicionar mais cargos? (s/sim/n/nao)");
-            String escolha = ler.nextLine();
+        System.out.println("-Editar Usuario-");
+        listar();
 
-            if (escolha.toLowerCase().startsWith("n")) {
-                System.out.println("Tchau!");
-                System.out.println(model);
-                return;
-            }
+        System.out.println("Escolha um ID:");
+        int id = ler.nextInt();
+        ler.nextLine();
 
-            else if (escolha.toLowerCase().startsWith("s")) {
-                List<String> rolesPossiveis = Stream.of(Roles.values()).
-                        map(Roles::name).
-                        collect(Collectors.toList());
+        Usuario escolha = controller.getById(id);
+        if (escolha == null) {
+            System.out.println("Usuario nao encontrado!");
+            return;
+        }
 
-                System.out.println("Adicione um cargo:");
-                for (int i = 0; i < rolesPossiveis.size(); i++) {
-                    System.out.printf("%d - %s\n", i+1, rolesPossiveis.get(i));
-                }
+        System.out.println(escolha);
+    }
 
-                int novoCargo = ler.nextInt() - 1;
-                ler.nextLine();
+    public void menuDeletar() {
+        Scanner ler = new Scanner(System.in);
 
-                if (novoCargo >= 0 && novoCargo < rolesPossiveis.size()) {
-                    model.addRole(Roles.valueOf(rolesPossiveis.get(novoCargo)));
-                }
-                else {
-                    System.out.println("Cargo invalido!");
-                }
-            }
+        System.out.println("-Deletar Usuario-");
+        listar();
 
-            else {
-                System.out.println("Escolha invalida!");
-            }
+        System.out.println("Escolha um ID:");
+        int id = ler.nextInt();
+        ler.nextLine();
+
+        if (controller.deleteById(id)) {
+            System.out.println("Usuario deletado com sucesso!");
+        } else {
+            System.out.println("Nao foi possivel deletar o Usuario, confirme se escreveu o ID correto.");
+        }
+    }
+
+    public void listar() {
+        for (Usuario usuario: controller.getModels()) {
+            System.out.printf("%d - %s\n", usuario.getUserId(), usuario.getNome());
         }
     }
 }

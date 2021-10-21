@@ -1,12 +1,13 @@
 package DAO;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractDAO<T> {
+public class FileDAO<T> {
     private String filename;
 
-    public AbstractDAO(String filename) {
+    public FileDAO(String filename) {
         this.filename = filename;
     }
 
@@ -30,7 +31,7 @@ public class AbstractDAO<T> {
 
             // FODA SE
             @SuppressWarnings("unchecked")
-            List<T> models = (List<T>) infile.readObject();
+            List<T> models = (ArrayList<T>) infile.readObject();
 
             infile.close();
             file.close();
@@ -38,7 +39,7 @@ public class AbstractDAO<T> {
             return models;
         } catch (Exception e) {
             System.out.println("Nao foi possivel carregar usuarios");
-            return null;
+            return new ArrayList<>();
         }
     }
 
