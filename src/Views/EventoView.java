@@ -31,10 +31,10 @@ public class EventoView {
         String descricao = ler.nextLine();
 
         System.out.println("Qual a modalidade do evento?");
-        Modalidade modalidade = ler.nextLine();
+        Modalidade modalidade = Modalidade.valueOf(ler.nextLine());
 
         System.out.println("Quando sera o evento?");
-        Instant dataEvento = ler.nextLine();
+        String dataEvento = ler.nextLine();
 
         controller.cadastrar(nomeEvento,descricao,modalidade,dataEvento);
         System.out.println("Evento " + model.getNomeEvento() + "foi criado!");

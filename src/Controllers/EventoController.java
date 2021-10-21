@@ -26,11 +26,11 @@ public class EventoController {
         }
         save();
     }
-    public void cadastrar(String nomeEvento, String descricao, Modalidade modalidade, Instant dataEvento) {
-    model.setNomeEvento(nomeEvento);
-    model.setDescricao(descricao);
-    model.setModalidade(modalidade);
-    model.setDataEvento(dataEvento);
+    public void cadastrar(String nomeEvento, String descricao, Modalidade modalidade, String dataEvento) {
+        model.setNomeEvento(nomeEvento);
+        model.setDescricao(descricao);
+        model.setModalidade(modalidade);
+        model.setDataEvento(dataEvento);
     }
     public void save(){
         try {
