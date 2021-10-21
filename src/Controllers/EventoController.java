@@ -26,7 +26,7 @@ public class EventoController {
         }
         save();
     }
-    public void registrar(String nomeEvento, String descricao, Modalidade modalidade, Instant dataEvento) {
+    public void cadastrar(String nomeEvento, String descricao, Modalidade modalidade, Instant dataEvento) {
     model.setNomeEvento(nomeEvento);
     model.setDescricao(descricao);
     model.setModalidade(modalidade);

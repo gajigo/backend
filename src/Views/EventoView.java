@@ -2,7 +2,9 @@ package Views;
 
 import Controllers.EventoController;
 import Models.Evento;
+import Models.Modalidade;
 
+import java.time.Instant;
 import java.util.Scanner;
 
 public class EventoView {
@@ -29,12 +31,13 @@ public class EventoView {
         String descricao = ler.nextLine();
 
         System.out.println("Qual a modalidade do evento?");
-        String modalidade = ler.nextLine();
+        Modalidade modalidade = ler.nextLine();
 
         System.out.println("Quando sera o evento?");
-        String dataEvento = ler.nextLine();
+        Instant dataEvento = ler.nextLine();
 
-
+        controller.cadastrar(nomeEvento,descricao,modalidade,dataEvento);
+        System.out.println("Evento " + model.getNomeEvento() + "foi criado!");
 
     }
 }
