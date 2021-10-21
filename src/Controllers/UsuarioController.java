@@ -1,6 +1,7 @@
 package Controllers;
 
 import DAO.FileDAO;
+import DAO.UsuarioDAO;
 import Factory.DAOFactory;
 import Models.Usuario;
 import Views.UsuarioView;
@@ -31,17 +32,17 @@ public class UsuarioController {
     }
 
     public void save() {
-        FileDAO<Usuario> dao = DAOFactory.getUsuariosDAO();
+        UsuarioDAO dao = new UsuarioDAO();
         dao.save(this.models);
     }
 
     public void load() {
-        FileDAO<Usuario> dao = DAOFactory.getUsuariosDAO();
+        UsuarioDAO dao = new UsuarioDAO();
         this.models = dao.load();
     }
 
     public void clean() {
-        FileDAO<Usuario> dao = DAOFactory.getUsuariosDAO();
+        UsuarioDAO dao = new UsuarioDAO();
         dao.clean();
     }
 
