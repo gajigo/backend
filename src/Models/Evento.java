@@ -1,32 +1,32 @@
 package Models;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class Evento implements Serializable {
-    @Serial
+
     private static final long serialVersionUID = 1L;
     private String nomeEvento;
     private String descricao;
     private Modalidade modalidade;
     private long id;
-    private String dataEvento;
+    private Instant dataEvento;
     private List<Usuario> organizadores = new ArrayList<>();
     private List<Palestra> palestras = new ArrayList<>();
 
     public Evento() {
-    }
-
-    public Evento(String nomeEvento, String descricao, Modalidade modalidade, long id, String dataEvento, List<Usuario> organizadores, List<Palestra> palestras) {
-        this.id = id;
         this.nomeEvento = nomeEvento;
         this.descricao = descricao;
         this.modalidade = modalidade;
+    }
+
+    public Evento(String nomeEvento, String descricao, Modalidade modalidade, long id, Instant dataEvento, List<Usuario> organizadores, List<Palestra> palestras) {
+        this.nomeEvento = nomeEvento;
+        this.descricao = descricao;
+        this.modalidade = modalidade;
+        this.id = id;
         this.dataEvento = dataEvento;
         this.organizadores = organizadores;
         this.palestras = palestras;
@@ -77,11 +77,11 @@ public class Evento implements Serializable {
         this.id = id;
     }
 
-    public String getDataEvento() {
+    public Instant getDataEvento() {
         return dataEvento;
     }
 
-    public void setDataEvento(String dataEvento) {
+    public void setDataEvento(Instant dataEvento) {
         this.dataEvento = dataEvento;
     }
 

@@ -1,11 +1,11 @@
 package Models;
 
-import java.io.Serial;
+
 import java.io.Serializable;
 import java.util.List;
 
 public class CartaoVisita implements Serializable {
-    @Serial
+    
     private static final long serialVersionUID = 1L;
     private Usuario usuario;
     private List<Link> links;

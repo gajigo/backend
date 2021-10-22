@@ -1,11 +1,9 @@
 package Controllers;
 
 import Models.Evento;
-import Models.Modalidade;
 import Views.EventoView;
 
 import java.io.*;
-import java.time.Instant;
 
 public class EventoController {
     private Evento model;
@@ -26,11 +24,11 @@ public class EventoController {
         }
         save();
     }
-    public void cadastrar(String nomeEvento, String descricao, Modalidade modalidade, String dataEvento) {
-        model.setNomeEvento(nomeEvento);
-        model.setDescricao(descricao);
-        model.setModalidade(modalidade);
-        model.setDataEvento(dataEvento);
+    public void cadastrar(String nomeEvento, String descricao) {
+    model.setNomeEvento(nomeEvento);
+    model.setDescricao(descricao);
+/*    model.setModalidade(modalidade);
+    model.setDataEvento(dataEvento); */
     }
     public void save(){
         try {

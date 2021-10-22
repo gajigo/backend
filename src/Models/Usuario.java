@@ -1,11 +1,11 @@
 package Models;
 
-import java.io.Serial;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Usuario implements Serializable {
-    @Serial
+
     private static final long serialVersionUID = 1L;
     private int userId;
     private String nome;
