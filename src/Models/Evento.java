@@ -12,14 +12,14 @@ public class Evento implements Serializable {
     private String descricao;
     private Modalidade modalidade;
     private long id;
-    private Instant dataEvento;
+    private String dataEvento;
     private List<Usuario> organizadores = new ArrayList<>();
     private List<Palestra> palestras = new ArrayList<>();
 
     public Evento() {
     }
 
-    public Evento(String nomeEvento, String descricao, Modalidade modalidade, long id, Instant dataEvento, List<Usuario> organizadores, List<Palestra> palestras) {
+    public Evento(String nomeEvento, String descricao, Modalidade modalidade, long id, String dataEvento, List<Usuario> organizadores, List<Palestra> palestras) {
         this.nomeEvento = nomeEvento;
         this.descricao = descricao;
         this.modalidade = modalidade;
@@ -74,11 +74,11 @@ public class Evento implements Serializable {
         this.id = id;
     }
 
-    public Instant getDataEvento() {
+    public String getDataEvento() {
         return dataEvento;
     }
 
-    public void setDataEvento(Instant dataEvento) {
+    public void setDataEvento(String dataEvento) {
         this.dataEvento = dataEvento;
     }
 
