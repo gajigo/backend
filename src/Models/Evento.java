@@ -1,7 +1,6 @@
 package Models;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +31,10 @@ public class Evento implements Serializable {
     @Override
     public String toString() {
         return "Evento{" +
-                "nomeEvento='" + nomeEvento + '\'' +
+                " id=" + id +
+                ", nomeEvento='" + nomeEvento + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", modalidade=" + modalidade +
-                ", id=" + id +
                 ", dataEvento=" + dataEvento +
                 ", organizadores=" + organizadores +
                 ", palestras=" + palestras +

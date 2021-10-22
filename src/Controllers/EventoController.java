@@ -1,7 +1,6 @@
 package Controllers;
 
 import Models.Evento;
-import Models.Modalidade;
 import Views.EventoView;
 
 import java.io.*;
@@ -25,10 +24,9 @@ public class EventoController {
         }
         save();
     }
-    public void cadastrar(String nomeEvento, String descricao, Modalidade modalidade, String dataEvento) {
+    public void cadastrar(String nomeEvento, String descricao, String dataEvento) {
         model.setNomeEvento(nomeEvento);
         model.setDescricao(descricao);
-        model.setModalidade(modalidade);
         model.setDataEvento(dataEvento);
     }
     public void save(){
