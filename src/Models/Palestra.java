@@ -11,14 +11,15 @@ public class Palestra implements Serializable {
     private String nome;
     private String descricao;
     private long id;
-    private Instant dataInicio;
-    private Instant duracao;
-    private Idioma idioma;
+    private String dataInicio;//E do tipo Instant mas esta String por enquanto para facilitar
+    private String duracao;//E do tipo Instant mas esta String por enquanto para facilitar
+    private List<Idioma> idioma = new ArrayList<>();
     private List<Assunto> assuntos = new ArrayList<>();
     private List<Avaliacao> avaliacoes = new ArrayList<>();
     private List<Usuario> palestrantes = new ArrayList<>();
     private List<Usuario> participantes = new ArrayList<>();
     private List<DuvidaPalestra> duvidas = new ArrayList<>();
+    private boolean status;
 
     public Palestra() {
     }
@@ -69,27 +70,27 @@ public class Palestra implements Serializable {
         this.id = id;
     }
 
-    public Instant getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Instant dataInicio) {
+    public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Instant getDuracao() {
+    public String getDuracao() {
         return duracao;
     }
 
-    public void setDuracao(Instant duracao) {
+    public void setDuracao(String duracao) {
         this.duracao = duracao;
     }
 
-    public Idioma getIdioma() {
+    public List<Idioma> getIdioma() {
         return idioma;
     }
 
-    public void setIdioma(Idioma idioma) {
+    public void setIdioma(List<Idioma> idioma) {
         this.idioma = idioma;
     }
 
@@ -97,7 +98,7 @@ public class Palestra implements Serializable {
         return assuntos;
     }
 
-    public void setAssunto(List<Assunto> assuntos) {
+    public void setAssuntos(List<Assunto> assuntos) {
         this.assuntos = assuntos;
     }
 
@@ -149,11 +150,27 @@ public class Palestra implements Serializable {
         this.palestrantes.remove(palestrante);
     }
 
+    public List<Usuario> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(List<Usuario> participantes) {
+        this.participantes = participantes;
+    }
+
     public void addDuvida(DuvidaPalestra duvida) {
         this.duvidas.add(duvida);
     }
 
     public void removeDuvida(DuvidaPalestra duvida) {
         this.duvidas.remove(duvida);
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
