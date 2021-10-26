@@ -58,6 +58,8 @@ public class EventoView {
             case 3:
                 modHibrido();
                 break;
+            case 0:
+                return;
             default:
                 System.out.println("Escolha uma modalidade de evento!");
                 break;
