@@ -17,6 +17,7 @@ public class UsuarioView {
     }
 
     public void novoMenu() {
+        Scanner ler = new Scanner(System.in);
         while (true) {
             System.out.println("-Menu Usuario-");
             System.out.println("1 - Crie um Usuario");
@@ -24,7 +25,6 @@ public class UsuarioView {
             System.out.println("3 - Delete um Usuario");
             System.out.println("4 - Sair");
 
-            Scanner ler = new Scanner(System.in);
             int escolha = ler.nextInt();
 
             switch (escolha) {
