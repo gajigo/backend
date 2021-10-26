@@ -7,7 +7,6 @@ public class UsuarioDAO extends FileDAO<Usuario> {
         super("usuarios.txt");
     }
 
-
     public UsuarioDAO(String filename) {
         super(filename);
     }
