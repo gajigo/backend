@@ -2,7 +2,6 @@ package Controllers;
 
 import DAO.FileDAO;
 import DAO.UsuarioDAO;
-import Factory.DAOFactory;
 import Models.Usuario;
 import Views.UsuarioView;
 
