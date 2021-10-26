@@ -40,29 +40,27 @@ public class EventoView {
 
     public void menuModalidade(){
         while (true) {
-        System.out.println("Qual a modalidade do seu evento?");
-        System.out.println("1 - ONLINE");
-        System.out.println("2 - PRESENCIAL");
-        System.out.println("3 - HIBRIDO");
+            System.out.println("Qual a modalidade do seu evento?");
+            System.out.println("1 - ONLINE");
+            System.out.println("2 - PRESENCIAL");
+            System.out.println("3 - HIBRIDO");
 
-        Scanner ler = new Scanner(System.in);
-        int escolha = ler.nextInt();
+            Scanner ler = new Scanner(System.in);
+            int escolha = ler.nextInt();
 
-        switch(escolha){
-            case 1:
-                modOnline();
-                break;
-            case 2:
-                modPresencial();
-                break;
-            case 3:
-                modHibrido();
-                break;
-            case 0:
-                return;
-            default:
-                System.out.println("Escolha uma modalidade de evento!");
-                break;
+            switch(escolha){
+                case 1:
+                    modOnline();
+                    return;
+                case 2:
+                    modPresencial();
+                    return;
+                case 3:
+                    modHibrido();
+                    return;
+                default:
+                    System.out.println("Escolha uma modalidade de evento!");
+                    break;
             }
         }
     }
