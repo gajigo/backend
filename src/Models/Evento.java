@@ -28,6 +28,12 @@ public class Evento implements Serializable {
         this.palestras = palestras;
     }
 
+    public Evento(String nomeEvento, String descricao, String dataEvento) {
+        this.nomeEvento = nomeEvento;
+        this.descricao = descricao;
+        this.dataEvento = dataEvento;
+    }
+
     @Override
     public String toString() {
         return "Evento{" +

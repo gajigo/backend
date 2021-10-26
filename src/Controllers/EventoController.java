@@ -1,64 +1,43 @@
 package Controllers;
 
+import DAO.EventoDAO;
 import Models.Evento;
 import Views.EventoView;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventoController {
-    private Evento model;
+    private List<Evento> models;
     private EventoView view;
 
     public EventoController() {
-        this.model = new Evento();
-        this.view = new EventoView(model, this);
+        this.models = new ArrayList<>();
+        this.view = new EventoView(this);
     }
 
     public void start(){
         load();
-        if (model.getNomeEvento() == null) {
-            view.menuEvento();
-        }
-        else {
-            System.out.println(model);
-        }
+        System.out.println(models);
+        view.menuEvento();
         save();
     }
     public void cadastrar(String nomeEvento, String descricao, String dataEvento) {
-        model.setNomeEvento(nomeEvento);
-        model.setDescricao(descricao);
-        model.setDataEvento(dataEvento);
+        Evento novoEvento = new Evento(nomeEvento, descricao, dataEvento);
     }
     public void save(){
-        try {
-            FileOutputStream file = new FileOutputStream("evento.txt");
-            ObjectOutputStream outfile = new ObjectOutputStream(file);
-            outfile.writeObject(model);
-            outfile.flush();
-            outfile.close();
-            file.close();
-        } catch(Exception e) {
-            System.out.println("nao foi possivel criar um evento");
-            e.printStackTrace();
-        }
+        EventoDAO dao = new EventoDAO();
+        dao.save(this.models)
     }
 
     public void load() {
-        try {
-            FileInputStream file = new FileInputStream("evento.txt");
-            ObjectInputStream infile = new ObjectInputStream(file);
-            model = (Evento)  infile.readObject();
-            infile.close();
-            file.close();
-        }   catch (Exception e) {
-            System.out.println("nao foi possivel carregar o evento");
-        }
+        EventoDAO dao = new EventoDAO();
+        this.models = dao.load();
     }
 
     public void clean() {
-        File file = new File("evento.txt");
-        if(!file.delete()) {
-            System.out.println("Erro ao limpar arquivo");
-        }
+        EventoDAO dao = new EventoDAO();
+        dao.clean();
     }
 }
