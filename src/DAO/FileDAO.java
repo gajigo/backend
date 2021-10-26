@@ -11,7 +11,7 @@ public class FileDAO<T> {
         this.filename = filename;
     }
 
-    public void save(List<T> models) {
+    public int save(List<T> models) {
         try {
             FileOutputStream file = new FileOutputStream(filename);
             ObjectOutputStream outfile = new ObjectOutputStream(file);
@@ -20,8 +20,10 @@ public class FileDAO<T> {
             outfile.close();
             file.close();
         } catch (Exception e) {
-            System.out.println("Nao foi possivel salvar usuario");
+            return -1;
         }
+
+        return 0;
     }
 
     public List<T> load() {
@@ -38,16 +40,17 @@ public class FileDAO<T> {
 
             return models;
         } catch (Exception e) {
-            System.out.println("Nao foi possivel carregar usuarios");
             return new ArrayList<>();
         }
     }
 
-    public void clean() {
+    public int clean() {
         File file = new File(filename);
 
         if (!file.delete()) {
-            System.out.println("Erro ao limpar arquivo");
+            return -1;
         }
+
+        return 0;
     }
 }
