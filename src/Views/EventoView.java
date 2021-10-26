@@ -6,17 +6,12 @@ import Models.Evento;
 import java.util.Scanner;
 
 public class EventoView {
-    private Evento model;
     private EventoController controller;
 
-    public EventoView(Evento model) {
-        this.model = model;
-    }
-
-    public EventoView(Evento model, EventoController controller) {
-        this.model = model;
+    public EventoView(EventoController controller) {
         this.controller = controller;
     }
+
 
     public void menuEvento() {
         Scanner ler = new Scanner(System.in);
@@ -33,8 +28,9 @@ public class EventoView {
         System.out.println("Quando sera o evento?");
         String dataEvento = ler.nextLine();
 
-        controller.cadastrar(nomeEvento, descricao, dataEvento);
-        System.out.println("Evento " + model.getNomeEvento() + "foi criado!");
+        Evento novoEvento = controller.cadastrar(nomeEvento, descricao, dataEvento);
+
+        System.out.println("Evento " + novoEvento.getNomeEvento() + "foi criado!");
 
     }
 

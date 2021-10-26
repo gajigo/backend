@@ -4,7 +4,6 @@ import DAO.EventoDAO;
 import Models.Evento;
 import Views.EventoView;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +22,16 @@ public class EventoController {
         view.menuEvento();
         save();
     }
-    public void cadastrar(String nomeEvento, String descricao, String dataEvento) {
+    public Evento cadastrar(String nomeEvento, String descricao, String dataEvento) {
         Evento novoEvento = new Evento(nomeEvento, descricao, dataEvento);
+        this.models.add(novoEvento);
+        return novoEvento;
     }
     public void save(){
         EventoDAO dao = new EventoDAO();
-        dao.save(this.models)
+        if (dao.save(this.models) == -1) {
+            System.out.println("Erro ao salvar eventos");
+        }
     }
 
     public void load() {
@@ -38,6 +41,8 @@ public class EventoController {
 
     public void clean() {
         EventoDAO dao = new EventoDAO();
-        dao.clean();
+        if (dao.clean() == -1) {
+            System.out.println("erro ao limpar arquivo!");
+        }
     }
 }
