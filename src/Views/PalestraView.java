@@ -11,19 +11,13 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class PalestraView {
-    private Palestra model;
     private PalestraController controller;
 
-    public PalestraView(Palestra model) {
-        this.model = model;
-    }
-
-    public PalestraView(Palestra model, PalestraController controller) {
-        this.model = model;
+    public PalestraView(PalestraController controller) {
         this.controller = controller;
     }
 
-    public void menuInicial(Evento evento) {
+    public void menu() {
         while (true) {
             Scanner ler = new Scanner(System.in);
 
@@ -34,10 +28,10 @@ public class PalestraView {
             int escolha = ler.nextInt();
             switch (escolha) {
                 case 1:
-                    criarPalestra(evento);
+                    criarPalestra();
                     break;
                 case 2:
-                    selecionarPalestra(evento);
+                    selecionarPalestra();
                     break;
                 case 0:
                     return;
@@ -48,7 +42,7 @@ public class PalestraView {
         }
     }
 
-    public void criarPalestra(Evento evento){
+    public void criarPalestra(){
         Scanner ler = new Scanner(System.in);
 
         System.out.println("Digite o nome da palestra");
@@ -63,28 +57,28 @@ public class PalestraView {
         System.out.println("Digite o idioma da palestra");
         String idioma =  ler.nextLine();
 
-        controller.criarPalestra(evento,nome,data,duracao,idioma);
+        controller.criarPalestra(nome,data,duracao,idioma);
 
     }
 
-    public void selecionarPalestra(Evento evento){
+    public void selecionarPalestra(){
         Scanner ler = new Scanner(System.in);
-        List<String> nomePalestra = controller.listaPalestras(evento);
+        List<String> nomePalestra = controller.listaPalestras();
         int i = 0;
 
-        while (nomePalestra.size() < i){
-            System.out.println(i + " - " + nomePalestra);
+        while (nomePalestra.size() > i){
+            System.out.println((i + 1) + " - " + nomePalestra.get(i));
             i = i+1;
         }
         System.out.println("0 - Voltar");
         int escolha = ler.nextInt();
-        String escolhida = controller.palestraIntString(nomePalestra, escolha - 1);
+        String escolhida = controller.palestraIntString(nomePalestra, (escolha - 1));
 
         if (escolha == 0){
             return;
         }
-        if (escolha > nomePalestra.size()){
-            palestraEscolhida(controller.palestraEscolhida(evento, escolhida));
+        if (escolha < nomePalestra.size()){
+            palestraEscolhida(controller.palestraEscolhida(escolhida));
         }
     }
 

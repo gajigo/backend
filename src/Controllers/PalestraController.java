@@ -7,52 +7,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PalestraController {
-    private Palestra model = new Palestra();
-    private PalestraView view = new PalestraView(model, this);
+    private List<Palestra> model;
+    private PalestraView view;
 
     public PalestraController() {
+        this.model = new ArrayList<>();
+        this.view = new PalestraView(this);
     }
 
-    public void criarPalestra(Evento evento, String nome, String data, String duracao, String idioma){
+    public void start(){
+        //load();
+        view.menu();
+        //save();
+    }
+
+    public void criarPalestra(String nome, String data, String duracao, String idioma){
+        Palestra novaPalestra = new Palestra();
         Idioma novoIdioma = new Idioma();
-        novoIdioma.setNome(idioma);
 
-        Palestra palestra = new Palestra(nome, "");
-        palestra.setDataInicio(data);
-        palestra.setDuracao(duracao);
-        palestra.getIdioma().add(novoIdioma);
 
-        evento.addPalestra(palestra);
+
+        novaPalestra.setNome(nome);
+        novaPalestra.setDataInicio(data);
+        novaPalestra.setDuracao(duracao);
+        novaPalestra.getIdioma().add(novoIdioma);
+
+        model.add(novaPalestra);
+
     }
 
-    public List<String> listaPalestras(Evento evento){
-        List<String> listaString= new ArrayList<>();
-        int i = 0;
+    public List<String> listaPalestras(){
+        List<String> listaString = new ArrayList<>();
 
-        while(evento.getPalestras().size() < i){
-            listaString.add(i,evento.getPalestras().get(i).getNome());
-            i = i + 1;
+        for (int i = 0 ; i < model.size() ; i++){
+            listaString.add(model.get(i).getNome());
         }
-
-        return  listaString;
+        return listaString;
     }
 
     public String palestraIntString(List <String> nomePalestra, int escolha){
         return nomePalestra.get(escolha);
     }
 
-    public Palestra palestraEscolhida(Evento evento, String nomePalestra){
-        int i = 0, escolhida = 0;
+    public Palestra palestraEscolhida(String nomePalestra){
+        Integer escolha = null;
 
-        while (evento.getPalestras().size() < i) {
-            if (evento.getPalestras().get(i).getNome().compareToIgnoreCase(nomePalestra) != 0) {
-            escolhida = i;
-
+        for (int i = 0 ; i < model.size() ; i++){
+            if (model.get(i).getNome().compareToIgnoreCase(nomePalestra) != 0) escolha = i;
             }
-            i = i + 1;
-        }
-        return evento.getPalestras().get(escolhida);
 
+        if (escolha != null) return model.get(escolha);
+        else return null;
     }
 
     public boolean deletarPalestra(Palestra palestra){
@@ -98,7 +103,7 @@ public class PalestraController {
     public void removeIdioma(Palestra palestra, String idioma){
         int i = 0;
 
-        while(palestra.getIdioma().size() < i){
+        while(palestra.getIdioma().size() > i){
             if(palestra.getIdioma().get(i).getNome().compareToIgnoreCase(idioma) != 0){
                 palestra.getIdioma().remove(i);
             }
@@ -115,7 +120,7 @@ public class PalestraController {
     public void removeAssunto(Palestra palestra, String assunto){
         int i = 0;
 
-        while(palestra.getAssuntos().size() < i){
+        while(palestra.getAssuntos().size() > i){
             if(palestra.getAssuntos().get(i).getNome().compareToIgnoreCase(assunto) != 0){
                 palestra.getAssuntos().remove(i);
             }
@@ -132,7 +137,7 @@ public class PalestraController {
     public void removePalestrante(Palestra palestra, String palestrante){
         int i = 0;
 
-        while(palestra.getPalestrantes().size() < i){
+        while(palestra.getPalestrantes().size() > i){
             if(palestra.getPalestrantes().get(i).getNome().compareToIgnoreCase(palestrante) != 0){
                 palestra.getPalestrantes().remove(i);
             }
