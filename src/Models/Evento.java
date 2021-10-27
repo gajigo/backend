@@ -9,7 +9,7 @@ public class Evento implements Serializable {
     private static final long serialVersionUID = 1L;
     private String nomeEvento;
     private String descricao;
-    private Modalidade modalidade;
+    private ArrayList<Modalidade> modalidade = new ArrayList<>();
     private long id;
     private String dataEvento;
     private List<Usuario> organizadores = new ArrayList<>();
@@ -18,7 +18,7 @@ public class Evento implements Serializable {
     public Evento() {
     }
 
-    public Evento(String nomeEvento, String descricao, Modalidade modalidade, long id, String dataEvento, List<Usuario> organizadores, List<Palestra> palestras) {
+    public Evento(String nomeEvento, String descricao, ArrayList<Modalidade> modalidade, long id, String dataEvento, List<Usuario> organizadores, List<Palestra> palestras) {
         this.nomeEvento = nomeEvento;
         this.descricao = descricao;
         this.modalidade = modalidade;
@@ -63,12 +63,19 @@ public class Evento implements Serializable {
         this.descricao = descricao;
     }
 
-    public Modalidade getModalidade() {
+    public ArrayList<Modalidade> getModalidade() {
         return modalidade;
     }
 
-    public void setModalidade(Modalidade modalidade) {
+    public void setModalidade(ArrayList<Modalidade> modalidade) {
         this.modalidade = modalidade;
+    }
+
+    public void addModalidade(Modalidade novoModalidade) {
+        if (this.modalidade.contains(novoModalidade)) {
+            return;
+        }
+        this.modalidade.add(novoModalidade);
     }
 
     public long getId() {

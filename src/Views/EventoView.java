@@ -2,8 +2,12 @@ package Views;
 
 import Controllers.EventoController;
 import Models.Evento;
+import Models.Modalidade;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class EventoView {
     private EventoController controller;
@@ -35,39 +39,20 @@ public class EventoView {
     }
 
     public void menuModalidade(){
+        Scanner ler = new Scanner(System.in);
         while (true) {
             System.out.println("Qual a modalidade do seu evento?");
-            System.out.println("1 - ONLINE");
-            System.out.println("2 - PRESENCIAL");
-            System.out.println("3 - HIBRIDO");
 
-            Scanner ler = new Scanner(System.in);
-            int escolha = ler.nextInt();
+            List<String> modalidadesPossiveis = Stream.of(Modalidade.values()).
+                    map(Modalidade::name).
+                    collect(Collectors.toList());
 
-            switch(escolha){
-                case 1:
-                    modOnline();
-                    return;
-                case 2:
-                    modPresencial();
-                    return;
-                case 3:
-                    modHibrido();
-                    return;
-                default:
-                    System.out.println("Escolha uma modalidade de evento!");
-                    break;
+            for (int i = 0; i < modalidadesPossiveis.size(); i++){
+                System.out.println("%d - %s\n", i+1, modalidadesPossiveis.get(i));
             }
+            int novaModalidade = ler.nextInt() - 1;
         }
     }
 
-    public void modOnline(){
 
-    }
-    public void modPresencial(){
-
-    }
-    public void modHibrido(){
-
-    }
 }
