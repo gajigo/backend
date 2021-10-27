@@ -11,6 +11,10 @@ public class Idioma implements Serializable {
     public Idioma() {
     }
 
+    public Idioma(String nome) {
+        this.nome = nome;
+    }
+
     public Idioma(long id, String nome) {
         this.id = id;
         this.nome = nome;
