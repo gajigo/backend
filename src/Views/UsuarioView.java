@@ -173,34 +173,41 @@ public class UsuarioView {
         Scanner ler = new Scanner(System.in);
         while (true) {
             System.out.println("Cargos: " + usuario.getRoles());
-            System.out.println("Deseja adicionar cargos? (s/sim/n/nao):");
-            String escolha = ler.nextLine();
+            System.out.println("1 - Adicionar Cargo");
+            System.out.println("2 - Remover Cargo");
+            System.out.println("3 - Confirmar");
+            int escolha = ler.nextInt();
 
-            if (escolha.toLowerCase().startsWith("s")) {
-                List<String> rolesPossiveis = Stream.of(Roles.values()).
-                        map(Roles::name).
-                        collect(Collectors.toList());
-
-                System.out.println("Adicione um cargo:");
-                for (int i = 0; i < rolesPossiveis.size(); i++) {
-                    System.out.printf("%d - %s\n", i+1, rolesPossiveis.get(i));
-                }
-
-                int novoCargo = ler.nextInt() - 1;
-                ler.nextLine();
-
-                if (novoCargo >= 0 && novoCargo < rolesPossiveis.size()) {
-                    usuario.addRole(Roles.valueOf(rolesPossiveis.get(novoCargo)));
-                } else {
-                    System.out.println("Cargo invalido!");
-                }
-            } else if (escolha.toLowerCase().startsWith("n")) {
-                System.out.println("Cargos confirmados!");
+            if (escolha == 3) {
                 return;
+            } else if (escolha < 1 || escolha > 3) {
+                System.out.println("Escolha invalida!");
+                continue;
+            }
+
+            List<String> rolesPossiveis = Stream.of(Roles.values()).
+                    map(Roles::name).
+                    collect(Collectors.toList());
+
+            System.out.println("Escolha um cargo:");
+            for (int i = 0; i < rolesPossiveis.size(); i++) {
+                System.out.printf("%d - %s\n", i+1, rolesPossiveis.get(i));
+            }
+
+            int cargoEscolhido = ler.nextInt() - 1;
+            ler.nextLine();
+
+            if (cargoEscolhido >= 0 && cargoEscolhido < rolesPossiveis.size()) {
+                Roles cargo = Roles.valueOf(rolesPossiveis.get(cargoEscolhido));
+
+                if (escolha == 1) {
+                    usuario.addRole(cargo);
+                } else {
+                    usuario.removeRole(cargo);
+                }
             } else {
-                System.out.println("Nao existe essa opcao, tente novamente.");
+                System.out.println("Cargo invalido!");
             }
         }
     }
-
 }
