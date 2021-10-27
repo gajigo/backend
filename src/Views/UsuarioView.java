@@ -88,7 +88,7 @@ public class UsuarioView {
             return;
         }
 
-        System.out.println(escolha);
+        edite(escolha);
     }
 
     public void menuDeletar() {
@@ -110,6 +110,56 @@ public class UsuarioView {
             System.out.println("Usuario deletado com sucesso!");
         } else {
             System.out.println("Nao foi possivel deletar o Usuario, confirme se escreveu o ID correto.");
+        }
+    }
+
+    public boolean login(Usuario usuario) {
+        Scanner ler = new Scanner(System.in);
+        System.out.println("Escreva sua senha:");
+
+        String senha = ler.nextLine();
+        return usuario.getSenha().equals(senha);
+    }
+
+    public void edite(Usuario usuario) {
+        Scanner ler = new Scanner(System.in);
+
+        if (!login(usuario)) {
+            System.out.println("Senha incorreta!");
+            return;
+        }
+
+        while (true) {
+            System.out.println("Informacoes:");
+            System.out.printf("1 - %s: %s\n", "Nome", usuario.getNome());
+            System.out.printf("2 - %s: %s\n", "Senha", usuario.getSenha());
+            System.out.printf("3 - %s: %s\n", "Cargos", usuario.getRoles());
+            System.out.println("4 - Sair");
+
+            System.out.println("Escolha uma opcao para mudar");
+            int escolha = ler.nextInt();
+            ler.nextLine();
+
+            switch (escolha) {
+                case 1:
+                    System.out.println("Escreva um novo nome:");
+                    String nome = ler.nextLine();
+                    usuario.setNome(nome);
+                    break;
+                case 2:
+                    System.out.println("Escreva uma nova senha:");
+                    String senha = ler.nextLine();
+                    usuario.setSenha(senha);
+                    break;
+                case 3:
+                    menuCargos(usuario);
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("Escolha invalida!");
+                    break;
+            }
         }
     }
 
