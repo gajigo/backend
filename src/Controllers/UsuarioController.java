@@ -20,7 +20,7 @@ public class UsuarioController {
 
     public void start() {
         load();
-        view.novoMenu();
+        view.menu();
         save();
     }
 
