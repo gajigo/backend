@@ -232,10 +232,16 @@ public class EventoView {
             int id = ler.nextInt();
             ler.nextLine();
 
+            Usuario usuarioEscolhido = usuarios.getById(id);
+            if (usuarioEscolhido == null) {
+                System.out.println("ID invalido!");
+                continue;
+            }
+
             if (escolha == 1) {
-                evento.addOrganizador(usuarios.getById(id));
+                evento.addOrganizador(usuarioEscolhido);
             } else {
-                evento.removeOrganizador(usuarios.getById(id));
+                evento.removeOrganizador(usuarioEscolhido);
             }
         }
     }
