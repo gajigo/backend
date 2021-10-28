@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.EventoController;
+import Controllers.UsuarioController;
 import Models.Evento;
 import Models.Modalidade;
 import Models.Usuario;
@@ -182,6 +183,7 @@ public class EventoView {
                     menuModalidade(evento);
                     break;
                 case 5:
+                    menuOrganizadores(evento);
                     break;
                 case 6:
                     break;
@@ -195,6 +197,46 @@ public class EventoView {
     public void listar() {
         for (Evento evento: controller.getModels()) {
             System.out.printf("%d - %s - %s\n", evento.getId(), evento.getNomeEvento(), evento.getModalidade());
+        }
+    }
+
+    public void menuOrganizadores(Evento evento) {
+        UsuarioController usuarios = new UsuarioController();
+        usuarios.load();
+
+        UsuarioView usuarioView = new UsuarioView(usuarios);
+        Scanner ler = new Scanner(System.in);
+        while (true) {
+            if (usuarios.getModels().size() == 0) {
+                System.out.println("Nao existe usuarios cadastrados!");
+                return;
+            }
+
+            System.out.println("Organizadores: " + evento.getOrganizadores());
+            System.out.println("1 - Adicionar Organizador");
+            System.out.println("2 - Remover Organizador");
+            System.out.println("3 - Confirmar");
+
+            int escolha = ler.nextInt();
+            ler.nextLine();
+
+            if (escolha == 3) {
+                return;
+            } else if (escolha < 1 || escolha > 3) {
+                System.out.println("Escolha invalida!");
+                continue;
+            }
+
+            usuarioView.listar();
+            System.out.println("Escolha um usuario:");
+            int id = ler.nextInt();
+            ler.nextLine();
+
+            if (escolha == 1) {
+                evento.addOrganizador(usuarios.getById(id));
+            } else {
+                evento.removeOrganizador(usuarios.getById(id));
+            }
         }
     }
 }
