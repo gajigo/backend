@@ -3,7 +3,7 @@ package Views;
 import Controllers.EventoController;
 import Models.Evento;
 import Models.Modalidade;
-import Models.Usuario;
+
 
 import java.util.List;
 import java.util.Scanner;
@@ -122,7 +122,7 @@ public class EventoView {
 
     public void listar() {
         for (Evento evento: controller.getModels()) {
-            System.out.printf("%d - %s\n", evento.getId(), evento.getNomeEvento());
+            System.out.printf("%d - %s - %s\n", evento.getId(), evento.getNomeEvento(), evento.getModalidade());
         }
     }
 }
