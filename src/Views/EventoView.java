@@ -3,6 +3,7 @@ package Views;
 import Controllers.EventoController;
 import Models.Evento;
 import Models.Modalidade;
+import Models.Usuario;
 
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class EventoView {
                     menuRegistrar();
                     break;
                 case 2:
+                    menuEditar();
                     break;
                 case 3:
                     menuDeletar();
@@ -70,7 +72,7 @@ public class EventoView {
 
         menuModalidade(novoEvento);
 
-        System.out.println("Evento " + novoEvento.getNomeEvento() + "foi criado!");
+        System.out.println("Evento " + novoEvento.getNomeEvento() + " foi criado!");
     }
 
     public void menuModalidade(Evento evento){
@@ -117,6 +119,76 @@ public class EventoView {
             System.out.println("Evento deletado com sucesso!");
         } else {
             System.out.println("Nao foi possivel deletar o Evento, confirme se escreveu o ID correto.");
+        }
+    }
+
+    public void menuEditar() {
+        if (controller.getModels().size() == 0) {
+            System.out.println("Nao existe usuarios para editar.");
+            return;
+        }
+
+        Scanner ler = new Scanner(System.in);
+
+        System.out.println("-Editar Evento-");
+        listar();
+
+        System.out.println("Escolha um ID:");
+        int id = ler.nextInt();
+        ler.nextLine();
+
+        Evento escolha = controller.getById(id);
+        if (escolha == null) {
+            System.out.println("Evento nao encontrado!");
+            return;
+        }
+
+        edite(escolha);
+    }
+
+    public void edite(Evento evento) {
+        Scanner ler = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Informacoes:");
+            System.out.printf("1 - %s: %s\n", "Nome", evento.getNomeEvento());
+            System.out.printf("2 - %s: %s\n", "Descricao", evento.getDescricao());
+            System.out.printf("3 - %s: %s\n", "Data", evento.getDataEvento());
+            System.out.printf("4 - %s: %s\n", "Modalidade", evento.getModalidade());
+            System.out.printf("5 - %s: %s\n", "Organizadores", evento.getOrganizadores());
+            System.out.printf("6 - %s: %s\n", "Palestras", evento.getPalestras());
+            System.out.println("7 - Sair");
+
+            System.out.println("Escolha uma opcao para mudar");
+            int escolha = ler.nextInt();
+            ler.nextLine();
+
+            switch (escolha) {
+                case 1:
+                    System.out.println("Escreva um novo nome:");
+                    evento.setNomeEvento(ler.nextLine());
+                    break;
+                case 2:
+                    System.out.println("Escreva uma nova descricao:");
+                    evento.setDescricao(ler.nextLine());
+                    break;
+                case 3:
+                    System.out.println("Escreva uma nova data:");
+                    evento.setDataEvento(ler.nextLine());
+                    break;
+                case 4:
+                    menuModalidade(evento);
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    return;
+                default:
+                    System.out.println("Escolha invalida!");
+                    break;
+            }
         }
     }
 

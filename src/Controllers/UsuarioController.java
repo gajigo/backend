@@ -78,7 +78,6 @@ public class UsuarioController {
 
         while (low < high) {
             int med = (low + high) / 2;
-            System.out.println(med);
             Usuario usuario = models.get(med);
 
             if (usuario.getUserId() < target) {

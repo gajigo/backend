@@ -83,10 +83,6 @@ public class UsuarioView {
         int id = ler.nextInt();
         ler.nextLine();
 
-        System.out.println("Normal");
-        controller.getById(id);
-
-        System.out.println("Mais rapido");
         Usuario escolha = controller.getById(id);
         if (escolha == null) {
             System.out.println("Usuario nao encontrado!");
@@ -148,13 +144,11 @@ public class UsuarioView {
             switch (escolha) {
                 case 1:
                     System.out.println("Escreva um novo nome:");
-                    String nome = ler.nextLine();
-                    usuario.setNome(nome);
+                    usuario.setNome(ler.nextLine());
                     break;
                 case 2:
                     System.out.println("Escreva uma nova senha:");
-                    String senha = ler.nextLine();
-                    usuario.setSenha(senha);
+                    usuario.setSenha(ler.nextLine());
                     break;
                 case 3:
                     menuCargos(usuario);
