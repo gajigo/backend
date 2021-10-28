@@ -27,12 +27,14 @@ public class EventoView {
             System.out.println("2 - Edite um Evento");
             System.out.println("3 - Delete um Evento");
             System.out.println("4 - Listar Eventos");
-            System.out.println("5 - Sair");
+            System.out.println("0 - Sair");
 
             int escolha = ler.nextInt();
             ler.nextLine();
 
             switch (escolha) {
+                case 0:
+                    return;
                 case 1:
                     menuRegistrar();
                     break;
@@ -46,8 +48,6 @@ public class EventoView {
                     System.out.println("-Eventos Cadastrados-");
                     listar();
                     break;
-                case 5:
-                    return;
                 default:
                     System.out.println("Escolha invalida!");
                     break;
@@ -157,13 +157,15 @@ public class EventoView {
             System.out.printf("4 - %s: %s\n", "Modalidade", evento.getModalidade());
             System.out.printf("5 - %s: %s\n", "Organizadores", evento.getOrganizadores());
             System.out.printf("6 - %s: %s\n", "Palestras", evento.getPalestras());
-            System.out.println("7 - Sair");
+            System.out.println("0 - Sair");
 
             System.out.println("Escolha uma opcao para mudar");
             int escolha = ler.nextInt();
             ler.nextLine();
 
             switch (escolha) {
+                case 0:
+                    return;
                 case 1:
                     System.out.println("Escreva um novo nome:");
                     evento.setNomeEvento(ler.nextLine());
@@ -183,8 +185,6 @@ public class EventoView {
                     break;
                 case 6:
                     break;
-                case 7:
-                    return;
                 default:
                     System.out.println("Escolha invalida!");
                     break;

@@ -25,11 +25,13 @@ public class UsuarioView {
             System.out.println("2 - Edite um Usuario");
             System.out.println("3 - Delete um Usuario");
             System.out.println("4 - Listar Usuarios");
-            System.out.println("5 - Sair");
+            System.out.println("0 - Sair");
 
             int escolha = ler.nextInt();
 
             switch (escolha) {
+                case 0:
+                    return;
                 case 1:
                     menuRegistrar();
                     break;
@@ -43,8 +45,6 @@ public class UsuarioView {
                     System.out.println("-Usuarios Cadastrados-");
                     listar();
                     break;
-                case 5:
-                    return;
                 default:
                     System.out.println("Escolha invalida!");
                     break;
@@ -135,13 +135,15 @@ public class UsuarioView {
             System.out.printf("1 - %s: %s\n", "Nome", usuario.getNome());
             System.out.printf("2 - %s: %s\n", "Senha", usuario.getSenha());
             System.out.printf("3 - %s: %s\n", "Cargos", usuario.getRoles());
-            System.out.println("4 - Sair");
+            System.out.println("0 - Sair");
 
             System.out.println("Escolha uma opcao para mudar");
             int escolha = ler.nextInt();
             ler.nextLine();
 
             switch (escolha) {
+                case 0:
+                    return;
                 case 1:
                     System.out.println("Escreva um novo nome:");
                     usuario.setNome(ler.nextLine());
@@ -153,8 +155,6 @@ public class UsuarioView {
                 case 3:
                     menuCargos(usuario);
                     break;
-                case 4:
-                    return;
                 default:
                     System.out.println("Escolha invalida!");
                     break;

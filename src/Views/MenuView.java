@@ -14,10 +14,12 @@ public class MenuView {
             System.out.println("1 - Menu Usuario");
             System.out.println("2 - Menu Evento");
             System.out.println("3 - Menu Palestra");
-            System.out.println("4 - Sair");
+            System.out.println("0 - Sair");
 
             int escolha = ler.nextInt();
             switch (escolha) {
+                case 0:
+                    return;
                 case 1:
                     menuUsuario();
                     break;
@@ -26,8 +28,6 @@ public class MenuView {
                     break;
                 case 3:
                     menuPalestra();
-                case 4:
-                    return;
                 default:
                     System.out.println("Escolha invalida! Tente novamente.");
                     break;
