@@ -74,15 +74,27 @@ public class UsuarioController {
     }
 
     public Usuario getById(int target) {
-        // Recebe um id alvo para procurar na lista, retorna o usuario com este id ou null
-        // Anda pela lista de usuarios, se o id do atual ser o procurado, retorna este usuario
-        for (Usuario usuario : models) {
-            if (usuario.getUserId() == target) {
-                return usuario;
+        int low = 0, high = models.size() - 1;
+
+        while (low < high) {
+            int med = (low + high) / 2;
+            System.out.println(med);
+            Usuario usuario = models.get(med);
+
+            if (usuario.getUserId() < target) {
+                low = med + 1;
+            } else if (usuario.getUserId() > target) {
+                high = med - 1;
+            } else {
+                low = med;
+                break;
             }
         }
 
-        // Se o id nao estiver na lista, retorna null
+        if (models.get(low).getUserId() == target) {
+            return models.get(low);
+        }
+
         return null;
     }
 

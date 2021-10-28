@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class UsuarioView {
+    // salvar coisas foreign como fkID ao invez de objeto
     private UsuarioController controller;
 
     public UsuarioView(UsuarioController controller) {
@@ -82,6 +83,10 @@ public class UsuarioView {
         int id = ler.nextInt();
         ler.nextLine();
 
+        System.out.println("Normal");
+        controller.getById(id);
+
+        System.out.println("Mais rapido");
         Usuario escolha = controller.getById(id);
         if (escolha == null) {
             System.out.println("Usuario nao encontrado!");
