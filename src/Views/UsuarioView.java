@@ -164,7 +164,7 @@ public class UsuarioView {
 
     public void listar() {
         for (Usuario usuario: controller.getModels()) {
-            System.out.printf("%d - %s\n", usuario.getUserId(), usuario.getNome());
+            System.out.printf("%d - %s\n", usuario.getId(), usuario.getNome());
         }
     }
 

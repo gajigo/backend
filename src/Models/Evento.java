@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Evento implements Serializable {
-
+public class Evento implements Serializable, DAOUser {
     private static final long serialVersionUID = 1L;
     private String nomeEvento;
     private String descricao;

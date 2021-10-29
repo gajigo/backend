@@ -4,9 +4,9 @@ package Models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, DAOUser {
     private static final long serialVersionUID = 2L;
-    private int userId;
+    private long userId;
     private String nome;
     private String senha;
     private String statusLogin;
@@ -43,12 +43,12 @@ public class Usuario implements Serializable {
                 '}';
     }
 
-    public int getUserId() {
+    public long getId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(long id) {
+        this.userId = id;
     }
 
     public String getNome() {
