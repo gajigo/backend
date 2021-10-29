@@ -6,24 +6,26 @@ import java.util.List;
 
 public class FileDAO<T> {
     private String filename;
+    private List<T> models;
 
     public FileDAO(String filename) {
         this.filename = filename;
+        this.models = load();
     }
 
-    public int save(List<T> models) {
+    public boolean save() {
         try {
             FileOutputStream file = new FileOutputStream(filename);
             ObjectOutputStream outfile = new ObjectOutputStream(file);
             outfile.writeObject(models);
+
             outfile.flush();
             outfile.close();
             file.close();
         } catch (Exception e) {
-            return -1;
+            return false;
         }
-
-        return 0;
+        return true;
     }
 
     public List<T> load() {
@@ -44,13 +46,20 @@ public class FileDAO<T> {
         }
     }
 
-    public int clean() {
+    public boolean clean() {
         File file = new File(filename);
+        return file.delete();
+    }
 
-        if (!file.delete()) {
-            return -1;
-        }
+    public List<T> getModels() {
+        return this.models;
+    }
 
-        return 0;
+    public void addModel(T model) {
+        this.models.add(model);
+    }
+
+    public void removeModel(T model) {
+        this.models.remove(model);
     }
 }

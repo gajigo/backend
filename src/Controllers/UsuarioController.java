@@ -10,18 +10,19 @@ import java.util.List;
 import static java.lang.Math.max;
 
 public class UsuarioController {
-    private List<Usuario> models;
+    private UsuarioDAO dao;
     private UsuarioView view;
 
     public UsuarioController() {
-        this.models = new ArrayList<>();
+        this.dao = new UsuarioDAO();
         this.view = new UsuarioView(this);
     }
 
     public void start() {
-        load();
         view.menu();
-        save();
+        if (!dao.save()) {
+            System.out.println("Erro ao salvar usuarios!");
+        }
     }
 
     public Usuario registrar(String nome, String senha) {
@@ -29,7 +30,7 @@ public class UsuarioController {
         Usuario novo = new Usuario(nome, senha);
         novo.setUserId(getNewId());
 
-        this.models.add(novo);
+        dao.addModel(novo);
 
         // Retorna o usuario para ele ser modificado se necessario
         return novo;
@@ -39,7 +40,7 @@ public class UsuarioController {
         // Retorna um id novo que nao esta na lista
         // Percorremos a lista procurando pelo id de valor maximo
         int idMax = 0;
-        for (Usuario usuario : models) {
+        for (Usuario usuario : dao.getModels()) {
             idMax = max(idMax, usuario.getUserId());
         }
 
@@ -47,35 +48,14 @@ public class UsuarioController {
         return idMax + 1;
     }
 
-    public void save() {
-        // Salva a lista de usuarios
-        UsuarioDAO dao = new UsuarioDAO();
-        if (dao.save(this.models) == -1) {
-            System.out.println("Erro ao salvar usuarios!");
-        }
-    }
-
-    public void load() {
-        // Carrega a lista de usuarios
-        UsuarioDAO dao = new UsuarioDAO();
-        this.models = dao.load();
-    }
-
-    public void clean() {
-        // Limpa a lista de usuarios
-        UsuarioDAO dao = new UsuarioDAO();
-        if (dao.clean() == -1) {
-            System.out.println("Erro ao limpar arquivo!");
-        }
-    }
-
     public List<Usuario> getModels() {
-        return this.models;
+        return dao.getModels();
     }
 
     public Usuario getById(int target) {
-        int low = 0, high = models.size() - 1;
+        List<Usuario> models = dao.getModels();
 
+        int low = 0, high = models.size() - 1;
         while (low < high) {
             int med = (low + high) / 2;
             Usuario usuario = models.get(med);
@@ -104,7 +84,7 @@ public class UsuarioController {
 
         // Se existe, delete e retorna true
         if (escolhido != null) {
-            models.remove(escolhido);
+            dao.removeModel(escolhido);
             return true;
         }
 

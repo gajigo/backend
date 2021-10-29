@@ -202,9 +202,8 @@ public class EventoView {
 
     public void menuOrganizadores(Evento evento) {
         UsuarioController usuarios = new UsuarioController();
-        usuarios.load();
-
         UsuarioView usuarioView = new UsuarioView(usuarios);
+
         Scanner ler = new Scanner(System.in);
         while (true) {
             if (usuarios.getModels().size() == 0) {

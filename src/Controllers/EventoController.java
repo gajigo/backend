@@ -11,23 +11,26 @@ import java.util.List;
 import static java.lang.Math.max;
 
 public class EventoController {
-    private List<Evento> models;
+    private EventoDAO dao;
     private EventoView view;
 
     public EventoController() {
-        this.models = new ArrayList<>();
+        this.dao = new EventoDAO();
         this.view = new EventoView(this);
     }
 
     public void start(){
-        load();
         view.menu();
-        save();
+        if (!dao.save()) {
+            System.out.println("Erro ao salvar eventos!");
+        }
     }
+
     public Evento cadastrar(String nomeEvento, String descricao, String dataEvento) {
         Evento novoEvento = new Evento(nomeEvento, descricao, dataEvento);
         novoEvento.setId(getNewId());
-        this.models.add(novoEvento);
+
+        dao.addModel(novoEvento);
         return novoEvento;
     }
 
@@ -35,7 +38,7 @@ public class EventoController {
         // Retorna um id novo que nao esta na lista
         // Percorremos a lista procurando pelo id de valor maximo
         long idMax = 0;
-        for (Evento evento : models) {
+        for (Evento evento : dao.getModels()) {
             idMax = max(idMax, evento.getId());
         }
 
@@ -43,33 +46,14 @@ public class EventoController {
         return idMax + 1;
     }
 
-    public void save(){
-        EventoDAO dao = new EventoDAO();
-        if (dao.save(this.models) == -1) {
-            System.out.println("Erro ao salvar eventos");
-        }
-    }
-
-    public void load() {
-        EventoDAO dao = new EventoDAO();
-        this.models = dao.load();
-    }
-
-    public void clean() {
-        EventoDAO dao = new EventoDAO();
-        if (dao.clean() == -1) {
-            System.out.println("erro ao limpar arquivo!");
-        }
-    }
-
     public List<Evento> getModels() {
-        return this.models;
+        return dao.getModels();
     }
 
     public Evento getById(int target) {
         // Recebe um id alvo para procurar na lista, retorna o evento com este id ou null
         // Anda pela lista de eventos, se o id do atual ser o procurado, retorna este evento
-        for (Evento evento : models) {
+        for (Evento evento : dao.getModels()) {
             if (evento.getId() == target) {
                 return evento;
             }
@@ -86,7 +70,7 @@ public class EventoController {
 
         // Se existe, delete e retorna true
         if (escolhido != null) {
-            models.remove(escolhido);
+            dao.removeModel(escolhido);
             return true;
         }
 
