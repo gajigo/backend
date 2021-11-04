@@ -72,12 +72,12 @@ public class PalestraView {
         }
         System.out.println("0 - Voltar");
         int escolha = ler.nextInt();
-        String escolhida = controller.palestraIntString(nomePalestra, (escolha - 1));
 
         if (escolha == 0){
             return;
         }
-        if (escolha < nomePalestra.size()){
+        String escolhida = controller.palestraIntString(nomePalestra, (escolha - 1));
+        if (escolha <= nomePalestra.size()){
             palestraEscolhida(controller.palestraEscolhida(escolhida));
         }
     }
@@ -146,7 +146,7 @@ public class PalestraView {
     }
 
     public void deletarPalestra(Palestra palestra){
-        if(controller.deletarPalestra(palestra)){
+        if(!controller.deletarPalestra(palestra)){
             System.out.println("Palestra Deletada");
         }else{
             System.out.println("Erro ao Deletar");

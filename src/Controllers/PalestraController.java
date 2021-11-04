@@ -1,5 +1,7 @@
 package Controllers;
 
+import DAO.EventoDAO;
+import DAO.PalestraDAO;
 import Models.*;
 import Views.PalestraView;
 
@@ -9,27 +11,29 @@ import java.util.List;
 public class PalestraController {
     private List<Palestra> model;
     private PalestraView view;
+    private PalestraDAO dao;
 
     public PalestraController() {
+        this.dao = new PalestraDAO();
         this.model = new ArrayList<>();
         this.view = new PalestraView(this);
     }
 
     public void start(){
-        //load();
         view.menu();
-        //save();
+        if (!dao.save()) {
+            System.out.println("Erro ao salvar palestras!");
+        }
     }
 
     public void criarPalestra(String nome, String data, String duracao, String idioma){
         Palestra novaPalestra = new Palestra();
         Idioma novoIdioma = new Idioma();
 
-
-
         novaPalestra.setNome(nome);
         novaPalestra.setDataInicio(data);
         novaPalestra.setDuracao(duracao);
+        novoIdioma.setNome(idioma);
         novaPalestra.getIdioma().add(novoIdioma);
 
         model.add(novaPalestra);
@@ -50,14 +54,11 @@ public class PalestraController {
     }
 
     public Palestra palestraEscolhida(String nomePalestra){
-        Integer escolha = null;
-
         for (int i = 0 ; i < model.size() ; i++){
-            if (model.get(i).getNome().compareToIgnoreCase(nomePalestra) != 0) escolha = i;
-            }
+            if (model.get(i).getNome().compareTo(nomePalestra) == 0) return model.get(i);
+        }
 
-        if (escolha != null) return model.get(escolha);
-        else return null;
+        return null;
     }
 
     public boolean deletarPalestra(Palestra palestra){
