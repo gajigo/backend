@@ -28,6 +28,7 @@ public class MenuView {
                     break;
                 case 3:
                     menuPalestra();
+                    break;
                 default:
                     System.out.println("Escolha invalida! Tente novamente.");
                     break;

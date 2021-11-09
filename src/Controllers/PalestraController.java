@@ -15,7 +15,7 @@ public class PalestraController {
 
     public PalestraController() {
         this.dao = new PalestraDAO();
-        this.model = new ArrayList<>();
+        this.model = getModels();
         this.view = new PalestraView(this);
     }
 
@@ -24,6 +24,9 @@ public class PalestraController {
         if (!dao.save()) {
             System.out.println("Erro ao salvar palestras!");
         }
+    }
+    public List<Palestra> getModels() {
+        return dao.getModels();
     }
 
     public void criarPalestra(String nome, String data, String duracao, String idioma){
@@ -43,8 +46,8 @@ public class PalestraController {
     public List<String> listaPalestras(){
         List<String> listaString = new ArrayList<>();
 
-        for (int i = 0 ; i < model.size() ; i++){
-            listaString.add(model.get(i).getNome());
+        for (Palestra palestra : model) {
+            listaString.add(palestra.getNome());
         }
         return listaString;
     }
@@ -54,8 +57,8 @@ public class PalestraController {
     }
 
     public Palestra palestraEscolhida(String nomePalestra){
-        for (int i = 0 ; i < model.size() ; i++){
-            if (model.get(i).getNome().compareTo(nomePalestra) == 0) return model.get(i);
+        for (Palestra palestra : model) {
+            if (palestra.getNome().compareTo(nomePalestra) == 0) return palestra;
         }
 
         return null;
@@ -145,4 +148,5 @@ public class PalestraController {
             i = i + 1;
         }
     }
+
 }
