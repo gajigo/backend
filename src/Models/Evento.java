@@ -1,5 +1,7 @@
 package Models;
 
+import DAO.DAOUser;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

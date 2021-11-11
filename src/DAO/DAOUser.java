@@ -1,4 +1,4 @@
-package Models;
+package DAO;
 
 public interface DAOUser {
     long getId();

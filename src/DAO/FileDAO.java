@@ -1,8 +1,5 @@
 package DAO;
 
-import Models.DAOUser;
-import Models.Usuario;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

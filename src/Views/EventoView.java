@@ -125,7 +125,7 @@ public class EventoView {
 
     public void menuEditar() {
         if (controller.getModels().size() == 0) {
-            System.out.println("Nao existe usuarios para editar.");
+            System.out.println("Nao existe eventos para editar.");
             return;
         }
 
