@@ -37,7 +37,6 @@ public class FileDAO<T extends DAOUser> {
             FileInputStream file = new FileInputStream(filename);
             ObjectInputStream infile = new ObjectInputStream(file);
 
-            // FODA SE
             @SuppressWarnings("unchecked")
             List<T> models = (ArrayList<T>) infile.readObject();
 

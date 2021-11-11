@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Palestra implements Serializable, DAOUser {
+public class Palestra implements DAOUser {
 
     private static final long serialVersionUID = 1L;
     private String nome;

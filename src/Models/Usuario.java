@@ -6,7 +6,7 @@ import DAO.DAOUser;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Usuario implements Serializable, DAOUser {
+public class Usuario implements DAOUser {
     private static final long serialVersionUID = 2L;
     private long userId;
     private String nome;
