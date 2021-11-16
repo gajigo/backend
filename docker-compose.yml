@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: gajigo-postgres
+    image: postgres
+    environment:
+      POSTGRES_DB: gajigo
+      POSTGRES_USERNAME: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+    networks:
+      - postgres-network
+
+  pgadmin:
+    container_name: gajigo-pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@gajigo.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - postgres-network
+
+networks:
+  postgres-network:
+    driver: bridge

@@ -1,4 +1,5 @@
 .idea/
+database/data/*
 out/
 *.iml
 *.txt
