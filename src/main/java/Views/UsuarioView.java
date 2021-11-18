@@ -67,8 +67,8 @@ public class UsuarioView {
         System.out.println("Escreva um e-mail:");
         user.setEmail(ler.nextLine());
 
+        menuCargos(user);
         User novoUser = controller.registrar(user);
-        menuCargos(novoUser);
 
         System.out.println("Usuario " + novoUser.getId() + " registrado com sucesso!");
     }
@@ -161,6 +161,7 @@ public class UsuarioView {
                     break;
                 case 3:
                     menuCargos(user);
+                    controller.editUser(user);
                     break;
                 default:
                     System.out.println("Escolha invalida!");

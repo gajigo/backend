@@ -1,6 +1,7 @@
 package DAO;
 
 import Models.CartaoVisita;
+import Models.Roles;
 import Models.User;
 import factory.ConnectionFactory;
 
@@ -30,11 +31,50 @@ public class UsuarioDAO extends FileDAO<User> {
                 "email VARCHAR(50) UNIQUE NOT NULL," +
                 "phone VARCHAR(14));";
 
+        sql += "CREATE TABLE IF NOT EXISTS roles (" +
+                "user_id BIGINT," +
+                "role SMALLINT," +
+                "PRIMARY KEY (user_id, role)," +
+                "CONSTRAINT fk_user_id " +
+                    "FOREIGN KEY (user_id) " +
+                    "REFERENCES users(user_id) " +
+                    "ON DELETE CASCADE);";
+
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
 
             statement.execute();
             statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void insertUpdateRoles(Long userId, List<Roles> roles) {
+        String sql = "DELETE FROM roles WHERE user_id = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, userId);
+
+            statement.execute();
+
+            for (Roles role : roles) {
+                sql = "INSERT INTO roles " +
+                        "(user_id, role)" +
+                        "VALUES (?, ?)";
+
+                statement = connection.prepareStatement(sql);
+
+                statement.setLong(1, userId);
+                if (role != null) {
+                    statement.setInt(2, role.ordinal());
+                } else {
+                    statement.setNull(2, Types.NULL);
+                }
+
+                statement.execute();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -61,6 +101,9 @@ public class UsuarioDAO extends FileDAO<User> {
                 while (resultSet.next()) {
                     user.setUserId(resultSet.getInt(1));
                 }
+
+                insertUpdateRoles(user.getUserId(), user.getRoles());
+
                 return user;
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -152,6 +195,8 @@ public class UsuarioDAO extends FileDAO<User> {
                 statement.setLong(5, user.getId());
 
                 statement.execute();
+
+                insertUpdateRoles(user.getUserId(), user.getRoles());
 
                 return user;
             } catch (SQLException e) {
