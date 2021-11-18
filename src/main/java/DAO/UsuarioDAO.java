@@ -24,7 +24,7 @@ public class UsuarioDAO extends FileDAO<User> {
         String sql = "CREATE SEQUENCE IF NOT EXISTS user_id_seq;";
 
         sql += "CREATE TABLE IF NOT EXISTS " + tableName + "(" +
-                "userId BIGINT PRIMARY KEY DEFAULT nextval('user_id_seq')," +
+                "user_id BIGINT PRIMARY KEY DEFAULT nextval('user_id_seq')," +
                 "name TEXT NOT NULL," +
                 "password TEXT NOT NULL," +
                 "email VARCHAR(50) UNIQUE," +
@@ -80,7 +80,7 @@ public class UsuarioDAO extends FileDAO<User> {
 
             while (resultSet.next()) {
                 user = new User();
-                user.setId(resultSet.getInt("id"));
+                user.setId(resultSet.getInt("user_id"));
                 user.setNome(resultSet.getString("name"));
                 user.setEmail(resultSet.getString("email"));
                 user.setTelefone(resultSet.getString("phone"));
