@@ -40,7 +40,7 @@ public class UsuarioController {
         return dao.getById(id);
     }
 
-    public boolean deleteById(long id) {
-        return dao.deleteById(id);
+    public boolean deleteById(Long id) {
+        return dao.deleteUserById(id);
     }
 }

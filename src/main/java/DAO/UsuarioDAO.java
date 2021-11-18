@@ -92,4 +92,21 @@ public class UsuarioDAO extends FileDAO<User> {
         }
         return users;
     }
+
+    public boolean deleteUserById(Long userId) {
+        if (userId != null) {
+            String sql = "DELETE FROM " + tableName + " WHERE user_id = ?";
+
+            try {
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setLong(1, userId);
+
+                statement.execute();
+                return true;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return false;
+    }
 }
