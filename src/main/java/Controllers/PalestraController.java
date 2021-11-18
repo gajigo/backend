@@ -14,7 +14,7 @@ public class PalestraController {
 
     public PalestraController() {
         this.dao = new PalestraDAO();
-        this.model = getModels();
+        this.model = dao.listSeminars();
         this.view = new PalestraView(this);
         dao.createSeminarsTable();
     }
@@ -50,7 +50,9 @@ public class PalestraController {
         for (Palestra palestra : model) {
             listaString.add(palestra.getNome());
         }
+
         return listaString;
+
     }
 
     public String palestraIntString(List <String> nomePalestra, int escolha){

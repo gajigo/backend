@@ -4,6 +4,8 @@ import Models.*;
 import factory.ConnectionFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PalestraDAO  extends FileDAO<Palestra> {
     public PalestraDAO() {
@@ -64,5 +66,32 @@ public class PalestraDAO  extends FileDAO<Palestra> {
             }
         }
         return null;
+    }
+
+    public List<Palestra> listSeminars(){
+        String sql = "SELECT * FROM " + tableName ;
+
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            List<Palestra> listSeminars = new ArrayList<>();
+            Palestra seminar ;
+
+            while(resultSet.next()){
+                seminar = new Palestra();
+                seminar.setId(resultSet.getInt(1));
+                seminar.setNome(resultSet.getString(2));
+                seminar.setDescricao(resultSet.getString(3));
+                seminar.setDataInicio(resultSet.getString(4));
+                seminar.setDuracao(resultSet.getString(5));
+                seminar.setStatus(resultSet.getBoolean(6));
+
+                listSeminars.add(seminar);
+            }
+            return listSeminars;
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -56,7 +56,7 @@ public class PalestraView {
         System.out.println("Digite o idioma da palestra");
         String idioma =  ler.nextLine();
 
-        System.out.println(controller.criarPalestra(nome,descricao,data,duracao,idioma).getNome() + "criada com sucesso");
+        System.out.println(controller.criarPalestra(nome,descricao,data,duracao,idioma).getNome() + " criada com sucesso");
 
     }
 
