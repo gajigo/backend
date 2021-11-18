@@ -104,7 +104,7 @@ public class UsuarioView {
         listar();
 
         System.out.println("Escolha um ID:");
-        int id = ler.nextInt();
+        Long id = ler.nextLong();
         ler.nextLine();
 
         if (controller.deleteById(id)) {

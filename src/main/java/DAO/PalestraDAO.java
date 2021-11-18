@@ -98,7 +98,7 @@ public class PalestraDAO  extends FileDAO<Palestra> {
         String sql = "UPDATE " + tableName + " SET nome = ?, descricao = ?, data = ?, duracao = ? WHERE id = ?";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(5,(int) seminar.getId());
+            statement.setLong(5, seminar.getId());
             statement.setString(1,seminar.getNome());
             statement.setString(2,seminar.getDescricao());
             statement.setString(3,seminar.getDataInicio());
@@ -114,7 +114,7 @@ public class PalestraDAO  extends FileDAO<Palestra> {
         String sql = "DELETE FROM " + tableName + " WHERE id = ?";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, (int) seminar.getId());
+            statement.setLong(1, seminar.getId());
             statement.execute();
         }catch (SQLException e){
             throw new RuntimeException(e);
