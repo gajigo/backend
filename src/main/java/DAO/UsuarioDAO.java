@@ -94,6 +94,31 @@ public class UsuarioDAO extends FileDAO<User> {
         return users;
     }
 
+    public User getUserById(Long userId) {
+        User user = null;
+        String sql = "SELECT * FROM " + tableName + " WHERE user_id = ?";
+
+        try {
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, userId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getInt("user_id"));
+                user.setNome(resultSet.getString("name"));
+                user.setSenha(resultSet.getString("password"));
+                user.setEmail(resultSet.getString("email"));
+                user.setTelefone(resultSet.getString("phone"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return user;
+    }
+
     public boolean deleteUserById(Long userId) {
         if (userId != null) {
             String sql = "DELETE FROM " + tableName + " WHERE user_id = ?";

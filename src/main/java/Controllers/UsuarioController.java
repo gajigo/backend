@@ -34,7 +34,7 @@ public class UsuarioController {
     }
 
     public User getById(long id) {
-        return dao.getById(id);
+        return dao.getUserById(id);
     }
 
     public boolean deleteById(Long id) {
