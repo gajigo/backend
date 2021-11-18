@@ -20,14 +20,6 @@ public class UsuarioDAO extends FileDAO<Usuario> {
     private String tableName = "users";
     private Connection connection = new ConnectionFactory().getConnection();
 
-    private long userId;
-    private String nome;
-    private String senha;
-    private String statusLogin;
-    private String email;
-    private String telefone;
-    private CartaoVisita cartao;
-
     public void createUserTable() {
         String sql = "CREATE SEQUENCE user_id_seq;";
 
