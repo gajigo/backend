@@ -21,9 +21,9 @@ public class PalestraDAO  extends FileDAO<Palestra> {
 
         sql += "CREATE TABLE IF NOT EXISTS " + tableName + "(" +
                 "id BIGINT PRIMARY KEY DEFAULT nextval('seminars_id_seq')," +
-                "nome TEXT NOT NULL," +
+                "nome TEXT ," +
                 "descricao TEXT," +
-                "data VARCHAR(10) NOT NULL," +
+                "data VARCHAR(10) ," +
                 "duracao VARCHAR(10)," +
                 "status BOOLEAN DEFAULT TRUE );";
         try{
