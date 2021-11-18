@@ -74,4 +74,63 @@ public class EventoDAO extends FileDAO<Evento> {
         }
         return null;
     }
+
+    public List<Evento> listEventos() {
+        String sql = "SELECT * FROM " + tableName;
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            List<Evento> listEventos = new ArrayList<>();
+            while (resultSet.next()) {
+                Evento novoEvento = new Evento();
+                novoEvento.setId(resultSet.getInt(1));
+                novoEvento.setNomeEvento(resultSet.getString(2));
+                novoEvento.setDescricao(resultSet.getString(3));
+                novoEvento.setModalidade(Modalidade.values()[resultSet.getInt(4)]);
+                novoEvento.setDataEvento(resultSet.getString(5));
+
+                listEventos.add(novoEvento);
+            }
+
+            return listEventos;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void editEvento(Evento evento) {
+        String sql = "UPDATE " + tableName + " SET nomeEvento = ?, descricao = ?, modalidade = ?, dataEvento = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, evento.getId());
+            statement.setString(2, evento.getNomeEvento());
+            statement.setString(3, evento.getDescricao());
+            statement.setInt(4, evento.getModalidade().ordinal());
+            statement.setString(5, evento.getDataEvento());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean deleteEventoById(Long eventoId) {
+        if (eventoId != null) {
+            String sql = "DELETE FROM " + tableName + " WHERE user_id = ?";
+
+            try {
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setLong(1, eventoId);
+
+                statement.execute();
+                return true;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return false;
+    }
 }
