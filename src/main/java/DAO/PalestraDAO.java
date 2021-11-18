@@ -94,4 +94,15 @@ public class PalestraDAO  extends FileDAO<Palestra> {
             throw new RuntimeException(e);
         }
     }
+
+    public void deleteSeminar(Palestra seminar){
+        String sql = "DELETE FROM " + tableName + " WHERE id = ?";
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, (int) seminar.getId());
+            statement.execute();
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

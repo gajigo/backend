@@ -68,9 +68,11 @@ public class PalestraController {
     }
 
     public boolean deletarPalestra(Palestra palestra){
-        palestra.setStatus(false);
+//        palestra.setStatus(false);
+//        return palestra.isStatus();
+        dao.deleteSeminar(palestra);
+        return false;
 
-        return palestra.isStatus();
     }
 
     public void enviarDuvida(Palestra palestra,String duvida){
