@@ -52,7 +52,7 @@ public class User implements DAOUser {
         this.userId = userId;
     }
 
-    public long getId() {
+    public Long getId() {
         return userId;
     }
 

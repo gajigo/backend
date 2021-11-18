@@ -3,6 +3,6 @@ package DAO;
 import java.io.Serializable;
 
 public interface DAOUser extends Serializable {
-    long getId();
+    Long getId();
     void setId(long id);
 }

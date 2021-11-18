@@ -62,7 +62,7 @@ public class Palestra implements DAOUser {
         this.descricao = descricao;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

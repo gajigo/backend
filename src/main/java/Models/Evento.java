@@ -71,7 +71,7 @@ public class Evento implements DAOUser {
         this.modalidade = modalidade;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
