@@ -12,6 +12,7 @@ public class EventoController {
 
     public EventoController() {
         this.dao = new EventoDAO();
+        this.dao.createEventoTable();
         this.view = new EventoView(this);
     }
 
@@ -25,7 +26,8 @@ public class EventoController {
     public Evento cadastrar(String nomeEvento, String descricao, String dataEvento) {
         // Registramos Evento no DAO e retornamos para ser modificado
         Evento novoEvento = new Evento(nomeEvento, descricao, dataEvento);
-        return dao.addModel(novoEvento);
+        return dao.createEvento(novoEvento);
+
     }
 
     public List<Evento> getModels() {
