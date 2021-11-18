@@ -154,4 +154,7 @@ public class PalestraController {
         }
     }
 
+    public void editaPalestra(Palestra palestra){
+        dao.editSeminar(palestra);
+    }
 }

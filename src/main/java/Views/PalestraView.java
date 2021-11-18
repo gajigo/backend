@@ -195,6 +195,7 @@ public class PalestraView {
                     System.out.println("Escolha invalida");
                     break;
             }
+            controller.editaPalestra(palestra);
         }
     }
 
