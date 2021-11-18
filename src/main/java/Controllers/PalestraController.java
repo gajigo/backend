@@ -29,18 +29,19 @@ public class PalestraController {
         return dao.getModels();
     }
 
-    public void criarPalestra(String nome, String data, String duracao, String idioma){
+    public Palestra criarPalestra(String nome,String descricao, String data, String duracao, String idioma){
         Palestra novaPalestra = new Palestra();
         Idioma novoIdioma = new Idioma();
 
         novaPalestra.setNome(nome);
+        novaPalestra.setDescricao(descricao);
         novaPalestra.setDataInicio(data);
         novaPalestra.setDuracao(duracao);
         novoIdioma.setNome(idioma);
         novaPalestra.getIdioma().add(novoIdioma);
 
         model.add(novaPalestra);
-
+        return dao.createSeminars(novaPalestra);
     }
 
     public List<String> listaPalestras(){

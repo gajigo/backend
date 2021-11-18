@@ -44,6 +44,9 @@ public class PalestraView {
         System.out.println("Digite o nome da palestra");
         String nome = ler.nextLine();
 
+        System.out.println("Digite a descricao da palestra");
+        String descricao = ler.nextLine();
+
         System.out.println("Digite a data da palestra");
         String data = ler.nextLine();
 
@@ -53,7 +56,7 @@ public class PalestraView {
         System.out.println("Digite o idioma da palestra");
         String idioma =  ler.nextLine();
 
-        controller.criarPalestra(nome,data,duracao,idioma);
+        System.out.println(controller.criarPalestra(nome,descricao,data,duracao,idioma).getNome() + "criada com sucesso");
 
     }
 
