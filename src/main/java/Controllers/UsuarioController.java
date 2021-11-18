@@ -23,13 +23,17 @@ public class UsuarioController {
         }
     }
 
-    public User registrar(String nome, String senha) {
+    public User registrar(User user) {
         // Registramos o usuario com nome e senha na DAO
         // e retornamos para o usuario modificar.
-        User user = new User(nome, senha);
-        user.setEmail("teste@email.com");
-        user.setTelefone("45999999999");
         return dao.createUser(user);
+    }
+
+    public User editUser(User user) {
+        if (user != null) {
+            return dao.updateUser(user);
+        }
+        return null;
     }
 
     public List<User> getModels() {
@@ -37,7 +41,7 @@ public class UsuarioController {
     }
 
     public User getById(long id) {
-        return dao.getById(id);
+        return dao.getUserById(id);
     }
 
     public boolean deleteById(Long id) {
