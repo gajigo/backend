@@ -29,6 +29,13 @@ public class UsuarioController {
         return dao.createUser(user);
     }
 
+    public User editUser(User user) {
+        if (user != null) {
+            return dao.updateUser(user);
+        }
+        return null;
+    }
+
     public List<User> getModels() {
         return dao.listUsers();
     }

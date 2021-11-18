@@ -135,4 +135,29 @@ public class UsuarioDAO extends FileDAO<User> {
         }
         return false;
     }
+
+    public User updateUser(User user) {
+        if (user != null) {
+            String sql = "UPDATE " + tableName + " SET " +
+                    "name = ?, password = ?, email = ?, phone = ? " +
+                    "WHERE user_id = ?";
+
+            try {
+                PreparedStatement statement = connection.prepareStatement(sql);
+
+                statement.setString(1, user.getNome());
+                statement.setString(2, user.getSenha());
+                statement.setString(3, user.getEmail());
+                statement.setString(4, user.getTelefone());
+                statement.setLong(5, user.getId());
+
+                statement.execute();
+
+                return user;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return null;
+    }
 }

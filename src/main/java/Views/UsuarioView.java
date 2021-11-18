@@ -152,10 +152,12 @@ public class UsuarioView {
                 case 1:
                     System.out.println("Escreva um novo nome:");
                     user.setNome(ler.nextLine());
+                    controller.editUser(user);
                     break;
                 case 2:
                     System.out.println("Escreva uma nova senha:");
                     user.setSenha(ler.nextLine());
+                    controller.editUser(user);
                     break;
                 case 3:
                     menuCargos(user);
