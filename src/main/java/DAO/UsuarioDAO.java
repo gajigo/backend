@@ -82,6 +82,7 @@ public class UsuarioDAO extends FileDAO<User> {
                 user = new User();
                 user.setId(resultSet.getInt("user_id"));
                 user.setNome(resultSet.getString("name"));
+                user.setSenha(resultSet.getString("password"));
                 user.setEmail(resultSet.getString("email"));
                 user.setTelefone(resultSet.getString("phone"));
 
