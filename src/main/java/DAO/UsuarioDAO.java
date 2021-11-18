@@ -5,6 +5,8 @@ import Models.User;
 import factory.ConnectionFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDAO extends FileDAO<User> {
     public UsuarioDAO() {
@@ -65,5 +67,29 @@ public class UsuarioDAO extends FileDAO<User> {
             }
         }
         return null;
+    }
+
+    public List<User> listUsers() {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM " + tableName;
+
+        try {
+            User user;
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setNome(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setTelefone(resultSet.getString("phone"));
+
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return users;
     }
 }

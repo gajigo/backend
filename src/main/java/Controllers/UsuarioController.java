@@ -33,7 +33,7 @@ public class UsuarioController {
     }
 
     public List<User> getModels() {
-        return dao.getModels();
+        return dao.listUsers();
     }
 
     public User getById(long id) {
