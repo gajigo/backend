@@ -17,6 +17,7 @@ public class PalestraController {
         this.dao = new PalestraDAO();
         this.model = getModels();
         this.view = new PalestraView(this);
+        dao.createSeminarsTable();
     }
 
     public void start(){
