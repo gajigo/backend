@@ -23,12 +23,9 @@ public class UsuarioController {
         }
     }
 
-    public User registrar(String nome, String senha) {
+    public User registrar(User user) {
         // Registramos o usuario com nome e senha na DAO
         // e retornamos para o usuario modificar.
-        User user = new User(nome, senha);
-        user.setEmail("teste@email.com");
-        user.setTelefone("45999999999");
         return dao.createUser(user);
     }
 

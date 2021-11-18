@@ -55,17 +55,22 @@ public class UsuarioView {
     public void menuRegistrar() {
         Scanner ler = new Scanner(System.in);
 
+        User user = new User();
+
         System.out.println("-Criar Usuario-");
         System.out.println("Escreva um nome:");
-        String nome = ler.nextLine();
+        user.setNome(ler.nextLine());
 
         System.out.println("Escreva uma senha:");
-        String senha = ler.nextLine();
+        user.setSenha(ler.nextLine());
 
-        User novoUser = controller.registrar(nome, senha);
+        System.out.println("Escreva um e-mail:");
+        user.setEmail(ler.nextLine());
+
+        User novoUser = controller.registrar(user);
         menuCargos(novoUser);
 
-        System.out.println("Usuario " + nome + " registrado com sucesso!");
+        System.out.println("Usuario " + novoUser.getId() + " registrado com sucesso!");
     }
 
     public void menuEditar() {
