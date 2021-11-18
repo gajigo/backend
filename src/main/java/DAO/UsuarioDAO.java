@@ -61,7 +61,7 @@ public class UsuarioDAO extends FileDAO<User> {
                 }
                 return user;
             } catch (SQLException e) {
-                return null;
+                throw new RuntimeException(e);
             }
         }
         return null;
