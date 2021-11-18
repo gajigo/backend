@@ -23,10 +23,10 @@ public class UsuarioDAO extends FileDAO<User> {
 
         sql += "CREATE TABLE IF NOT EXISTS " + tableName + "(" +
                 "userId BIGINT PRIMARY KEY DEFAULT nextval('user_id_seq')," +
-                "nome TEXT NOT NULL," +
-                "senha TEXT NOT NULL," +
+                "name TEXT NOT NULL," +
+                "password TEXT NOT NULL," +
                 "email VARCHAR(50) UNIQUE," +
-                "telefone VARCHAR(14));";
+                "phone VARCHAR(14));";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -41,7 +41,7 @@ public class UsuarioDAO extends FileDAO<User> {
     public User createUser(User user) {
         if (user != null) {
             String sql = "INSERT INTO " + tableName +
-                    "(nome, senha, email, telefone)" +
+                    "(name, password, email, phone)" +
                     "VALUES (?, ?, ?, ?)";
 
             try {
