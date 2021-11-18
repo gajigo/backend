@@ -21,7 +21,7 @@ public class UsuarioDAO extends FileDAO<Usuario> {
     private Connection connection = new ConnectionFactory().getConnection();
 
     public void createUserTable() {
-        String sql = "CREATE SEQUENCE user_id_seq;";
+        String sql = "CREATE SEQUENCE IF NOT EXISTS user_id_seq;";
 
         sql += "CREATE TABLE IF NOT EXISTS " + tableName + "(" +
                 "userId BIGINT PRIMARY KEY DEFAULT nextval('user_id_seq')," +
