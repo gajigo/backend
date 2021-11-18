@@ -1,14 +1,12 @@
 package DAO;
 
 import Models.CartaoVisita;
-import Models.Usuario;
+import Models.User;
 import factory.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class UsuarioDAO extends FileDAO<Usuario> {
+public class UsuarioDAO extends FileDAO<User> {
     public UsuarioDAO() {
         super("usuarios.txt");
     }
@@ -38,5 +36,34 @@ public class UsuarioDAO extends FileDAO<Usuario> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public User createUser(User user) {
+        if (user != null) {
+            String sql = "INSERT INTO " + tableName +
+                    "(nome, senha, email, telefone)" +
+                    "VALUES (?, ?, ?, ?)";
+
+            try {
+                PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+                statement.setString(1, user.getNome());
+                statement.setString(2, user.getSenha());
+                statement.setString(3, user.getEmail());
+                statement.setString(4, user.getTelefone());
+
+                statement.execute();
+
+                ResultSet resultSet = statement.getGeneratedKeys();
+
+                while (resultSet.next()) {
+                    user.setUserId(resultSet.getInt(1));
+                }
+                return user;
+            } catch (SQLException e) {
+                return null;
+            }
+        }
+        return null;
     }
 }
