@@ -7,31 +7,31 @@ import java.util.List;
 public class CartaoVisita implements Serializable {
     
     private static final long serialVersionUID = 1L;
-    private Usuario usuario;
+    private User user;
     private List<Link> links;
 
     public CartaoVisita() {
     }
 
-    public CartaoVisita(Usuario usuario, List<Link> links) {
-        this.usuario = usuario;
+    public CartaoVisita(User user, List<Link> links) {
+        this.user = user;
         this.links = links;
     }
 
     @Override
     public String toString() {
         return "CartaoVisita{" +
-                "usuario=" + usuario +
+                "usuario=" + user +
                 ", links=" + links +
                 '}';
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public User getUsuario() {
+        return user;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(User user) {
+        this.user = user;
     }
 
     public List<Link> getLinks() {

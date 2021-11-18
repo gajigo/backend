@@ -8,15 +8,15 @@ public class DuvidaPalestra implements Serializable {
     private static final long serialVersionUID = 1L;
     private long id;
     private String duvida;
-    private Usuario usuario;
+    private User user;
 
     public DuvidaPalestra() {
     }
 
-    public DuvidaPalestra(long id, String duvida, Usuario usuario) {
+    public DuvidaPalestra(long id, String duvida, User user) {
         this.id = id;
         this.duvida = duvida;
-        this.usuario = usuario;
+        this.user = user;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class DuvidaPalestra implements Serializable {
         return "DuvidaPalestra{" +
                 "id=" + id +
                 ", duvida='" + duvida + '\'' +
-                ", usuario=" + usuario +
+                ", usuario=" + user +
                 '}';
     }
 
@@ -44,11 +44,11 @@ public class DuvidaPalestra implements Serializable {
         this.duvida = duvida;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public User getUsuario() {
+        return user;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(User user) {
+        this.user = user;
     }
 }

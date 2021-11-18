@@ -2,7 +2,7 @@ package Views;
 
 import Controllers.UsuarioController;
 import Models.Roles;
-import Models.Usuario;
+import Models.User;
 
 import java.util.List;
 import java.util.Scanner;
@@ -62,8 +62,8 @@ public class UsuarioView {
         System.out.println("Escreva uma senha:");
         String senha = ler.nextLine();
 
-        Usuario novoUsuario = controller.registrar(nome, senha);
-        menuCargos(novoUsuario);
+        User novoUser = controller.registrar(nome, senha);
+        menuCargos(novoUser);
 
         System.out.println("Usuario " + nome + " registrado com sucesso!");
     }
@@ -83,7 +83,7 @@ public class UsuarioView {
         int id = ler.nextInt();
         ler.nextLine();
 
-        Usuario escolha = controller.getById(id);
+        User escolha = controller.getById(id);
         if (escolha == null) {
             System.out.println("Usuario nao encontrado!");
             return;
@@ -114,27 +114,27 @@ public class UsuarioView {
         }
     }
 
-    public boolean login(Usuario usuario) {
+    public boolean login(User user) {
         Scanner ler = new Scanner(System.in);
         System.out.println("Escreva sua senha:");
 
         String senha = ler.nextLine();
-        return usuario.getSenha().equals(senha);
+        return user.getSenha().equals(senha);
     }
 
-    public void edite(Usuario usuario) {
+    public void edite(User user) {
         Scanner ler = new Scanner(System.in);
 
-        if (!login(usuario)) {
+        if (!login(user)) {
             System.out.println("Senha incorreta!");
             return;
         }
 
         while (true) {
             System.out.println("Informacoes:");
-            System.out.printf("1 - %s: %s\n", "Nome", usuario.getNome());
-            System.out.printf("2 - %s: %s\n", "Senha", usuario.getSenha());
-            System.out.printf("3 - %s: %s\n", "Cargos", usuario.getRoles());
+            System.out.printf("1 - %s: %s\n", "Nome", user.getNome());
+            System.out.printf("2 - %s: %s\n", "Senha", user.getSenha());
+            System.out.printf("3 - %s: %s\n", "Cargos", user.getRoles());
             System.out.println("0 - Sair");
 
             System.out.println("Escolha uma opcao para mudar");
@@ -146,14 +146,14 @@ public class UsuarioView {
                     return;
                 case 1:
                     System.out.println("Escreva um novo nome:");
-                    usuario.setNome(ler.nextLine());
+                    user.setNome(ler.nextLine());
                     break;
                 case 2:
                     System.out.println("Escreva uma nova senha:");
-                    usuario.setSenha(ler.nextLine());
+                    user.setSenha(ler.nextLine());
                     break;
                 case 3:
-                    menuCargos(usuario);
+                    menuCargos(user);
                     break;
                 default:
                     System.out.println("Escolha invalida!");
@@ -163,15 +163,15 @@ public class UsuarioView {
     }
 
     public void listar() {
-        for (Usuario usuario: controller.getModels()) {
-            System.out.printf("%d - %s\n", usuario.getId(), usuario.getNome());
+        for (User user : controller.getModels()) {
+            System.out.printf("%d - %s\n", user.getId(), user.getNome());
         }
     }
 
-    public void menuCargos(Usuario usuario) {
+    public void menuCargos(User user) {
         Scanner ler = new Scanner(System.in);
         while (true) {
-            System.out.println("Cargos: " + usuario.getRoles());
+            System.out.println("Cargos: " + user.getRoles());
             System.out.println("1 - Adicionar Cargo");
             System.out.println("2 - Remover Cargo");
             System.out.println("3 - Confirmar");
@@ -200,9 +200,9 @@ public class UsuarioView {
                 Roles cargo = Roles.valueOf(rolesPossiveis.get(cargoEscolhido));
 
                 if (escolha == 1) {
-                    usuario.addRole(cargo);
+                    user.addRole(cargo);
                 } else {
-                    usuario.removeRole(cargo);
+                    user.removeRole(cargo);
                 }
             } else {
                 System.out.println("Cargo invalido!");

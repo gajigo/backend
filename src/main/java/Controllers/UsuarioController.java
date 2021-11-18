@@ -1,7 +1,7 @@
 package Controllers;
 
 import DAO.UsuarioDAO;
-import Models.Usuario;
+import Models.User;
 import Views.UsuarioView;
 
 import java.util.List;
@@ -23,17 +23,20 @@ public class UsuarioController {
         }
     }
 
-    public Usuario registrar(String nome, String senha) {
+    public User registrar(String nome, String senha) {
         // Registramos o usuario com nome e senha na DAO
         // e retornamos para o usuario modificar.
-        return dao.addModel(new Usuario(nome, senha));
+        User user = new User(nome, senha);
+        user.setEmail("teste@email.com");
+        user.setTelefone("45999999999");
+        return dao.createUser(user);
     }
 
-    public List<Usuario> getModels() {
+    public List<User> getModels() {
         return dao.getModels();
     }
 
-    public Usuario getById(long id) {
+    public User getById(long id) {
         return dao.getById(id);
     }
 

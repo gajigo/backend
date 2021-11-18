@@ -3,10 +3,9 @@ package Models;
 
 import DAO.DAOUser;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Usuario implements DAOUser {
+public class User implements DAOUser {
     private static final long serialVersionUID = 2L;
     private long userId;
     private String nome;
@@ -17,17 +16,17 @@ public class Usuario implements DAOUser {
     private CartaoVisita cartao;
     private ArrayList<Roles> roles = new ArrayList<>();
 
-    public Usuario() {
+    public User() {
         statusLogin = "logado";
     }
 
-    public Usuario(String nome, String senha) {
+    public User(String nome, String senha) {
         this();
         this.nome = nome;
         this.senha = senha;
     }
 
-    public Usuario(int userId, String nome, String senha, String statusLogin, ArrayList<Roles> roles) {
+    public User(int userId, String nome, String senha, String statusLogin, ArrayList<Roles> roles) {
         this(nome, senha);
         this.userId = userId;
         this.statusLogin = statusLogin;
@@ -43,6 +42,14 @@ public class Usuario implements DAOUser {
                 ", statusLogin='" + statusLogin + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public long getId() {
@@ -75,6 +82,30 @@ public class Usuario implements DAOUser {
 
     public void setStatusLogin(String statusLogin) {
         this.statusLogin = statusLogin;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public CartaoVisita getCartao() {
+        return cartao;
+    }
+
+    public void setCartao(CartaoVisita cartao) {
+        this.cartao = cartao;
     }
 
     public ArrayList<Roles> getRoles() {

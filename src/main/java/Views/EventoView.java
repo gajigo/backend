@@ -4,7 +4,7 @@ import Controllers.EventoController;
 import Controllers.UsuarioController;
 import Models.Evento;
 import Models.Modalidade;
-import Models.Usuario;
+import Models.User;
 
 
 import java.util.List;
@@ -232,16 +232,16 @@ public class EventoView {
             int id = ler.nextInt();
             ler.nextLine();
 
-            Usuario usuarioEscolhido = usuarios.getById(id);
-            if (usuarioEscolhido == null) {
+            User userEscolhido = usuarios.getById(id);
+            if (userEscolhido == null) {
                 System.out.println("ID invalido!");
                 continue;
             }
 
             if (escolha == 1) {
-                evento.addOrganizador(usuarioEscolhido);
+                evento.addOrganizador(userEscolhido);
             } else {
-                evento.removeOrganizador(usuarioEscolhido);
+                evento.removeOrganizador(userEscolhido);
             }
         }
     }

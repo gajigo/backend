@@ -1,6 +1,5 @@
 package Controllers;
 
-import DAO.EventoDAO;
 import DAO.PalestraDAO;
 import Models.*;
 import Views.PalestraView;
@@ -78,9 +77,9 @@ public class PalestraController {
     }
 
     public boolean participarPalestra(Palestra palestra,String novoUsuario){
-        Usuario usuario = new Usuario();
-        usuario.setNome(novoUsuario);
-        palestra.getParticipantes().add(usuario);
+        User user = new User();
+        user.setNome(novoUsuario);
+        palestra.getParticipantes().add(user);
         return true;
     }
 
@@ -134,7 +133,7 @@ public class PalestraController {
     }
 
     public void adicionaPalestrante(Palestra palestra, String novoPalestrante){
-        Usuario palestrante = new Usuario();
+        User palestrante = new User();
         palestrante.setNome(novoPalestrante);
         palestra.getPalestrantes().add(palestrante);
     }

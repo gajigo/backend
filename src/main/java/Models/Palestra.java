@@ -2,7 +2,6 @@ package Models;
 
 import DAO.DAOUser;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +16,8 @@ public class Palestra implements DAOUser {
     private List<Idioma> idioma = new ArrayList<>();
     private List<Assunto> assuntos = new ArrayList<>();
     private List<Avaliacao> avaliacoes = new ArrayList<>();
-    private List<Usuario> palestrantes = new ArrayList<>();
-    private List<Usuario> participantes = new ArrayList<>();
+    private List<User> palestrantes = new ArrayList<>();
+    private List<User> participantes = new ArrayList<>();
     private List<DuvidaPalestra> duvidas = new ArrayList<>();
     private boolean status;
 
@@ -111,11 +110,11 @@ public class Palestra implements DAOUser {
         this.avaliacoes = avaliacoes;
     }
 
-    public List<Usuario> getPalestrantes() {
+    public List<User> getPalestrantes() {
         return palestrantes;
     }
 
-    public void setPalestrantes(List<Usuario> palestrantes) {
+    public void setPalestrantes(List<User> palestrantes) {
         this.palestrantes = palestrantes;
     }
 
@@ -143,19 +142,19 @@ public class Palestra implements DAOUser {
         this.avaliacoes.remove(avaliacao);
     }
 
-    public void addPalestrante(Usuario palestrante) {
+    public void addPalestrante(User palestrante) {
         this.palestrantes.add(palestrante);
     }
 
-    public void removePalestrante(Usuario palestrante) {
+    public void removePalestrante(User palestrante) {
         this.palestrantes.remove(palestrante);
     }
 
-    public List<Usuario> getParticipantes() {
+    public List<User> getParticipantes() {
         return participantes;
     }
 
-    public void setParticipantes(List<Usuario> participantes) {
+    public void setParticipantes(List<User> participantes) {
         this.participantes = participantes;
     }
 

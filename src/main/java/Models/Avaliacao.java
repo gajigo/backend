@@ -9,10 +9,10 @@ public class Avaliacao implements Serializable {
     private long id;
     private float nota;
     private Palestra palestraAssociada;
-    private Usuario avaliador;
+    private User avaliador;
     private boolean ativo;
 
-    public Avaliacao(float nota, Palestra palestraAssociada, Usuario avaliador) {
+    public Avaliacao(float nota, Palestra palestraAssociada, User avaliador) {
         this.nota = nota;
         this.palestraAssociada = palestraAssociada;
         this.avaliador = avaliador;
@@ -53,11 +53,11 @@ public class Avaliacao implements Serializable {
         this.palestraAssociada = palestraAssociada;
     }
 
-    public Usuario getAvaliador() {
+    public User getAvaliador() {
         return avaliador;
     }
 
-    public void setAvaliador(Usuario avaliador) {
+    public void setAvaliador(User avaliador) {
         this.avaliador = avaliador;
     }
 

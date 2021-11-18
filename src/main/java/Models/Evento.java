@@ -2,7 +2,6 @@ package Models;
 
 import DAO.DAOUser;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +12,13 @@ public class Evento implements DAOUser {
     private Modalidade modalidade;
     private long id;
     private String dataEvento;
-    private List<Usuario> organizadores = new ArrayList<>();
+    private List<User> organizadores = new ArrayList<>();
     private List<Palestra> palestras = new ArrayList<>();
 
     public Evento() {
     }
 
-    public Evento(String nomeEvento, String descricao, Modalidade modalidade, long id, String dataEvento, List<Usuario> organizadores, List<Palestra> palestras) {
+    public Evento(String nomeEvento, String descricao, Modalidade modalidade, long id, String dataEvento, List<User> organizadores, List<Palestra> palestras) {
         this.nomeEvento = nomeEvento;
         this.descricao = descricao;
         this.modalidade = modalidade;
@@ -88,11 +87,11 @@ public class Evento implements DAOUser {
         this.dataEvento = dataEvento;
     }
 
-    public List<Usuario> getOrganizadores() {
+    public List<User> getOrganizadores() {
         return organizadores;
     }
 
-    public void setOrganizadores(List<Usuario> organizadores) {
+    public void setOrganizadores(List<User> organizadores) {
         this.organizadores = organizadores;
     }
 
@@ -112,11 +111,11 @@ public class Evento implements DAOUser {
         this.palestras.remove(palestra);
     }
 
-    public void addOrganizador(Usuario organizador){
+    public void addOrganizador(User organizador){
         this.organizadores.add(organizador);
     }
 
-    public void removeOrganizador(Usuario organizador){
+    public void removeOrganizador(User organizador){
         this.organizadores.remove(organizador);
     }
 }
