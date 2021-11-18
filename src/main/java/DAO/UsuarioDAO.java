@@ -27,7 +27,7 @@ public class UsuarioDAO extends FileDAO<User> {
                 "user_id BIGINT PRIMARY KEY DEFAULT nextval('user_id_seq')," +
                 "name TEXT NOT NULL," +
                 "password TEXT NOT NULL," +
-                "email VARCHAR(50) UNIQUE," +
+                "email VARCHAR(50) UNIQUE NOT NULL," +
                 "phone VARCHAR(14));";
 
         try {
