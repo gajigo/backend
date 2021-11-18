@@ -13,6 +13,7 @@ public class UsuarioController {
     public UsuarioController() {
         this.dao = new UsuarioDAO();
         this.view = new UsuarioView(this);
+        this.dao.createUserTable();
     }
 
     public void start() {
