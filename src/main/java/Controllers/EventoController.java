@@ -12,7 +12,6 @@ public class EventoController {
 
     public EventoController() {
         this.dao = new EventoDAO();
-        this.dao.createEventoTable();
         this.view = new EventoView(this);
     }
 

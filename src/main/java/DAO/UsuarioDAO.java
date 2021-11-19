@@ -12,10 +12,12 @@ import java.util.List;
 public class UsuarioDAO extends FileDAO<User> {
     public UsuarioDAO() {
         super("usuarios.txt");
+        createUserTable();
     }
 
     public UsuarioDAO(String filename) {
         super(filename);
+        createUserTable();
     }
 
     private String tableName = "users";

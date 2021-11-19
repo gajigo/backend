@@ -10,9 +10,11 @@ import java.util.List;
 public class PalestraDAO  extends FileDAO<Palestra> {
     public PalestraDAO() {
         super("palestras.txt");
+        createSeminarsTable();
     }
     public PalestraDAO(String filename) {
         super(filename);
+        createSeminarsTable();
     }
 
     private String tableName = "seminars";
