@@ -8,13 +8,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAO extends FileDAO<User> {
-    public UsuarioDAO() {
+public class UserDAO extends FileDAO<User> {
+    public UserDAO() {
         super("usuarios.txt");
         createUserTable();
     }
 
-    public UsuarioDAO(String filename) {
+    public UserDAO(String filename) {
         super(filename);
         createUserTable();
     }
