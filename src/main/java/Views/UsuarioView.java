@@ -59,10 +59,10 @@ public class UsuarioView {
 
         System.out.println("-Criar Usuario-");
         System.out.println("Escreva um nome:");
-        user.setNome(ler.nextLine());
+        user.setName(ler.nextLine());
 
         System.out.println("Escreva uma senha:");
-        user.setSenha(ler.nextLine());
+        user.setPassword(ler.nextLine());
 
         System.out.println("Escreva um e-mail:");
         user.setEmail(ler.nextLine());
@@ -124,7 +124,7 @@ public class UsuarioView {
         System.out.println("Escreva sua senha:");
 
         String senha = ler.nextLine();
-        return user.getSenha().equals(senha);
+        return user.getPassword().equals(senha);
     }
 
     public void edite(User user) {
@@ -137,8 +137,8 @@ public class UsuarioView {
 
         while (true) {
             System.out.println("Informacoes:");
-            System.out.printf("1 - %s: %s\n", "Nome", user.getNome());
-            System.out.printf("2 - %s: %s\n", "Senha", user.getSenha());
+            System.out.printf("1 - %s: %s\n", "Nome", user.getName());
+            System.out.printf("2 - %s: %s\n", "Senha", user.getPassword());
             System.out.printf("3 - %s: %s\n", "Cargos", user.getRoles());
             System.out.println("0 - Sair");
 
@@ -151,12 +151,12 @@ public class UsuarioView {
                     return;
                 case 1:
                     System.out.println("Escreva um novo nome:");
-                    user.setNome(ler.nextLine());
+                    user.setName(ler.nextLine());
                     controller.editUser(user);
                     break;
                 case 2:
                     System.out.println("Escreva uma nova senha:");
-                    user.setSenha(ler.nextLine());
+                    user.setPassword(ler.nextLine());
                     controller.editUser(user);
                     break;
                 case 3:
@@ -172,7 +172,7 @@ public class UsuarioView {
 
     public void listar() {
         for (User user : controller.getModels()) {
-            System.out.printf("%d - %s\n", user.getId(), user.getNome());
+            System.out.printf("%d - %s\n", user.getId(), user.getName());
         }
     }
 

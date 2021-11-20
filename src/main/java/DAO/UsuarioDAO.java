@@ -1,6 +1,5 @@
 package DAO;
 
-import Models.CartaoVisita;
 import Models.Roles;
 import Models.User;
 import factory.ConnectionFactory;
@@ -91,10 +90,10 @@ public class UsuarioDAO extends FileDAO<User> {
             try {
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-                statement.setString(1, user.getNome());
-                statement.setString(2, user.getSenha());
+                statement.setString(1, user.getName());
+                statement.setString(2, user.getPassword());
                 statement.setString(3, user.getEmail());
-                statement.setString(4, user.getTelefone());
+                statement.setString(4, user.getPhone());
 
                 statement.execute();
 
@@ -126,10 +125,10 @@ public class UsuarioDAO extends FileDAO<User> {
             while (resultSet.next()) {
                 user = new User();
                 user.setId(resultSet.getInt("user_id"));
-                user.setNome(resultSet.getString("name"));
-                user.setSenha(resultSet.getString("password"));
+                user.setName(resultSet.getString("name"));
+                user.setPassword(resultSet.getString("password"));
                 user.setEmail(resultSet.getString("email"));
-                user.setTelefone(resultSet.getString("phone"));
+                user.setPhone(resultSet.getString("phone"));
 
                 users.add(user);
             }
@@ -153,10 +152,10 @@ public class UsuarioDAO extends FileDAO<User> {
             while (resultSet.next()) {
                 user = new User();
                 user.setId(resultSet.getInt("user_id"));
-                user.setNome(resultSet.getString("name"));
-                user.setSenha(resultSet.getString("password"));
+                user.setName(resultSet.getString("name"));
+                user.setPassword(resultSet.getString("password"));
                 user.setEmail(resultSet.getString("email"));
-                user.setTelefone(resultSet.getString("phone"));
+                user.setPhone(resultSet.getString("phone"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -190,10 +189,10 @@ public class UsuarioDAO extends FileDAO<User> {
             try {
                 PreparedStatement statement = connection.prepareStatement(sql);
 
-                statement.setString(1, user.getNome());
-                statement.setString(2, user.getSenha());
+                statement.setString(1, user.getName());
+                statement.setString(2, user.getPassword());
                 statement.setString(3, user.getEmail());
-                statement.setString(4, user.getTelefone());
+                statement.setString(4, user.getPhone());
                 statement.setLong(5, user.getId());
 
                 statement.execute();

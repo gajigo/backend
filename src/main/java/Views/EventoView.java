@@ -71,9 +71,9 @@ public class EventoView {
 
         Evento novoEvento = controller.cadastrar(nomeEvento, descricao, dataEvento);
 
-        menuModalidade(novoEvento);
+        //menuModalidade(novoEvento);
 
-        System.out.println("Evento " + novoEvento.getNomeEvento() + " foi criado!");
+        //System.out.println("Evento " + novoEvento.getNomeEvento() + " foi criado!");
     }
 
     public void menuModalidade(Evento evento){

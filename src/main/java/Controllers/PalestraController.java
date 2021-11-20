@@ -82,7 +82,7 @@ public class PalestraController {
 
     public boolean participarPalestra(Palestra palestra,String novoUsuario){
         User user = new User();
-        user.setNome(novoUsuario);
+        user.setName(novoUsuario);
         palestra.getParticipantes().add(user);
         return true;
     }
@@ -138,7 +138,7 @@ public class PalestraController {
 
     public void adicionaPalestrante(Palestra palestra, String novoPalestrante){
         User palestrante = new User();
-        palestrante.setNome(novoPalestrante);
+        palestrante.setName(novoPalestrante);
         palestra.getPalestrantes().add(palestrante);
     }
 
@@ -146,7 +146,7 @@ public class PalestraController {
         int i = 0;
 
         while(palestra.getPalestrantes().size() > i){
-            if(palestra.getPalestrantes().get(i).getNome().compareToIgnoreCase(palestrante) != 0){
+            if(palestra.getPalestrantes().get(i).getName().compareToIgnoreCase(palestrante) != 0){
                 palestra.getPalestrantes().remove(i);
             }
             i = i + 1;

@@ -8,26 +8,26 @@ import java.util.ArrayList;
 public class User implements DAOUser {
     private static final long serialVersionUID = 2L;
     private long userId;
-    private String nome;
-    private String senha;
+    private String name;
+    private String password;
     private String statusLogin;
     private String email;
-    private String telefone;
-    private CartaoVisita cartao;
+    private String phone;
+    private CartaoVisita businessCard;
     private ArrayList<Roles> roles = new ArrayList<>();
 
     public User() {
         statusLogin = "logado";
     }
 
-    public User(String nome, String senha) {
+    public User(String name, String password) {
         this();
-        this.nome = nome;
-        this.senha = senha;
+        this.name = name;
+        this.password = password;
     }
 
-    public User(int userId, String nome, String senha, String statusLogin, ArrayList<Roles> roles) {
-        this(nome, senha);
+    public User(int userId, String name, String password, String statusLogin, ArrayList<Roles> roles) {
+        this(name, password);
         this.userId = userId;
         this.statusLogin = statusLogin;
         this.roles = roles;
@@ -37,8 +37,8 @@ public class User implements DAOUser {
     public String toString() {
         return "Usuario{" +
                 "userId=" + userId +
-                ", nome='" + nome + '\'' +
-                ", senha='" + senha + '\'' +
+                ", nome='" + name + '\'' +
+                ", senha='" + password + '\'' +
                 ", statusLogin='" + statusLogin + '\'' +
                 ", roles=" + roles +
                 '}';
@@ -60,20 +60,20 @@ public class User implements DAOUser {
         this.userId = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getStatusLogin() {
@@ -92,20 +92,20 @@ public class User implements DAOUser {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public CartaoVisita getCartao() {
-        return cartao;
+    public CartaoVisita getBusinessCard() {
+        return businessCard;
     }
 
-    public void setCartao(CartaoVisita cartao) {
-        this.cartao = cartao;
+    public void setBusinessCard(CartaoVisita businessCard) {
+        this.businessCard = businessCard;
     }
 
     public ArrayList<Roles> getRoles() {
@@ -116,18 +116,18 @@ public class User implements DAOUser {
         this.roles = roles;
     }
 
-    public void addRole(Roles novoRole) {
-        if (this.roles.contains(novoRole)) {
+    public void addRole(Roles newRole) {
+        if (this.roles.contains(newRole)) {
             return;
         }
-        this.roles.add(novoRole);
+        this.roles.add(newRole);
     }
 
     public void removeRole(Roles role) {
         this.roles.remove(role);
     }
 
-    public boolean verificaLogin(String senhaTeste) {
-        return senhaTeste.equals(this.senha);
+    public boolean checkLogin(String password) {
+        return password.equals(this.password);
     }
 }
