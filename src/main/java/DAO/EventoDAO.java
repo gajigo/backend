@@ -103,15 +103,17 @@ public class EventoDAO extends FileDAO<Evento> {
     }
 
     public void editEvento(Evento evento) {
-        String sql = "UPDATE " + tableName + " SET nomeEvento = ?, descricao = ?, modalidade = ?, dataEvento = ?";
+        String sql = "UPDATE " + tableName + " SET nomeEvento = ?, descricao = ?, modalidade = ?, dataEvento = ?" +
+                " WHERE eventoId = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, evento.getId());
-            statement.setString(2, evento.getNomeEvento());
-            statement.setString(3, evento.getDescricao());
-            statement.setInt(4, evento.getModalidade().ordinal());
-            statement.setString(5, evento.getDataEvento());
+            statement.setString(1, evento.getNomeEvento());
+            statement.setString(2, evento.getDescricao());
+            statement.setInt(3, evento.getModalidade().ordinal());
+            statement.setString(4, evento.getDataEvento());
+
+            statement.setLong(5, evento.getId());
 
             statement.executeUpdate();
         } catch (SQLException e) {
