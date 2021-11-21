@@ -119,7 +119,12 @@ public class EventoDAO extends FileDAO<Evento> {
         }
     }
 
-    public boolean deleteEventoById(Long eventoId) {
+    public Evento getById(Long id) {
+        // TODO: Método não implementado
+        return new Evento();
+    }
+
+    public boolean deleteById(Long eventoId) {
         if (eventoId != null) {
             String sql = "DELETE FROM " + tableName + " WHERE user_id = ?";
 

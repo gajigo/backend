@@ -25,7 +25,7 @@ public class PalestraController {
         }
     }
     public List<Palestra> getModels() {
-        return dao.getModels();
+        return dao.listSeminars();
     }
 
     public Palestra criarPalestra(String nome,String descricao, String data, String duracao, String idioma){

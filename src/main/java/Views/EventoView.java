@@ -114,7 +114,7 @@ public class EventoView {
         listar();
 
         System.out.println("Escolha um ID:");
-        int id = ler.nextInt();
+        Long id = ler.nextLong();
         ler.nextLine();
 
         if (controller.deleteById(id)) {
@@ -136,7 +136,7 @@ public class EventoView {
         listar();
 
         System.out.println("Escolha um ID:");
-        int id = ler.nextInt();
+        Long id = ler.nextLong();
         ler.nextLine();
 
         Evento escolha = controller.getById(id);

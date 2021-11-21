@@ -30,14 +30,14 @@ public class EventoController {
     }
 
     public List<Evento> getModels() {
-        return dao.getModels();
+        return dao.listEventos();
     }
 
-    public Evento getById(long id) {
+    public Evento getById(Long id) {
         return dao.getById(id);
     }
 
-    public boolean deleteById(long id) {
+    public boolean deleteById(Long id) {
         return dao.deleteById(id);
     }
 }
