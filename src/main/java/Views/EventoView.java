@@ -203,7 +203,7 @@ public class EventoView {
 
     public void menuOrganizadores(Evento evento) {
         UserController usuarios = new UserController();
-        UsuarioView usuarioView = new UsuarioView(usuarios);
+        UserView userView = new UserView(usuarios);
 
         Scanner ler = new Scanner(System.in);
         while (true) {
@@ -227,7 +227,7 @@ public class EventoView {
                 continue;
             }
 
-            usuarioView.listar();
+            userView.list();
             System.out.println("Escolha um usuario:");
             int id = ler.nextInt();
             ler.nextLine();

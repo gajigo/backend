@@ -2,17 +2,17 @@ package Controllers;
 
 import DAO.UserDAO;
 import Models.User;
-import Views.UsuarioView;
+import Views.UserView;
 
 import java.util.List;
 
 public class UserController {
     private UserDAO dao;
-    private UsuarioView view;
+    private UserView view;
 
     public UserController() {
         this.dao = new UserDAO();
-        this.view = new UsuarioView(this);
+        this.view = new UserView(this);
     }
 
     public void start() {
