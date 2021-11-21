@@ -1,7 +1,7 @@
 package Views;
 
 import Controllers.EventoController;
-import Controllers.UsuarioController;
+import Controllers.UserController;
 import Controllers.PalestraController;
 
 import java.util.Scanner;
@@ -37,7 +37,7 @@ public class MenuView {
     }
 
     public static void menuUsuario() {
-        UsuarioController controller = new UsuarioController();
+        UserController controller = new UserController();
         controller.start();
     }
 

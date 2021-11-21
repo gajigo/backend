@@ -1,7 +1,7 @@
 package Views;
 
 import Controllers.EventoController;
-import Controllers.UsuarioController;
+import Controllers.UserController;
 import Models.Evento;
 import Models.Modalidade;
 import Models.User;
@@ -202,7 +202,7 @@ public class EventoView {
     }
 
     public void menuOrganizadores(Evento evento) {
-        UsuarioController usuarios = new UsuarioController();
+        UserController usuarios = new UserController();
         UsuarioView usuarioView = new UsuarioView(usuarios);
 
         Scanner ler = new Scanner(System.in);

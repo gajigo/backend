@@ -1,6 +1,6 @@
 package Views;
 
-import Controllers.UsuarioController;
+import Controllers.UserController;
 import Models.Roles;
 import Models.User;
 
@@ -11,9 +11,9 @@ import java.util.stream.Stream;
 
 public class UsuarioView {
     // salvar coisas foreign como fkID ao invez de objeto
-    private UsuarioController controller;
+    private UserController controller;
 
-    public UsuarioView(UsuarioController controller) {
+    public UsuarioView(UserController controller) {
         this.controller = controller;
     }
 
@@ -68,7 +68,7 @@ public class UsuarioView {
         user.setEmail(ler.nextLine());
 
         menuCargos(user);
-        User novoUser = controller.registrar(user);
+        User novoUser = controller.register(user);
 
         System.out.println("Usuario " + novoUser.getId() + " registrado com sucesso!");
     }
