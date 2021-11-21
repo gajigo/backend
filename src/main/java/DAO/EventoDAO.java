@@ -128,7 +128,7 @@ public class EventoDAO extends FileDAO<Evento> {
 
     public boolean deleteById(Long eventoId) {
         if (eventoId != null) {
-            String sql = "DELETE FROM " + tableName + " WHERE user_id = ?";
+            String sql = "DELETE FROM " + tableName + " WHERE eventoid = ?";
 
             try {
                 PreparedStatement statement = connection.prepareStatement(sql);
