@@ -2,7 +2,6 @@ package DAO;
 
 import Models.Evento;
 import Models.Modalidade;
-import Models.Palestra;
 //import Models.Usuario;
 import factory.ConnectionFactory;
 

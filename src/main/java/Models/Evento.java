@@ -13,19 +13,19 @@ public class Evento implements DAOUser {
     private long id;
     private String dataEvento;
     private List<User> organizadores = new ArrayList<>();
-    private List<Palestra> palestras = new ArrayList<>();
+    private List<Lecture> lectures = new ArrayList<>();
 
     public Evento() {
     }
 
-    public Evento(String nomeEvento, String descricao, Modalidade modalidade, long id, String dataEvento, List<User> organizadores, List<Palestra> palestras) {
+    public Evento(String nomeEvento, String descricao, Modalidade modalidade, long id, String dataEvento, List<User> organizadores, List<Lecture> lectures) {
         this.nomeEvento = nomeEvento;
         this.descricao = descricao;
         this.modalidade = modalidade;
         this.id = id;
         this.dataEvento = dataEvento;
         this.organizadores = organizadores;
-        this.palestras = palestras;
+        this.lectures = lectures;
     }
 
     public Evento(String nomeEvento, String descricao, String dataEvento) {
@@ -43,7 +43,7 @@ public class Evento implements DAOUser {
                 ", modalidade=" + modalidade +
                 ", dataEvento=" + dataEvento +
                 ", organizadores=" + organizadores +
-                ", palestras=" + palestras +
+                ", palestras=" + lectures +
                 '}';
     }
 
@@ -95,20 +95,20 @@ public class Evento implements DAOUser {
         this.organizadores = organizadores;
     }
 
-    public List<Palestra> getPalestras() {
-        return palestras;
+    public List<Lecture> getPalestras() {
+        return lectures;
     }
 
-    public void setPalestras(List<Palestra> palestras) {
-        this.palestras = palestras;
+    public void setPalestras(List<Lecture> lectures) {
+        this.lectures = lectures;
     }
 
-    public void addPalestra(Palestra palestra) {
-        this.palestras.add(palestra);
+    public void addPalestra(Lecture lecture) {
+        this.lectures.add(lecture);
     }
 
-    public void removePalestra(Palestra palestra) {
-        this.palestras.remove(palestra);
+    public void removePalestra(Lecture lecture) {
+        this.lectures.remove(lecture);
     }
 
     public void addOrganizador(User organizador){

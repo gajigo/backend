@@ -2,7 +2,7 @@ package Views;
 
 import Controllers.EventoController;
 import Controllers.UserController;
-import Controllers.PalestraController;
+import Controllers.LectureController;
 
 import java.util.Scanner;
 
@@ -47,7 +47,7 @@ public class MenuView {
     }
 
     public static void menuPalestra(){
-        PalestraController controller = new PalestraController();
+        LectureController controller = new LectureController();
         controller.start();
     }
 }
