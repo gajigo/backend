@@ -11,7 +11,6 @@ import java.util.List;
 public class UserDAO extends FileDAO<User> {
     public UserDAO() {
         super("usuarios.txt");
-        createUserTable();
     }
 
     public UserDAO(String filename) {

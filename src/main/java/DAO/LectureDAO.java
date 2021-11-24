@@ -14,7 +14,6 @@ public class LectureDAO extends FileDAO<Lecture> {
     }
     public LectureDAO(String filename) {
         super(filename);
-        createLecturesTable();
     }
 
     private String tableName = "lectures";

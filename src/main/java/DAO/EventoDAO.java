@@ -12,7 +12,6 @@ import java.util.List;
 public class EventoDAO extends FileDAO<Evento> {
     public EventoDAO() {
         super("eventos.txt");
-        createEventoTable();
     }
 
     public EventoDAO(String filename) {
