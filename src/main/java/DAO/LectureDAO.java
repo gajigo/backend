@@ -43,7 +43,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-        EventPromoterDAO promoterDAO = new EventPromoterDAO();
+        UserPoliceDAO promoterDAO = new UserPoliceDAO();
         promoterDAO.createUserLectureTable();
     }
 
@@ -88,12 +88,12 @@ public class LectureDAO extends FileDAO<Lecture> {
 
             while(resultSet.next()){
                 lecture = new Lecture();
-                lecture.setId(resultSet.getInt(1));
-                lecture.setName(resultSet.getString(2));
-                lecture.setDescription(resultSet.getString(3));
-                lecture.setInitialDate(resultSet.getString(4));
-                lecture.setDuration(resultSet.getString(5));
-                lecture.setStatus(resultSet.getBoolean(6));
+                lecture.setId(resultSet.getInt("lecture_id"));
+                lecture.setName(resultSet.getString("name"));
+                lecture.setDescription(resultSet.getString("description"));
+                lecture.setInitialDate(resultSet.getString("date"));
+                lecture.setDuration(resultSet.getString("duration"));
+                lecture.setStatus(resultSet.getBoolean("status"));
 
                 listLectures.add(lecture);
             }
@@ -103,7 +103,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         }
     }
     public void editSeminar(Lecture lecture){
-        String sql = "UPDATE " + tableName + " SET name = ?, description = ?, date = ?, duration = ? WHERE id = ?";
+        String sql = "UPDATE " + tableName + " SET name = ?, description = ?, date = ?, duration = ? WHERE lecture_id = ?";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(5, lecture.getId());
