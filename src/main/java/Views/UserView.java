@@ -12,13 +12,13 @@ import java.util.stream.Stream;
 public class UserView {
     // salvar coisas foreign como fkID ao invez de objeto
     private UserController controller;
-    Scanner input = new Scanner(System.in);
 
     public UserView(UserController controller) {
         this.controller = controller;
     }
 
     public void menu() {
+        Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println("-Menu Usuario-");
             System.out.println("1 - Crie um Usuario");
@@ -28,6 +28,7 @@ public class UserView {
             System.out.println("0 - Sair");
 
             int choice = input.nextInt();
+            input.nextLine();
 
             switch (choice) {
                 case 0:
@@ -53,6 +54,7 @@ public class UserView {
     }
 
     public void registrationMenu() {
+        Scanner input = new Scanner(System.in);
         User user = new User();
 
         System.out.println("-Criar Usuario-");
@@ -77,6 +79,8 @@ public class UserView {
             return;
         }
 
+        Scanner input = new Scanner(System.in);
+
         System.out.println("-Editar Usuario-");
         list();
 
@@ -94,6 +98,8 @@ public class UserView {
     }
 
     public void deleteMenu() {
+        Scanner input = new Scanner(System.in);
+
         if (controller.getModels().size() == 0) {
             System.out.println("Nao existe usuarios para deletar.");
             return;
@@ -127,6 +133,7 @@ public class UserView {
             return;
         }
 
+        Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println("Informacoes:");
             System.out.printf("1 - %s: %s\n", "Nome", user.getName());
@@ -169,6 +176,7 @@ public class UserView {
     }
 
     public void rolesMenu(User user) {
+        Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println("Cargos: " + user.getRoles());
             System.out.println("1 - Adicionar Cargo");
