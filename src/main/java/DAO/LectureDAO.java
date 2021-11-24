@@ -24,12 +24,17 @@ public class LectureDAO extends FileDAO<Lecture> {
         String sql = "CREATE SEQUENCE IF NOT EXISTS lectures_id_seq;";
 
         sql += "CREATE TABLE IF NOT EXISTS " + tableName + "(" +
-                "id BIGINT PRIMARY KEY DEFAULT nextval('lectures_id_seq')," +
+                "lecture_id BIGINT PRIMARY KEY DEFAULT nextval('lectures_id_seq')," +
+                "event_id BIGINT NOT NULL" +
                 "name TEXT ," +
                 "description TEXT," +
                 "date VARCHAR(10) ," +
                 "duration VARCHAR(10)," +
-                "status BOOLEAN DEFAULT TRUE );";
+                "status BOOLEAN DEFAULT TRUE " +
+                "CONSTRAINT fk_lecture_event_id" +
+                    "FOREIGN KEY (event_id)" +
+                    "REFERENCES events(event_id)" +
+                ");";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -43,8 +48,8 @@ public class LectureDAO extends FileDAO<Lecture> {
     public Lecture createLectures(Lecture lecture){
         if (lecture != null){
             String sql = "INSERT INTO " + tableName +
-                    "(name, description, date, duration)" +
-                    "VALUES (?, ?, ?, ?)";
+                    "(name, description, date, duration, event_id)" +
+                    "VALUES (?, ?, ?, ?, ?)";
 
             try {
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -53,7 +58,6 @@ public class LectureDAO extends FileDAO<Lecture> {
                 statement.setString(2, lecture.getDescription());
                 statement.setString(3, lecture.getInitialDate());
                 statement.setString(4, lecture.getDuration());
-
                 statement.execute();
 
                 ResultSet resultSet = statement.getGeneratedKeys();
