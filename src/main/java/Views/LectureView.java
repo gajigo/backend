@@ -1,13 +1,21 @@
 package Views;
 
 import Controllers.LectureController;
+import Controllers.UserController;
+import DAO.UserPoliceDAO;
 import Models.Lecture;
+import Models.Roles;
+import Models.User;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class LectureView {
     private LectureController controller;
+    UserController userController = new UserController();
+    private UserView viewUser = new UserView(userController);
+    private UserController usuarios = new UserController();
+    private UserPoliceDAO userPoliceDAO = new UserPoliceDAO();
 
     public LectureView(LectureController controller) {
         this.controller = controller;
@@ -328,9 +336,15 @@ public class LectureView {
         String escolha = reader.nextLine();
 
         if (escolha.compareToIgnoreCase("ADICIONAR") == 0){
-            System.out.println("Insira palestrante novo");
-            String novoPalestrante = reader.nextLine();
-            controller.addPresenter(lecture,novoPalestrante);
+//            System.out.println("Insira palestrante novo");
+//            String novoPalestrante = reader.nextLine();
+//            controller.addPresenter(lecture,novoPalestrante);
+            viewUser.list();
+            System.out.println("Escolha um usuario:");
+            int id = reader.nextInt();
+            User userEscolhido = usuarios.getById(id);
+            userPoliceDAO.addUserPolice(userEscolhido,lecture, Roles.PALESTRANTE);
+
         }
 
         if (escolha.compareToIgnoreCase("REMOVER") == 0){
