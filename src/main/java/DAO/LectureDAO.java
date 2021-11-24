@@ -25,15 +25,15 @@ public class LectureDAO extends FileDAO<Lecture> {
 
         sql += "CREATE TABLE IF NOT EXISTS " + tableName + "(" +
                 "lecture_id BIGINT PRIMARY KEY DEFAULT nextval('lectures_id_seq')," +
-                "event_id BIGINT NOT NULL" +
-                "name TEXT ," +
+                "event_id BIGINT NOT NULL, " +
+                "name TEXT, " +
                 "description TEXT," +
                 "date VARCHAR(10) ," +
                 "duration VARCHAR(10)," +
-                "status BOOLEAN DEFAULT TRUE " +
-                "CONSTRAINT fk_lecture_event_id" +
+                "status BOOLEAN DEFAULT TRUE, " +
+                "CONSTRAINT fk_lecture_event_id " +
                     "FOREIGN KEY (event_id)" +
-                    "REFERENCES events(event_id)" +
+                    "REFERENCES eventos(eventoId)" +
                 ");";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -43,6 +43,8 @@ public class LectureDAO extends FileDAO<Lecture> {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
+        EventPromoterDAO promoterDAO = new EventPromoterDAO();
+        promoterDAO.createUserLectureTable();
     }
 
     public Lecture createLectures(Lecture lecture){
