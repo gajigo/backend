@@ -13,6 +13,7 @@ public class Lecture implements DAOUser {
     private long id;
     private String initialDate;
     private String duration;
+    private Evento event;
     private List<Idioma> language = new ArrayList<>();
     private List<Assunto> topics = new ArrayList<>();
     private List<Avaliacao> evaluation = new ArrayList<>();
@@ -85,6 +86,10 @@ public class Lecture implements DAOUser {
     public void setDuration(String duration) {
         this.duration = duration;
     }
+
+    public Evento getEvent() { return event; }
+
+    public void setEvent(Evento event) { this.event = event; }
 
     public List<Idioma> getLanguage() {
         return language;
