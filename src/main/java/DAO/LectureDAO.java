@@ -18,6 +18,7 @@ public class LectureDAO extends FileDAO<Lecture> {
 
     private String tableName = "lectures";
     private Connection connection = new ConnectionFactory().getConnection();
+    private UserPoliceDAO userPoliceDAO = new UserPoliceDAO();
 
     public void createLecturesTable(){
         String sql = "CREATE SEQUENCE IF NOT EXISTS lectures_id_seq;";
@@ -77,7 +78,7 @@ public class LectureDAO extends FileDAO<Lecture> {
 
     public List<Lecture> listLecture(){
         String sql = "SELECT * FROM " + tableName ;
-        UserPoliceDAO userPoliceDAO = new UserPoliceDAO();
+
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -128,5 +129,13 @@ public class LectureDAO extends FileDAO<Lecture> {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
+    }
+
+    public void addLectureAttendee(Lecture lecture, User user){
+        userPoliceDAO.addUserPolice(user,lecture,Roles.CLIENTE);
+    }
+
+    public List<User> getAttendees(Lecture lecture){
+        return userPoliceDAO.getUserPolice(lecture,Roles.CLIENTE);
     }
 }

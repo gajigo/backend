@@ -238,10 +238,11 @@ public class LectureView {
     public void joinLecture(Lecture lecture){
         Scanner reader = new Scanner(System.in);
 
-        System.out.println("Digite seu Nome");
-        String user = reader.nextLine();
+        viewUser.list();
+        System.out.println("escolha quem adicionar");
+        int user_id = reader.nextInt();
 
-        if(controller.joinLecture(lecture, user)){
+        if(controller.joinLecture(lecture, user_id)){
             System.out.println("Presenca Contabilizada");
         }else{
             System.out.println("Falha ao adicionar Presenca");
@@ -250,7 +251,7 @@ public class LectureView {
 
     public void showAttendees(Lecture lecture){
         System.out.println("Participantes:");
-        System.out.println(lecture.getAttendees());
+        System.out.println(controller.getAttendees(lecture));
     }
 
     public void editName(Lecture lecture){
@@ -353,5 +354,6 @@ public class LectureView {
             controller.removePresenter(lecture,removePalestrante);
         }
     }
+
 }
 

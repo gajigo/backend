@@ -78,10 +78,10 @@ public class LectureController {
         lecture.getLectureQuestions().add(newQuestion);
     }
 
-    public boolean joinLecture(Lecture lecture, String newUser){
-        User user = new User();
-        user.setName(newUser);
-        lecture.getAttendees().add(user);
+    public boolean joinLecture(Lecture lecture, int user_id){
+        UserController userController = new UserController();
+        User user = userController.getById(user_id);
+        dao.addLectureAttendee(lecture,user);
         return true;
     }
 
@@ -153,5 +153,9 @@ public class LectureController {
 
     public void editLecture(Lecture lecture){
         dao.editSeminar(lecture);
+    }
+
+    public List<User>getAttendees(Lecture lecture){
+        return dao.getAttendees(lecture);
     }
 }

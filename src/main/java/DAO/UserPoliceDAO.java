@@ -92,6 +92,23 @@ public class UserPoliceDAO {
             throw new RuntimeException(e);
         }
     }
-
+//    public List<User> getAttendees(Lecture lecture){
+//        String sql = "SELECT * FROM " + tableName +
+//                " WHERE lecture_id = ? AND police = 3";
+//        try{
+//            PreparedStatement statement = connection.prepareStatement(sql);
+//            statement.setLong(1,lecture.getId());
+//            ResultSet resultSet = statement.executeQuery();
+//
+//            List<User> userList = new ArrayList<>();
+//            User user;
+//
+//            while(resultSet.next()){
+//
+//            }
+//        }catch (SQLException e){
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 }
