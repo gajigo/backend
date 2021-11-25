@@ -42,8 +42,8 @@ public class LectureDAO extends FileDAO<Lecture> {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-        UserPoliceDAO promoterDAO = new UserPoliceDAO();
-        promoterDAO.createUserLectureTable();
+        UserPoliceDAO userPoliceDAO = new UserPoliceDAO();
+        userPoliceDAO.createUserLectureTable();
     }
 
     public Lecture createLectures(Lecture lecture){
@@ -77,7 +77,7 @@ public class LectureDAO extends FileDAO<Lecture> {
 
     public List<Lecture> listLecture(){
         String sql = "SELECT * FROM " + tableName ;
-
+        UserPoliceDAO userPoliceDAO = new UserPoliceDAO();
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -94,6 +94,7 @@ public class LectureDAO extends FileDAO<Lecture> {
                 lecture.setDuration(resultSet.getString("duration"));
                 lecture.setStatus(resultSet.getBoolean("status"));
 
+                lecture.setPresenter(userPoliceDAO.getUserPolice(lecture,Roles.PALESTRANTE));
                 listLectures.add(lecture);
             }
             return listLectures;
