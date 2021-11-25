@@ -93,8 +93,9 @@ public class LectureDAO extends FileDAO<Lecture> {
                 lecture.setInitialDate(resultSet.getString("date"));
                 lecture.setDuration(resultSet.getString("duration"));
                 lecture.setStatus(resultSet.getBoolean("status"));
-
                 lecture.setPresenter(userPoliceDAO.getUserPolice(lecture,Roles.PALESTRANTE));
+                lecture.setAttendees(userPoliceDAO.getUserPolice(lecture,Roles.CLIENTE));
+
                 listLectures.add(lecture);
             }
             return listLectures;
