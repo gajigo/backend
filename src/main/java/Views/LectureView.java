@@ -337,21 +337,20 @@ public class LectureView {
         String escolha = reader.nextLine();
 
         if (escolha.compareToIgnoreCase("ADICIONAR") == 0){
-//            System.out.println("Insira palestrante novo");
-//            String novoPalestrante = reader.nextLine();
-//            controller.addPresenter(lecture,novoPalestrante);
             viewUser.list();
             System.out.println("Escolha um usuario:");
             int id = reader.nextInt();
             User userEscolhido = usuarios.getById(id);
-            userPoliceDAO.addUserPolice(userEscolhido,lecture, Roles.PALESTRANTE);
+            controller.addPresenter(lecture,userEscolhido);
 
         }
 
         if (escolha.compareToIgnoreCase("REMOVER") == 0){
-            System.out.println("Insira palestrante a ser removido");
-            String removePalestrante = reader.nextLine();
-            controller.removePresenter(lecture,removePalestrante);
+            viewUser.list();
+            System.out.println("Escolha um usuario:");
+            int id = reader.nextInt();
+            User userEscolhido = usuarios.getById(id);
+            controller.removePresenter(lecture,userEscolhido);
         }
     }
 

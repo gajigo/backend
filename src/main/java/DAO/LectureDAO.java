@@ -138,4 +138,11 @@ public class LectureDAO extends FileDAO<Lecture> {
     public List<User> getAttendees(Lecture lecture){
         return userPoliceDAO.getUserPolice(lecture,Roles.CLIENTE);
     }
+
+    public void addLecturePresenter(Lecture lecture, User presenter){
+        userPoliceDAO.addUserPolice(presenter,lecture,Roles.PALESTRANTE);
+    }
+    public void removeLecturePresenter(Lecture lecture, User presenter){
+        userPoliceDAO.removeUserPolice(lecture,presenter,Roles.PALESTRANTE);
+    }
 }

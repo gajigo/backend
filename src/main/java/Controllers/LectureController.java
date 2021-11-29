@@ -134,21 +134,12 @@ public class LectureController {
         }
     }
 
-    public void addPresenter(Lecture lecture, String newPresenter){
-        User presenter = new User();
-        presenter.setName(newPresenter);
-        lecture.getPresenter().add(presenter);
+    public void addPresenter(Lecture lecture, User newPresenter){
+        dao.addLecturePresenter(lecture,newPresenter);
     }
 
-    public void removePresenter(Lecture lecture, String presenter){
-        int i = 0;
-
-        while(lecture.getPresenter().size() > i){
-            if(lecture.getPresenter().get(i).getName().compareToIgnoreCase(presenter) != 0){
-                lecture.getPresenter().remove(i);
-            }
-            i = i + 1;
-        }
+    public void removePresenter(Lecture lecture, User presenter){
+        dao.removeLecturePresenter(lecture,presenter);
     }
 
     public void editLecture(Lecture lecture){
