@@ -78,10 +78,10 @@ public class LectureController {
         lecture.getLectureQuestions().add(newQuestion);
     }
 
-    public boolean joinLecture(Lecture lecture, String newUser){
-        User user = new User();
-        user.setName(newUser);
-        lecture.getAttendees().add(user);
+    public boolean joinLecture(Lecture lecture, int user_id){
+        UserController userController = new UserController();
+        User user = userController.getById(user_id);
+        dao.addLectureAttendee(lecture,user);
         return true;
     }
 
@@ -134,24 +134,19 @@ public class LectureController {
         }
     }
 
-    public void addPresenter(Lecture lecture, String newPresenter){
-        User presenter = new User();
-        presenter.setName(newPresenter);
-        lecture.getPresenter().add(presenter);
+    public void addPresenter(Lecture lecture, User newPresenter){
+        dao.addLecturePresenter(lecture,newPresenter);
     }
 
-    public void removePresenter(Lecture lecture, String presenter){
-        int i = 0;
-
-        while(lecture.getPresenter().size() > i){
-            if(lecture.getPresenter().get(i).getName().compareToIgnoreCase(presenter) != 0){
-                lecture.getPresenter().remove(i);
-            }
-            i = i + 1;
-        }
+    public void removePresenter(Lecture lecture, User presenter){
+        dao.removeLecturePresenter(lecture,presenter);
     }
 
     public void editLecture(Lecture lecture){
         dao.editSeminar(lecture);
+    }
+
+    public List<User>getAttendees(Lecture lecture){
+        return dao.getAttendees(lecture);
     }
 }
