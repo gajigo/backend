@@ -19,6 +19,10 @@ public class EventoView {
         this.controller = controller;
     }
 
+    public EventoView() {
+
+    }
+
     public void menu() {
         Scanner ler = new Scanner(System.in);
 
@@ -191,7 +195,9 @@ public class EventoView {
                 default:
                     System.out.println("Escolha invalida!");
                     break;
+
             }
+            controller.editEvento(evento);
         }
     }
 

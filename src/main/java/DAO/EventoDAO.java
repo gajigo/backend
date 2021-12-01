@@ -101,17 +101,17 @@ public class EventoDAO extends FileDAO<Evento> {
     }
 
     public void editEvento(Evento evento) {
-        String sql = "UPDATE " + tableName + " SET nomeEvento = ?, descricao = ?, modalidade = ?, dataEvento = ?" +
+        String sql = "UPDATE " + tableName + " SET nomeEvento = ?, descricao = ?, modalidade = 2, dataEvento = ?" +
                 " WHERE eventoId = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, evento.getNomeEvento());
             statement.setString(2, evento.getDescricao());
-            statement.setInt(3, evento.getModalidade().ordinal());
-            statement.setString(4, evento.getDataEvento());
+//            statement.setInt(3, evento.getModalidade().ordinal());
+            statement.setString(3, evento.getDataEvento());
 
-            statement.setLong(5, evento.getId());
+            statement.setLong(4, evento.getId());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -120,8 +120,29 @@ public class EventoDAO extends FileDAO<Evento> {
     }
 
     public Evento getById(Long id) {
-        // TODO: Método não implementado
-        return new Evento();
+        String sql = "SELECT * FROM eventos WHERE eventoid = ?";
+
+        Evento evento = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, id);
+
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                evento = new Evento();
+                evento.setId(resultSet.getInt("eventoid"));
+                evento.setNomeEvento(resultSet.getString("nomeevento"));
+                evento.setDescricao(resultSet.getString("descricao"));
+//            evento.setModalidade(resultSet.getInt("modalidade"));
+                evento.setDataEvento(resultSet.getString("dataevento"));
+            }
+        }   catch (SQLException e){
+            return null;
+        }
+        return evento;
+
+
     }
 
     public boolean deleteById(Long eventoId) {

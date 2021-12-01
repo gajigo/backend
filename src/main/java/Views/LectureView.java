@@ -3,6 +3,7 @@ package Views;
 import Controllers.LectureController;
 import Controllers.UserController;
 import DAO.UserPoliceDAO;
+import Models.Evento;
 import Models.Lecture;
 import Models.Roles;
 import Models.User;
@@ -48,6 +49,7 @@ public class LectureView {
 
     public void createLecture(){
         Scanner reader = new Scanner(System.in);
+        EventoView eventoView = new EventoView();
 
         System.out.println("Digite o nome da palestra");
         String nome = reader.nextLine();
@@ -63,6 +65,10 @@ public class LectureView {
 
         System.out.println("Digite o idioma da palestra");
         String idioma =  reader.nextLine();
+
+//        System.out.println("Escolha o Evento");
+//        eventoView.listar();
+//        Integer evento = reader.nextInt();
 
         System.out.println(controller.createLecture(nome,descricao,data,duracao,idioma).getName() + " criada com sucesso");
 

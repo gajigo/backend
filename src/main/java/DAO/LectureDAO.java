@@ -51,7 +51,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         if (lecture != null){
             String sql = "INSERT INTO " + tableName +
                     "(name, description, date, duration, event_id)" +
-                    "VALUES (?, ?, ?, ?, ?)";
+                    "VALUES (?, ?, ?, ?, 1)";
 
             try {
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -65,8 +65,8 @@ public class LectureDAO extends FileDAO<Lecture> {
                 ResultSet resultSet = statement.getGeneratedKeys();
 
                 while(resultSet.next()){
-                    lecture.setId(resultSet.getInt(1));
-                    lecture.setStatus(resultSet.getBoolean(6));
+                    lecture.setId(resultSet.getInt("lecture_id"));
+                    lecture.setStatus(resultSet.getBoolean("status"));
                 }
                 return lecture;
             }catch (SQLException e){
@@ -133,6 +133,9 @@ public class LectureDAO extends FileDAO<Lecture> {
 
     public void addLectureAttendee(Lecture lecture, User user){
         userPoliceDAO.addUserPolice(user,lecture,Roles.CLIENTE);
+    }
+    public void removeLectureAttendee(Lecture lecture, User user){
+        userPoliceDAO.removeUserPolice(lecture,user,Roles.CLIENTE);
     }
 
     public List<User> getAttendees(Lecture lecture){

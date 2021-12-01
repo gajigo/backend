@@ -37,6 +37,8 @@ public class EventoController {
         return dao.getById(id);
     }
 
+    public void editEvento(Evento evento){ dao.editEvento(evento);}
+
     public boolean deleteById(Long id) {
         return dao.deleteById(id);
     }
