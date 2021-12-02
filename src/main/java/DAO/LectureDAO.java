@@ -47,11 +47,11 @@ public class LectureDAO extends FileDAO<Lecture> {
         userPoliceDAO.createUserLectureTable();
     }
 
-    public Lecture createLectures(Lecture lecture){
+    public Lecture createLectures(Lecture lecture) throws SQLException, NullPointerException {
         if (lecture != null){
             String sql = "INSERT INTO " + tableName +
                     "(name, description, date, duration, event_id)" +
-                    "VALUES (?, ?, ?, ?, 1)";
+                    "VALUES (?, ?, ?, ?, ?)";
 
             try {
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -60,6 +60,7 @@ public class LectureDAO extends FileDAO<Lecture> {
                 statement.setString(2, lecture.getDescription());
                 statement.setString(3, lecture.getInitialDate());
                 statement.setString(4, lecture.getDuration());
+                statement.setLong(5, lecture.getEvent().getId());
                 statement.execute();
 
                 ResultSet resultSet = statement.getGeneratedKeys();

@@ -64,7 +64,7 @@ public class UserPoliceDAO {
     public List<User>getUserPolice(Lecture lecture, Roles police){
         String sql = "SELECT * FROM  users " +
                 "LEFT JOIN " + tableName +
-                " USING (user_id) " +
+                " ON users.user_id = user_lecture.user_id " +
                 "WHERE lecture_id = ? " +
                 "AND police = ?";
 

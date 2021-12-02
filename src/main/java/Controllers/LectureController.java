@@ -4,6 +4,7 @@ import DAO.LectureDAO;
 import Models.*;
 import Views.LectureView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +29,10 @@ public class LectureController {
         return dao.listLecture();
     }
 
-    public Lecture createLecture(String name, String description, String date, String duration, String language){
+    public Lecture createLecture(String name, String description, String date, String duration, String language, long evento) throws SQLException {
         Lecture newLecture = new Lecture();
         Idioma newLanguage = new Idioma();
+        EventoController newEvent = new EventoController();
 
         newLecture.setName(name);
         newLecture.setDescription(description);
@@ -38,6 +40,7 @@ public class LectureController {
         newLecture.setDuration(duration);
         newLanguage.setNome(language);
         newLecture.getLanguage().add(newLanguage);
+        newLecture.setEvent(newEvent.getById(evento));
 
         model.add(newLecture);
         return dao.createLectures(newLecture);

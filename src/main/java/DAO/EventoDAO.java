@@ -85,11 +85,11 @@ public class EventoDAO extends FileDAO<Evento> {
             List<Evento> listEventos = new ArrayList<>();
             while (resultSet.next()) {
                 Evento novoEvento = new Evento();
-                novoEvento.setId(resultSet.getInt(1));
-                novoEvento.setNomeEvento(resultSet.getString(2));
-                novoEvento.setDescricao(resultSet.getString(3));
-                novoEvento.setModalidade(Modalidade.values()[resultSet.getInt(4)]);
-                novoEvento.setDataEvento(resultSet.getString(5));
+                novoEvento.setId(resultSet.getInt("eventoid"));
+                novoEvento.setNomeEvento(resultSet.getString("nomeevento"));
+                novoEvento.setDescricao(resultSet.getString("descricao"));
+                novoEvento.setModalidade(Modalidade.values()[resultSet.getInt("modalidade")]);
+                novoEvento.setDataEvento(resultSet.getString("dataevento"));
 
                 listEventos.add(novoEvento);
             }
@@ -138,7 +138,7 @@ public class EventoDAO extends FileDAO<Evento> {
                 evento.setDataEvento(resultSet.getString("dataevento"));
             }
         }   catch (SQLException e){
-            return null;
+            throw new RuntimeException(e);
         }
         return evento;
 

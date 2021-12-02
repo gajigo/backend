@@ -8,6 +8,7 @@ import Models.Lecture;
 import Models.Roles;
 import Models.User;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,11 +67,17 @@ public class LectureView {
         System.out.println("Digite o idioma da palestra");
         String idioma =  reader.nextLine();
 
-//        System.out.println("Escolha o Evento");
-//        eventoView.listar();
-//        Integer evento = reader.nextInt();
+        System.out.println("Escolha o Evento");
+        eventoView.listar();
+        Integer evento = reader.nextInt();
 
-        System.out.println(controller.createLecture(nome,descricao,data,duracao,idioma).getName() + " criada com sucesso");
+        try{
+            System.out.println(controller.createLecture(nome,descricao,data,duracao,idioma,evento).getName() + " criada com sucesso");
+        }catch (SQLException e){
+            System.out.println("deu ruim");
+        }catch (NullPointerException e){
+            System.out.println("deu ruim tbm");
+        }
 
     }
 
