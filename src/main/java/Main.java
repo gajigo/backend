@@ -1,7 +1,4 @@
-import DAO.EventoDAO;
-import DAO.LectureDAO;
-import DAO.LectureEvaluationDAO;
-import DAO.UserDAO;
+import DAO.*;
 import Views.MenuView;
 
 import java.sql.SQLException;
@@ -13,6 +10,7 @@ public class Main {
             new EventoDAO().createEventoTable();
             new LectureDAO().createLecturesTable();
             new LectureEvaluationDAO().createLectureEvaluationTable();
+            new EventUserDAO().createEventUserTable();
         }catch (SQLException e){
             System.out.println("Falha ao criar tabelas");
             throw new RuntimeException(e);
