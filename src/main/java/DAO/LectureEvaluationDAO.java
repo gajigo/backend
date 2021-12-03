@@ -1,5 +1,7 @@
 package DAO;
 
+import Models.Lecture;
+import Models.User;
 import factory.ConnectionFactory;
 
 import java.sql.Connection;
@@ -11,8 +13,10 @@ public class LectureEvaluationDAO {
     private Connection connection = new ConnectionFactory().getConnection();
 
     public void createLectureEvaluationTable() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (" +
-                "evaluation_id BIGINT PRIMARY KEY, " +
+        String sql = "CREATE SEQUENCE IF NOT EXISTS lectures_evaluation_id_seq ;";
+
+        sql += "CREATE TABLE IF NOT EXISTS " + tableName + " (" +
+                "evaluation_id BIGINT PRIMARY KEY DEFAULT nextval('lectures_evaluation_id_seq'), " +
                 "evaluation_value SMALLINT NOT NULL, " +
                 "lecture_id BIGINT NOT NULL, " +
                 "user_id BIGINT NOT NULL, " +
