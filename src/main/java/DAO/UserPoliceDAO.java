@@ -64,7 +64,7 @@ public class UserPoliceDAO {
     public List<User>getUserPolice(Lecture lecture, Roles police){
         String sql = "SELECT * FROM  users " +
                 "LEFT JOIN " + tableName +
-                " ON users.user_id = user_lecture.user_id " +
+                " USING (user_id) " +
                 "WHERE lecture_id = ? " +
                 "AND police = ?";
 
@@ -92,6 +92,7 @@ public class UserPoliceDAO {
             throw new RuntimeException(e);
         }
     }
+
     public void removeUserPolice (Lecture lecture, User user, Roles police){
         String sql = "DELETE FROM " + tableName + " WHERE lecture_id = ? AND user_id = ? AND police = ?";
         try{
