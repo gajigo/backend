@@ -109,6 +109,7 @@ public class LectureView {
         System.out.println("2 - Deletar");
         System.out.println("3 - Editar");
         System.out.println("4 - Participar");
+        System.out.println("5 - Avaliar");
         System.out.println("0 - Voltar");
 
         int escolha = reader.nextInt();
@@ -125,6 +126,8 @@ public class LectureView {
             case 4:
                 joinLecture(lecture);
                 break;
+            case 5:
+                evaluateLecture(lecture);
             case 0:
                 return;
             default:
@@ -260,6 +263,19 @@ public class LectureView {
         }else{
             System.out.println("Falha ao adicionar Presenca");
         }
+    }
+
+    public void evaluateLecture(Lecture lecture){
+        Scanner reader = new Scanner(System.in);
+
+        viewUser.list();
+        System.out.println("Escolha Seu Usuario");
+        long user_id = reader.nextLong();
+
+        System.out.println("Digite a nota da palestra (Entre 1 e 5)");
+        int value = reader.nextInt();
+
+        controller.evaluateLecture(lecture,user_id,value);
     }
 
     public void showAttendees(Lecture lecture){

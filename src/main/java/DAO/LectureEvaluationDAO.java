@@ -36,5 +36,19 @@ public class LectureEvaluationDAO {
         statement.execute();
         statement.close();
     }
+
+    public void addLectureEvaluation(User user, Lecture lecture, int value) throws SQLException{
+        String sql = "INSERT INTO " + tableName +
+                " (evaluation_value,lecture_id,user_id)" +
+                " VALUES (?, ?, ?)";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setInt(1,value);
+        statement.setLong(2,lecture.getId());
+        statement.setLong(3,user.getUserId());
+
+        statement.execute();
+    }
 }
 

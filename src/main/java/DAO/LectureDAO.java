@@ -19,6 +19,7 @@ public class LectureDAO extends FileDAO<Lecture> {
     private String tableName = "lectures";
     private Connection connection = new ConnectionFactory().getConnection();
     private UserPoliceDAO userPoliceDAO = new UserPoliceDAO();
+    private LectureEvaluationDAO lectureEvaluationDAO = new LectureEvaluationDAO();
 
     public void createLecturesTable(){
         String sql = "CREATE SEQUENCE IF NOT EXISTS lectures_id_seq;";
@@ -148,5 +149,14 @@ public class LectureDAO extends FileDAO<Lecture> {
     }
     public void removeLecturePresenter(Lecture lecture, User presenter){
         userPoliceDAO.removeUserPolice(lecture,presenter,Roles.PALESTRANTE);
+    }
+
+    public void evaluateLecture(Lecture lecture, long user_id, int value) {
+        UserDAO user = new UserDAO();
+        try {
+            lectureEvaluationDAO.addLectureEvaluation(user.getUserById(user_id), lecture, value);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 }

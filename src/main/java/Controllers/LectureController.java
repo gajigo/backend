@@ -152,4 +152,8 @@ public class LectureController {
     public List<User>getAttendees(Lecture lecture){
         return dao.getAttendees(lecture);
     }
+
+    public void evaluateLecture(Lecture lecture, long user_id, int value) {
+        dao.evaluateLecture(lecture,user_id,value);
+    }
 }
