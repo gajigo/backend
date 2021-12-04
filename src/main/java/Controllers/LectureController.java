@@ -153,7 +153,10 @@ public class LectureController {
         return dao.getAttendees(lecture);
     }
 
-    public void evaluateLecture(Lecture lecture, long user_id, int value) {
+    public void evaluateLecture(Lecture lecture, long user_id, int value){
         dao.evaluateLecture(lecture,user_id,value);
+    }
+    public void editEvaluation(Lecture lecture, long user_id, int value){
+        dao.editEvaluation(lecture,user_id,value);
     }
 }

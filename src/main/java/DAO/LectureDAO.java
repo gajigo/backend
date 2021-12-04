@@ -151,10 +151,19 @@ public class LectureDAO extends FileDAO<Lecture> {
         userPoliceDAO.removeUserPolice(lecture,presenter,Roles.PALESTRANTE);
     }
 
-    public void evaluateLecture(Lecture lecture, long user_id, int value) {
+    public void evaluateLecture(Lecture lecture, long user_id, int value){
         UserDAO user = new UserDAO();
         try {
             lectureEvaluationDAO.addLectureEvaluation(user.getUserById(user_id), lecture, value);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void editEvaluation(Lecture lecture, long user_id, int value) {
+        UserDAO user = new UserDAO();
+        try {
+            lectureEvaluationDAO.editLectureEvaluation(user.getUserById(user_id), lecture, value);
         }catch (SQLException e){
             throw new RuntimeException(e);
         }

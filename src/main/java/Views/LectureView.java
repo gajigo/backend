@@ -69,7 +69,7 @@ public class LectureView {
 
         System.out.println("Escolha o Evento");
         eventoView.listar();
-        Integer evento = reader.nextInt();
+        int evento = reader.nextInt();
 
         try{
             System.out.println(controller.createLecture(nome,descricao,data,duracao,idioma,evento).getName() + " criada com sucesso");
@@ -110,6 +110,7 @@ public class LectureView {
         System.out.println("3 - Editar");
         System.out.println("4 - Participar");
         System.out.println("5 - Avaliar");
+        System.out.println("6 - Editar Avaliacao");
         System.out.println("0 - Voltar");
 
         int escolha = reader.nextInt();
@@ -128,6 +129,10 @@ public class LectureView {
                 break;
             case 5:
                 evaluateLecture(lecture);
+                break;
+            case 6:
+                editEvaluation(lecture);
+                break;
             case 0:
                 return;
             default:
@@ -275,7 +280,22 @@ public class LectureView {
         System.out.println("Digite a nota da palestra (Entre 1 e 5)");
         int value = reader.nextInt();
 
-        controller.evaluateLecture(lecture,user_id,value);
+        controller.evaluateLecture(lecture, user_id, value);
+
+    }
+
+    public void editEvaluation(Lecture lecture){
+        Scanner reader = new Scanner(System.in);
+
+        viewUser.list();
+        System.out.println("Escolha Seu Usuario");
+        long user_id = reader.nextLong();
+
+        System.out.println("Digite a nota da palestra (Entre 1 e 5)");
+        int value = reader.nextInt();
+
+        controller.editEvaluation(lecture, user_id, value);
+
     }
 
     public void showAttendees(Lecture lecture){

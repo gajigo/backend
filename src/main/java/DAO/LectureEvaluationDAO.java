@@ -50,5 +50,17 @@ public class LectureEvaluationDAO {
 
         statement.execute();
     }
+
+    public void editLectureEvaluation(User user, Lecture lecture, int value)throws SQLException{
+        String sql = "UPDATE " + tableName + " SET evaluation_value = ? WHERE lecture_id = ? AND user_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setInt(1,value);
+        statement.setLong(2,lecture.getId());
+        statement.setLong(3,user.getUserId());
+
+        statement.executeUpdate();
+    }
 }
 
