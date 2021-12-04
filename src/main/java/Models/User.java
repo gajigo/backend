@@ -37,10 +37,7 @@ public class User implements DAOUser {
     public String toString() {
         return "Usuario{" +
                 "userId=" + userId +
-                ", nome='" + name + '\'' +
-                ", senha='" + password + '\'' +
-                ", statusLogin='" + statusLogin + '\'' +
-                ", roles=" + roles +
+                ", nome='" + name +
                 '}';
     }
 
