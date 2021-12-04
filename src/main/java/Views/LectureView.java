@@ -9,6 +9,7 @@ import Models.Roles;
 import Models.User;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
 
@@ -147,6 +148,8 @@ public class LectureView {
 
     public void showLecture(Lecture lecture){
         Scanner reader = new Scanner(System.in);
+        Float evaluationValue = controller.averageLectureEvaluation(lecture);
+        DecimalFormat format = new DecimalFormat("#.#");
 
         System.out.println("Nome: " + lecture.getName());
         System.out.println("ID: " + lecture.getId());
@@ -155,6 +158,7 @@ public class LectureView {
         System.out.println("Idiomas: " + lecture.getLanguage());
         System.out.println("Assuntos: " + lecture.getTopics());
         System.out.println("Palestrantes: " + lecture.getPresenter());
+        System.out.println("Avaliacao da Palestra: " + format.format(evaluationValue) );
         System.out.println();
         System.out.println("1 - Listar Duvidas");
         System.out.println("2 - Listar Participantes");

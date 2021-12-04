@@ -6,6 +6,7 @@ import factory.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LectureEvaluationDAO {
@@ -72,6 +73,21 @@ public class LectureEvaluationDAO {
         statement.setLong(2,user.getUserId());
 
         statement.execute();
+    }
+
+    public Float averageLectureEvaluation(Lecture lecture) throws SQLException{
+        String sql = "SELECT AVG(evaluation_value) as media FROM " + tableName +
+                " WHERE lecture_id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1,lecture.getId());
+
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()){
+            return resultSet.getFloat("media");
+        }
+        return null;
     }
 }
 

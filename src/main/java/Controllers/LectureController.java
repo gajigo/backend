@@ -25,6 +25,7 @@ public class LectureController {
             System.out.println("Erro ao salvar palestras!");
         }
     }
+    
     public List<Lecture> getModels() {
         return dao.listLecture();
     }
@@ -156,11 +157,16 @@ public class LectureController {
     public void evaluateLecture(Lecture lecture, long user_id, int value){
         dao.evaluateLecture(lecture,user_id,value);
     }
+    
     public void editEvaluation(Lecture lecture, long user_id, int value){
         dao.editEvaluation(lecture,user_id,value);
     }
 
     public void removeEvaluation(Lecture lecture, long user_id) {
         dao.removeEvaluation(lecture,user_id);
+    }
+
+    public float averageLectureEvaluation(Lecture lecture){
+        return dao.averageLectureEvaluation(lecture);
     }
 }

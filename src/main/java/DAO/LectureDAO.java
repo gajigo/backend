@@ -182,4 +182,12 @@ public class LectureDAO extends FileDAO<Lecture> {
             throw new RuntimeException(e);
         }
     }
+    
+    public float averageLectureEvaluation(Lecture lecture){
+        try{
+            return lectureEvaluationDAO.averageLectureEvaluation(lecture);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
