@@ -159,4 +159,8 @@ public class LectureController {
     public void editEvaluation(Lecture lecture, long user_id, int value){
         dao.editEvaluation(lecture,user_id,value);
     }
+
+    public void removeEvaluation(Lecture lecture, long user_id) {
+        dao.removeEvaluation(lecture,user_id);
+    }
 }

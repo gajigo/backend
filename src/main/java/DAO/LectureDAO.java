@@ -106,6 +106,7 @@ public class LectureDAO extends FileDAO<Lecture> {
             throw new RuntimeException(e);
         }
     }
+
     public void editSeminar(Lecture lecture){
         String sql = "UPDATE " + tableName + " SET name = ?, description = ?, date = ?, duration = ? WHERE lecture_id = ?";
         try{
@@ -122,6 +123,7 @@ public class LectureDAO extends FileDAO<Lecture> {
             throw new RuntimeException(e);
         }
     }
+
     public void deleteLecture(Lecture lecture){
         String sql = "DELETE FROM " + tableName + " WHERE id = ?";
         try{
@@ -136,6 +138,7 @@ public class LectureDAO extends FileDAO<Lecture> {
     public void addLectureAttendee(Lecture lecture, User user){
         userPoliceDAO.addUserPolice(user,lecture,Roles.CLIENTE);
     }
+
     public void removeLectureAttendee(Lecture lecture, User user){
         userPoliceDAO.removeUserPolice(lecture,user,Roles.CLIENTE);
     }
@@ -147,6 +150,7 @@ public class LectureDAO extends FileDAO<Lecture> {
     public void addLecturePresenter(Lecture lecture, User presenter){
         userPoliceDAO.addUserPolice(presenter,lecture,Roles.PALESTRANTE);
     }
+
     public void removeLecturePresenter(Lecture lecture, User presenter){
         userPoliceDAO.removeUserPolice(lecture,presenter,Roles.PALESTRANTE);
     }
@@ -164,6 +168,16 @@ public class LectureDAO extends FileDAO<Lecture> {
         UserDAO user = new UserDAO();
         try {
             lectureEvaluationDAO.editLectureEvaluation(user.getUserById(user_id), lecture, value);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removeEvaluation(Lecture lecture, long user_id) {
+        UserDAO user = new UserDAO();
+        
+        try{
+            lectureEvaluationDAO.removeLectureEvaluation(user.getUserById(user_id),lecture);
         }catch (SQLException e){
             throw new RuntimeException(e);
         }

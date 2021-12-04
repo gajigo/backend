@@ -111,6 +111,7 @@ public class LectureView {
         System.out.println("4 - Participar");
         System.out.println("5 - Avaliar");
         System.out.println("6 - Editar Avaliacao");
+        System.out.println("7 - Remover Avaliacao");
         System.out.println("0 - Voltar");
 
         int escolha = reader.nextInt();
@@ -132,6 +133,9 @@ public class LectureView {
                 break;
             case 6:
                 editEvaluation(lecture);
+                break;
+            case 7:
+                removeEvaluation(lecture);
                 break;
             case 0:
                 return;
@@ -298,6 +302,16 @@ public class LectureView {
 
     }
 
+    public void removeEvaluation(Lecture lecture){
+        Scanner reader = new Scanner(System.in);
+
+        viewUser.list();
+        System.out.println("Escolha Seu Usuario");
+        long user_id = reader.nextLong();
+
+        controller.removeEvaluation(lecture, user_id);
+    }
+
     public void showAttendees(Lecture lecture){
         System.out.println("Participantes:");
         System.out.println(controller.getAttendees(lecture));
@@ -378,6 +392,7 @@ public class LectureView {
             controller.removeTopic(lecture,removeAssunto);
         }
     }
+
     public void editPresenter(Lecture lecture){
         Scanner reader = new Scanner(System.in);
 
