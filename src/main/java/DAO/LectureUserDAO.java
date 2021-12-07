@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserPoliceDAO {
+public class LectureUserDAO {
     private String tableName = "user_lecture";
     private Connection connection = new ConnectionFactory().getConnection();
 

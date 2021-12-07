@@ -18,7 +18,7 @@ public class LectureDAO extends FileDAO<Lecture> {
 
     private String tableName = "lectures";
     private Connection connection = new ConnectionFactory().getConnection();
-    private UserPoliceDAO userPoliceDAO = new UserPoliceDAO();
+    private LectureUserDAO lectureUserDAO = new LectureUserDAO();
     private LectureEvaluationDAO lectureEvaluationDAO = new LectureEvaluationDAO();
 
     public void createLecturesTable(){
@@ -44,8 +44,8 @@ public class LectureDAO extends FileDAO<Lecture> {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-        UserPoliceDAO userPoliceDAO = new UserPoliceDAO();
-        userPoliceDAO.createUserLectureTable();
+        LectureUserDAO lectureUserDAO = new LectureUserDAO();
+        lectureUserDAO.createUserLectureTable();
     }
 
     public Lecture createLectures(Lecture lecture) throws SQLException, NullPointerException {
@@ -96,8 +96,8 @@ public class LectureDAO extends FileDAO<Lecture> {
                 lecture.setInitialDate(resultSet.getString("date"));
                 lecture.setDuration(resultSet.getString("duration"));
                 lecture.setStatus(resultSet.getBoolean("status"));
-                lecture.setPresenter(userPoliceDAO.getUserPolice(lecture,Roles.PALESTRANTE));
-                lecture.setAttendees(userPoliceDAO.getUserPolice(lecture,Roles.CLIENTE));
+                lecture.setPresenter(lectureUserDAO.getUserPolice(lecture,Roles.PALESTRANTE));
+                lecture.setAttendees(lectureUserDAO.getUserPolice(lecture,Roles.CLIENTE));
 
                 listLectures.add(lecture);
             }
@@ -136,23 +136,23 @@ public class LectureDAO extends FileDAO<Lecture> {
     }
 
     public void addLectureAttendee(Lecture lecture, User user){
-        userPoliceDAO.addUserPolice(user,lecture,Roles.CLIENTE);
+        lectureUserDAO.addUserPolice(user,lecture,Roles.CLIENTE);
     }
 
     public void removeLectureAttendee(Lecture lecture, User user){
-        userPoliceDAO.removeUserPolice(lecture,user,Roles.CLIENTE);
+        lectureUserDAO.removeUserPolice(lecture,user,Roles.CLIENTE);
     }
 
     public List<User> getAttendees(Lecture lecture){
-        return userPoliceDAO.getUserPolice(lecture,Roles.CLIENTE);
+        return lectureUserDAO.getUserPolice(lecture,Roles.CLIENTE);
     }
 
     public void addLecturePresenter(Lecture lecture, User presenter){
-        userPoliceDAO.addUserPolice(presenter,lecture,Roles.PALESTRANTE);
+        lectureUserDAO.addUserPolice(presenter,lecture,Roles.PALESTRANTE);
     }
 
     public void removeLecturePresenter(Lecture lecture, User presenter){
-        userPoliceDAO.removeUserPolice(lecture,presenter,Roles.PALESTRANTE);
+        lectureUserDAO.removeUserPolice(lecture,presenter,Roles.PALESTRANTE);
     }
 
     public void evaluateLecture(Lecture lecture, long user_id, int value){

@@ -2,10 +2,8 @@ package Views;
 
 import Controllers.LectureController;
 import Controllers.UserController;
-import DAO.UserPoliceDAO;
-import Models.Evento;
+import DAO.LectureUserDAO;
 import Models.Lecture;
-import Models.Roles;
 import Models.User;
 
 import java.sql.SQLException;
@@ -18,7 +16,7 @@ public class LectureView {
     UserController userController = new UserController();
     private UserView viewUser = new UserView(userController);
     private UserController usuarios = new UserController();
-    private UserPoliceDAO userPoliceDAO = new UserPoliceDAO();
+    private LectureUserDAO lectureUserDAO = new LectureUserDAO();
 
     public LectureView(LectureController controller) {
         this.controller = controller;
