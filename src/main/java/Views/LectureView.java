@@ -12,14 +12,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LectureView {
-    private LectureController controller;
+    private LectureController controller = new LectureController();
     UserController userController = new UserController();
     private UserView viewUser = new UserView(userController);
     private UserController usuarios = new UserController();
     private LectureUserDAO lectureUserDAO = new LectureUserDAO();
 
-    public LectureView(LectureController controller) {
-        this.controller = controller;
+    public LectureView() {
     }
 
     public void initialMenu() {
@@ -75,7 +74,7 @@ public class LectureView {
         }catch (SQLException e){
             System.out.println("deu ruim");
         }catch (NullPointerException e){
-            System.out.println("deu ruim tbm");
+            throw new RuntimeException(e);
         }
 
     }

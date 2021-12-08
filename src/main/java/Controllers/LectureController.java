@@ -9,24 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LectureController {
-    private List<Lecture> model;
-    private LectureView view;
-    private LectureDAO dao;
+    private LectureDAO dao = new LectureDAO();
 
     public LectureController() {
-        this.dao = new LectureDAO();
-        this.model = dao.listLecture();
-        this.view = new LectureView(this);
     }
 
-    public void start(){
-        view.initialMenu();
-        if (!dao.save()) {
-            System.out.println("Erro ao salvar palestras!");
-        }
-    }
-    
-    public List<Lecture> getModels() {
+    public List<Lecture> getModels(){
         return dao.listLecture();
     }
 

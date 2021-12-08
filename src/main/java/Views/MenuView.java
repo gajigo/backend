@@ -47,7 +47,7 @@ public class MenuView {
     }
 
     public static void menuPalestra(){
-        LectureController controller = new LectureController();
-        controller.start();
+        LectureView view = new LectureView();
+        view.initialMenu();
     }
 }
