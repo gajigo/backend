@@ -107,21 +107,18 @@ public class LectureDAO extends FileDAO<Lecture> {
         }
     }
 
-    public void editSeminar(Lecture lecture){
+    public void editSeminar(Lecture lecture) throws SQLException, NullPointerException{
         String sql = "UPDATE " + tableName + " SET name = ?, description = ?, date = ?, duration = ? WHERE lecture_id = ?";
-        try{
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(5, lecture.getId());
-            statement.setString(1, lecture.getName());
-            statement.setString(2, lecture.getDescription());
-            statement.setString(3, lecture.getInitialDate());
-            statement.setString(4, lecture.getDuration());
 
-            statement.executeUpdate();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(5, lecture.getId());
+        statement.setString(1, lecture.getName());
+        statement.setString(2, lecture.getDescription());
+        statement.setString(3, lecture.getInitialDate());
+        statement.setString(4, lecture.getDuration());
 
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
+        statement.executeUpdate();
+
     }
 
     public void deleteLecture(Lecture lecture){

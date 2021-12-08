@@ -18,7 +18,7 @@ public class LectureController {
         return dao.listLecture();
     }
 
-    public Lecture createLecture(String name, String description, String date, String duration, String language, long evento) throws SQLException {
+    public Lecture createLecture(String name, String description, String date, String duration, String language, long event) throws SQLException {
         Lecture newLecture = new Lecture();
         Idioma newLanguage = new Idioma();
         EventoController newEvent = new EventoController();
@@ -29,16 +29,16 @@ public class LectureController {
         newLecture.setDuration(duration);
         newLanguage.setNome(language);
         newLecture.getLanguage().add(newLanguage);
-        newLecture.setEvent(newEvent.getById(evento));
+        newLecture.setEvent(newEvent.getById(event));
 
-        model.add(newLecture);
         return dao.createLectures(newLecture);
     }
 
-    public List<String> listLecture(){
+    public List<String> listLectureNames() {
         List<String> listString = new ArrayList<>();
+        List<Lecture> lectures = getModels();
 
-        for (Lecture lecture : model) {
+        for (Lecture lecture : lectures) {
             listString.add(lecture.getName());
         }
 
@@ -51,7 +51,9 @@ public class LectureController {
     }
 
     public Lecture chosenLecture(String lectureName){
-        for (Lecture lecture : model) {
+        List<Lecture> lectures = getModels();
+
+        for (Lecture lecture : lectures) {
             if (lecture.getName().compareTo(lectureName) == 0) return lecture;
         }
 
@@ -134,7 +136,7 @@ public class LectureController {
         dao.removeLecturePresenter(lecture,presenter);
     }
 
-    public void editLecture(Lecture lecture){
+    public void editLecture(Lecture lecture) throws SQLException, NullPointerException{
         dao.editSeminar(lecture);
     }
 

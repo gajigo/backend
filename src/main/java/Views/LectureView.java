@@ -81,7 +81,7 @@ public class LectureView {
 
     public void selectLecture(){
         Scanner reader = new Scanner(System.in);
-        List<String> nomePalestra = controller.listLecture();
+        List<String> nomePalestra = controller.listLectureNames();
         int i = 0;
 
         while (nomePalestra.size() > i){
@@ -229,7 +229,14 @@ public class LectureView {
                     System.out.println("Escolha invalida");
                     break;
             }
-            controller.editLecture(lecture);
+            try {
+                controller.editLecture(lecture);
+                System.out.println("Editado com Sucesso");
+            }catch (SQLException e){
+                System.out.println("Falha ao Editar Palestra");
+            }catch (NullPointerException e){
+                System.out.println("Falha ao Editar Palestra");
+            }
         }
     }
 
