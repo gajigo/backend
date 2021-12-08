@@ -179,11 +179,14 @@ public class LectureView {
     }
 
     public void deleteLecture(Lecture lecture){
-        if(!controller.deleteLecture(lecture)){
-            System.out.println("Palestra Deletada");
-        }else{
+       try {
+           controller.deleteLecture(lecture);
+           System.out.println("Palestra Deletada");
+        }catch (SQLException e){
             System.out.println("Erro ao Deletar");
-        }
+        }catch (NullPointerException e){
+           System.out.println("Erro ao Deletar");
+       }
     }
 
     public void editMenu(Lecture lecture){

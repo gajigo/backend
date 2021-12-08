@@ -121,15 +121,13 @@ public class LectureDAO extends FileDAO<Lecture> {
 
     }
 
-    public void deleteLecture(Lecture lecture){
+    public void deleteLecture(Lecture lecture)throws SQLException, NullPointerException{
         String sql = "DELETE FROM " + tableName + " WHERE id = ?";
-        try{
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, lecture.getId());
-            statement.execute();
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1, lecture.getId());
+        statement.execute();
+
     }
 
     public void addLectureAttendee(Lecture lecture, User user){

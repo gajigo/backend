@@ -60,7 +60,7 @@ public class LectureController {
         return null;
     }
 
-    public boolean deleteLecture(Lecture lecture){
+    public boolean deleteLecture(Lecture lecture)throws SQLException, NullPointerException{
         dao.deleteLecture(lecture);
         return false;
 
