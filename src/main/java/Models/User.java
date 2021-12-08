@@ -3,6 +3,10 @@ package Models;
 
 import DAO.DAOUser;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class User implements DAOUser {
@@ -73,6 +77,10 @@ public class User implements DAOUser {
         this.password = password;
     }
 
+    public void setNewPassword(String password) {
+        this.setPassword(this.generateHashPassword(password));
+    }
+
     public String getStatusLogin() {
         return statusLogin;
     }
@@ -124,7 +132,22 @@ public class User implements DAOUser {
         this.roles.remove(role);
     }
 
+    protected String generateHashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+
+            byte[] messageDigest = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            return no.toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+    }
+
     public boolean checkLogin(String password) {
-        return password.equals(this.password);
+        String hashPassword = this.generateHashPassword(password);
+        return this.password.equals(hashPassword);
     }
 }
