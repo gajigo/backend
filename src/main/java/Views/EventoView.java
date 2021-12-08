@@ -7,6 +7,7 @@ import Models.Modalidade;
 import Models.User;
 
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -212,6 +213,7 @@ public class EventoView {
         UserController usuarios = new UserController();
         UserView userView = new UserView(usuarios);
 
+
         Scanner ler = new Scanner(System.in);
         while (true) {
             if (usuarios.getModels().size() == 0) {
@@ -247,6 +249,7 @@ public class EventoView {
 
             if (escolha == 1) {
                 evento.addOrganizador(userEscolhido);
+                controller.addEventOrganizer(usuarios.getById(id), evento);  // coloca aqui a funçao pra add no sql
             } else {
                 evento.removeOrganizador(userEscolhido);
             }

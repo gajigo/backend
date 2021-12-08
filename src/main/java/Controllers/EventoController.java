@@ -2,6 +2,7 @@ package Controllers;
 
 import DAO.EventoDAO;
 import Models.Evento;
+import Models.User;
 import Views.EventoView;
 
 import java.util.List;
@@ -42,4 +43,7 @@ public class EventoController {
     public boolean deleteById(Long id) {
         return dao.deleteById(id);
     }
+
+    public void addEventOrganizer(User user, Evento evento) { dao.addEventOrganizer(user,evento);}
+
 }
