@@ -130,7 +130,7 @@ public class LectureDAO extends FileDAO<Lecture> {
 
     }
 
-    public void addLectureAttendee(Lecture lecture, User user){
+    public void addLectureAttendee(Lecture lecture, User user) throws SQLException{
         lectureUserDAO.addUserPolice(user,lecture,Roles.CLIENTE);
     }
 
@@ -142,7 +142,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         return lectureUserDAO.getUserPolice(lecture,Roles.CLIENTE);
     }
 
-    public void addLecturePresenter(Lecture lecture, User presenter){
+    public void addLecturePresenter(Lecture lecture, User presenter) throws SQLException{
         lectureUserDAO.addUserPolice(presenter,lecture,Roles.PALESTRANTE);
     }
 

@@ -42,22 +42,18 @@ public class LectureUserDAO {
         }
     }
 
-    public void addUserPolice(User user, Lecture lecture, Roles police){
+    public void addUserPolice(User user, Lecture lecture, Roles police) throws SQLException{
         if(user != null && lecture != null && police != null){
             String sql = "INSERT INTO " + tableName +
                     "(user_id,lecture_id,police)" +
                     "VALUES (?, ?, ?)";
-            try{
-                PreparedStatement statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
 
-                statement.setLong(1,user.getUserId());
-                statement.setLong(2,lecture.getId());
-                statement.setInt(3,police.ordinal());
-                statement.execute();
+            statement.setLong(1,user.getUserId());
+            statement.setLong(2,lecture.getId());
+            statement.setInt(3,police.ordinal());
+            statement.execute();
 
-            }catch (SQLException e){
-                throw new RuntimeException(e);
-            }
         }
     }
 

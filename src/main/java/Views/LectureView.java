@@ -278,9 +278,10 @@ public class LectureView {
         System.out.println("escolha quem adicionar");
         int user_id = reader.nextInt();
 
-        if(controller.joinLecture(lecture, user_id)){
+        try{
+            controller.joinLecture(lecture, user_id);
             System.out.println("Presenca Contabilizada");
-        }else{
+        }catch (SQLException e ){
             System.out.println("Falha ao adicionar Presenca");
         }
     }
@@ -416,8 +417,12 @@ public class LectureView {
             System.out.println("Escolha um usuario:");
             int id = reader.nextInt();
             User userEscolhido = usuarios.getById(id);
-            controller.addPresenter(lecture,userEscolhido);
-
+            try {
+                controller.addPresenter(lecture, userEscolhido);
+                System.out.println("Palestrante adicionado");
+            }catch (SQLException e){
+                System.out.println("Falha ao adicionar palestrante");
+            }
         }
 
         if (escolha.compareToIgnoreCase("REMOVER") == 0){

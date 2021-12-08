@@ -72,11 +72,10 @@ public class LectureController {
         lecture.getLectureQuestions().add(newQuestion);
     }
 
-    public boolean joinLecture(Lecture lecture, int user_id){
+    public void joinLecture(Lecture lecture, int user_id) throws SQLException{
         UserController userController = new UserController();
         User user = userController.getById(user_id);
         dao.addLectureAttendee(lecture,user);
-        return true;
     }
 
     public void editName(Lecture lecture, String newName){
@@ -128,7 +127,7 @@ public class LectureController {
         }
     }
 
-    public void addPresenter(Lecture lecture, User newPresenter){
+    public void addPresenter(Lecture lecture, User newPresenter) throws SQLException{
         dao.addLecturePresenter(lecture,newPresenter);
     }
 
