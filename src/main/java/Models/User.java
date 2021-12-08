@@ -53,7 +53,7 @@ public class User implements DAOUser {
         return userId;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.userId = id;
     }
 

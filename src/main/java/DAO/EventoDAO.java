@@ -64,7 +64,7 @@ public class EventoDAO extends FileDAO<Evento> {
                 ResultSet resultSet = statement.getGeneratedKeys();
 
                 while (resultSet.next()) {
-                    evento.setId(resultSet.getInt(1));
+                    evento.setId(resultSet.getLong(1));
                 }
                 return evento;
             }
@@ -85,7 +85,7 @@ public class EventoDAO extends FileDAO<Evento> {
             List<Evento> listEventos = new ArrayList<>();
             while (resultSet.next()) {
                 Evento novoEvento = new Evento();
-                novoEvento.setId(resultSet.getInt("eventoid"));
+                novoEvento.setId(resultSet.getLong("eventoid"));
                 novoEvento.setNomeEvento(resultSet.getString("nomeevento"));
                 novoEvento.setDescricao(resultSet.getString("descricao"));
                 novoEvento.setModalidade(Modalidade.values()[resultSet.getInt("modalidade")]);
@@ -131,7 +131,7 @@ public class EventoDAO extends FileDAO<Evento> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 evento = new Evento();
-                evento.setId(resultSet.getInt("eventoid"));
+                evento.setId(resultSet.getLong("eventoid"));
                 evento.setNomeEvento(resultSet.getString("nomeevento"));
                 evento.setDescricao(resultSet.getString("descricao"));
 //            evento.setModalidade(resultSet.getInt("modalidade"));

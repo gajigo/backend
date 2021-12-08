@@ -123,7 +123,7 @@ public class UserDAO extends FileDAO<User> {
 
             while (resultSet.next()) {
                 user = new User();
-                user.setId(resultSet.getInt("user_id"));
+                user.setId(resultSet.getLong("user_id"));
                 user.setName(resultSet.getString("name"));
                 user.setPassword(resultSet.getString("password"));
                 user.setEmail(resultSet.getString("email"));
@@ -150,7 +150,7 @@ public class UserDAO extends FileDAO<User> {
 
             while (resultSet.next()) {
                 user = new User();
-                user.setId(resultSet.getInt("user_id"));
+                user.setId(resultSet.getLong("user_id"));
                 user.setName(resultSet.getString("name"));
                 user.setPassword(resultSet.getString("password"));
                 user.setEmail(resultSet.getString("email"));

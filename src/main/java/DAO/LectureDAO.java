@@ -67,7 +67,7 @@ public class LectureDAO extends FileDAO<Lecture> {
                 ResultSet resultSet = statement.getGeneratedKeys();
 
                 while(resultSet.next()){
-                    lecture.setId(resultSet.getInt("lecture_id"));
+                    lecture.setId(resultSet.getLong("lecture_id"));
                     lecture.setStatus(resultSet.getBoolean("status"));
                 }
                 return lecture;
@@ -90,7 +90,7 @@ public class LectureDAO extends FileDAO<Lecture> {
 
             while(resultSet.next()){
                 lecture = new Lecture();
-                lecture.setId(resultSet.getInt("lecture_id"));
+                lecture.setId(resultSet.getLong("lecture_id"));
                 lecture.setName(resultSet.getString("name"));
                 lecture.setDescription(resultSet.getString("description"));
                 lecture.setInitialDate(resultSet.getString("date"));
