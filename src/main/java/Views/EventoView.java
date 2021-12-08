@@ -1,12 +1,13 @@
 package Views;
 
 import Controllers.EventoController;
-import Controllers.UsuarioController;
+import Controllers.UserController;
 import Models.Evento;
 import Models.Modalidade;
-import Models.Usuario;
+import Models.User;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -17,6 +18,10 @@ public class EventoView {
 
     public EventoView(EventoController controller) {
         this.controller = controller;
+    }
+
+    public EventoView() {
+        controller = new EventoController();
     }
 
     public void menu() {
@@ -71,9 +76,9 @@ public class EventoView {
 
         Evento novoEvento = controller.cadastrar(nomeEvento, descricao, dataEvento);
 
-        menuModalidade(novoEvento);
+        //menuModalidade(novoEvento);
 
-        System.out.println("Evento " + novoEvento.getNomeEvento() + " foi criado!");
+        //System.out.println("Evento " + novoEvento.getNomeEvento() + " foi criado!");
     }
 
     public void menuModalidade(Evento evento){
@@ -98,6 +103,7 @@ public class EventoView {
             } else {
                 System.out.println("Modalidade invalida!");
             }
+
         }
     }
 
@@ -113,7 +119,7 @@ public class EventoView {
         listar();
 
         System.out.println("Escolha um ID:");
-        int id = ler.nextInt();
+        Long id = ler.nextLong();
         ler.nextLine();
 
         if (controller.deleteById(id)) {
@@ -135,7 +141,7 @@ public class EventoView {
         listar();
 
         System.out.println("Escolha um ID:");
-        int id = ler.nextInt();
+        Long id = ler.nextLong();
         ler.nextLine();
 
         Evento escolha = controller.getById(id);
@@ -190,7 +196,9 @@ public class EventoView {
                 default:
                     System.out.println("Escolha invalida!");
                     break;
+
             }
+            controller.editEvento(evento);
         }
     }
 
@@ -201,8 +209,8 @@ public class EventoView {
     }
 
     public void menuOrganizadores(Evento evento) {
-        UsuarioController usuarios = new UsuarioController();
-        UsuarioView usuarioView = new UsuarioView(usuarios);
+        UserController usuarios = new UserController();
+        UserView userView = new UserView(usuarios);
 
         Scanner ler = new Scanner(System.in);
         while (true) {
@@ -226,21 +234,21 @@ public class EventoView {
                 continue;
             }
 
-            usuarioView.listar();
+            userView.list();
             System.out.println("Escolha um usuario:");
             int id = ler.nextInt();
             ler.nextLine();
 
-            Usuario usuarioEscolhido = usuarios.getById(id);
-            if (usuarioEscolhido == null) {
+            User userEscolhido = usuarios.getById(id);
+            if (userEscolhido == null) {
                 System.out.println("ID invalido!");
                 continue;
             }
 
             if (escolha == 1) {
-                evento.addOrganizador(usuarioEscolhido);
+                evento.addOrganizador(userEscolhido);
             } else {
-                evento.removeOrganizador(usuarioEscolhido);
+                evento.removeOrganizador(userEscolhido);
             }
         }
     }

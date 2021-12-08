@@ -1,24 +1,24 @@
 package Views;
 
-import Controllers.UsuarioController;
+import Controllers.UserController;
 import Models.Roles;
-import Models.Usuario;
+import Models.User;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class UsuarioView {
+public class UserView {
     // salvar coisas foreign como fkID ao invez de objeto
-    private UsuarioController controller;
+    private UserController controller;
 
-    public UsuarioView(UsuarioController controller) {
+    public UserView(UserController controller) {
         this.controller = controller;
     }
 
     public void menu() {
-        Scanner ler = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println("-Menu Usuario-");
             System.out.println("1 - Crie um Usuario");
@@ -27,23 +27,24 @@ public class UsuarioView {
             System.out.println("4 - Listar Usuarios");
             System.out.println("0 - Sair");
 
-            int escolha = ler.nextInt();
+            int choice = input.nextInt();
+            input.nextLine();
 
-            switch (escolha) {
+            switch (choice) {
                 case 0:
                     return;
                 case 1:
-                    menuRegistrar();
+                    registrationMenu();
                     break;
                 case 2:
-                    menuEditar();
+                    editMenu();
                     break;
                 case 3:
-                    menuDeletar();
+                    deleteMenu();
                     break;
                 case 4:
                     System.out.println("-Usuarios Cadastrados-");
-                    listar();
+                    list();
                     break;
                 default:
                     System.out.println("Escolha invalida!");
@@ -52,60 +53,64 @@ public class UsuarioView {
         }
     }
 
-    public void menuRegistrar() {
-        Scanner ler = new Scanner(System.in);
+    public void registrationMenu() {
+        Scanner input = new Scanner(System.in);
+        User user = new User();
 
         System.out.println("-Criar Usuario-");
         System.out.println("Escreva um nome:");
-        String nome = ler.nextLine();
+        user.setName(input.nextLine());
 
         System.out.println("Escreva uma senha:");
-        String senha = ler.nextLine();
+        user.setPassword(input.nextLine());
 
-        Usuario novoUsuario = controller.registrar(nome, senha);
-        menuCargos(novoUsuario);
+        System.out.println("Escreva um e-mail:");
+        user.setEmail(input.nextLine());
 
-        System.out.println("Usuario " + nome + " registrado com sucesso!");
+        rolesMenu(user);
+        User novoUser = controller.register(user);
+
+        System.out.println("Usuario " + novoUser.getId() + " registrado com sucesso!");
     }
 
-    public void menuEditar() {
+    public void editMenu() {
         if (controller.getModels().size() == 0) {
             System.out.println("Nao existe usuarios para editar.");
             return;
         }
 
-        Scanner ler = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
         System.out.println("-Editar Usuario-");
-        listar();
+        list();
 
         System.out.println("Escolha um ID:");
-        int id = ler.nextInt();
-        ler.nextLine();
+        int id = input.nextInt();
+        input.nextLine();
 
-        Usuario escolha = controller.getById(id);
-        if (escolha == null) {
+        User choice = controller.getById(id);
+        if (choice == null) {
             System.out.println("Usuario nao encontrado!");
             return;
         }
 
-        edite(escolha);
+        edit(choice);
     }
 
-    public void menuDeletar() {
+    public void deleteMenu() {
+        Scanner input = new Scanner(System.in);
+
         if (controller.getModels().size() == 0) {
             System.out.println("Nao existe usuarios para deletar.");
             return;
         }
 
-        Scanner ler = new Scanner(System.in);
-
         System.out.println("-Deletar Usuario-");
-        listar();
+        list();
 
         System.out.println("Escolha um ID:");
-        int id = ler.nextInt();
-        ler.nextLine();
+        Long id = input.nextLong();
+        input.nextLine();
 
         if (controller.deleteById(id)) {
             System.out.println("Usuario deletado com sucesso!");
@@ -114,46 +119,48 @@ public class UsuarioView {
         }
     }
 
-    public boolean login(Usuario usuario) {
-        Scanner ler = new Scanner(System.in);
+    public boolean login(User user) {
+        Scanner input = new Scanner(System.in);
         System.out.println("Escreva sua senha:");
 
-        String senha = ler.nextLine();
-        return usuario.getSenha().equals(senha);
+        String password = input.nextLine();
+        return user.getPassword().equals(password);
     }
 
-    public void edite(Usuario usuario) {
-        Scanner ler = new Scanner(System.in);
-
-        if (!login(usuario)) {
+    public void edit(User user) {
+        if (!login(user)) {
             System.out.println("Senha incorreta!");
             return;
         }
 
+        Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println("Informacoes:");
-            System.out.printf("1 - %s: %s\n", "Nome", usuario.getNome());
-            System.out.printf("2 - %s: %s\n", "Senha", usuario.getSenha());
-            System.out.printf("3 - %s: %s\n", "Cargos", usuario.getRoles());
+            System.out.printf("1 - %s: %s\n", "Nome", user.getName());
+            System.out.printf("2 - %s: %s\n", "Senha", user.getPassword());
+            System.out.printf("3 - %s: %s\n", "Cargos", user.getRoles());
             System.out.println("0 - Sair");
 
             System.out.println("Escolha uma opcao para mudar");
-            int escolha = ler.nextInt();
-            ler.nextLine();
+            int choice = input.nextInt();
+            input.nextLine();
 
-            switch (escolha) {
+            switch (choice) {
                 case 0:
                     return;
                 case 1:
                     System.out.println("Escreva um novo nome:");
-                    usuario.setNome(ler.nextLine());
+                    user.setName(input.nextLine());
+                    controller.editUser(user);
                     break;
                 case 2:
                     System.out.println("Escreva uma nova senha:");
-                    usuario.setSenha(ler.nextLine());
+                    user.setPassword(input.nextLine());
+                    controller.editUser(user);
                     break;
                 case 3:
-                    menuCargos(usuario);
+                    rolesMenu(user);
+                    controller.editUser(user);
                     break;
                 default:
                     System.out.println("Escolha invalida!");
@@ -162,47 +169,47 @@ public class UsuarioView {
         }
     }
 
-    public void listar() {
-        for (Usuario usuario: controller.getModels()) {
-            System.out.printf("%d - %s\n", usuario.getId(), usuario.getNome());
+    public void list() {
+        for (User user : controller.getModels()) {
+            System.out.printf("%d - %s\n", user.getId(), user.getName());
         }
     }
 
-    public void menuCargos(Usuario usuario) {
-        Scanner ler = new Scanner(System.in);
+    public void rolesMenu(User user) {
+        Scanner input = new Scanner(System.in);
         while (true) {
-            System.out.println("Cargos: " + usuario.getRoles());
+            System.out.println("Cargos: " + user.getRoles());
             System.out.println("1 - Adicionar Cargo");
             System.out.println("2 - Remover Cargo");
             System.out.println("3 - Confirmar");
-            int escolha = ler.nextInt();
+            int choice = input.nextInt();
 
-            if (escolha == 3) {
+            if (choice == 3) {
                 return;
-            } else if (escolha < 1 || escolha > 3) {
+            } else if (choice < 1 || choice > 3) {
                 System.out.println("Escolha invalida!");
                 continue;
             }
 
-            List<String> rolesPossiveis = Stream.of(Roles.values()).
+            List<String> possibleRoles = Stream.of(Roles.values()).
                     map(Roles::name).
                     collect(Collectors.toList());
 
             System.out.println("Escolha um cargo:");
-            for (int i = 0; i < rolesPossiveis.size(); i++) {
-                System.out.printf("%d - %s\n", i+1, rolesPossiveis.get(i));
+            for (int i = 0; i < possibleRoles.size(); i++) {
+                System.out.printf("%d - %s\n", i+1, possibleRoles.get(i));
             }
 
-            int cargoEscolhido = ler.nextInt() - 1;
-            ler.nextLine();
+            int selectedRole = input.nextInt() - 1;
+            input.nextLine();
 
-            if (cargoEscolhido >= 0 && cargoEscolhido < rolesPossiveis.size()) {
-                Roles cargo = Roles.valueOf(rolesPossiveis.get(cargoEscolhido));
+            if (selectedRole >= 0 && selectedRole < possibleRoles.size()) {
+                Roles role = Roles.valueOf(possibleRoles.get(selectedRole));
 
-                if (escolha == 1) {
-                    usuario.addRole(cargo);
+                if (choice == 1) {
+                    user.addRole(role);
                 } else {
-                    usuario.removeRole(cargo);
+                    user.removeRole(role);
                 }
             } else {
                 System.out.println("Cargo invalido!");

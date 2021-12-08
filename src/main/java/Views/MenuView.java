@@ -1,8 +1,8 @@
 package Views;
 
 import Controllers.EventoController;
-import Controllers.UsuarioController;
-import Controllers.PalestraController;
+import Controllers.UserController;
+import Controllers.LectureController;
 
 import java.util.Scanner;
 
@@ -37,7 +37,7 @@ public class MenuView {
     }
 
     public static void menuUsuario() {
-        UsuarioController controller = new UsuarioController();
+        UserController controller = new UserController();
         controller.start();
     }
 
@@ -47,7 +47,7 @@ public class MenuView {
     }
 
     public static void menuPalestra(){
-        PalestraController controller = new PalestraController();
-        controller.start();
+        LectureView view = new LectureView();
+        view.initialMenu();
     }
 }

@@ -25,18 +25,21 @@ public class EventoController {
     public Evento cadastrar(String nomeEvento, String descricao, String dataEvento) {
         // Registramos Evento no DAO e retornamos para ser modificado
         Evento novoEvento = new Evento(nomeEvento, descricao, dataEvento);
-        return dao.addModel(novoEvento);
+        return dao.createEvento(novoEvento);
+
     }
 
     public List<Evento> getModels() {
-        return dao.getModels();
+        return dao.listEventos();
     }
 
-    public Evento getById(long id) {
+    public Evento getById(Long id) {
         return dao.getById(id);
     }
 
-    public boolean deleteById(long id) {
+    public void editEvento(Evento evento){ dao.editEvento(evento);}
+
+    public boolean deleteById(Long id) {
         return dao.deleteById(id);
     }
 }

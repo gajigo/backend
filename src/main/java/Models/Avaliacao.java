@@ -8,13 +8,13 @@ public class Avaliacao implements Serializable {
     private static final long serialVersionUID = 1L;
     private long id;
     private float nota;
-    private Palestra palestraAssociada;
-    private Usuario avaliador;
+    private Lecture lectureAssociada;
+    private User avaliador;
     private boolean ativo;
 
-    public Avaliacao(float nota, Palestra palestraAssociada, Usuario avaliador) {
+    public Avaliacao(float nota, Lecture lectureAssociada, User avaliador) {
         this.nota = nota;
-        this.palestraAssociada = palestraAssociada;
+        this.lectureAssociada = lectureAssociada;
         this.avaliador = avaliador;
         this.ativo = true;
     }
@@ -23,7 +23,7 @@ public class Avaliacao implements Serializable {
     public String toString() {
         return "Avaliacao{" +
                 "nota=" + nota +
-                ", palestraAssociada=" + palestraAssociada +
+                ", palestraAssociada=" + lectureAssociada +
                 ", avaliador=" + avaliador +
                 ", ativo=" + ativo +
                 '}';
@@ -45,19 +45,19 @@ public class Avaliacao implements Serializable {
         this.nota = nota;
     }
 
-    public Palestra getPalestraAssociada() {
-        return palestraAssociada;
+    public Lecture getPalestraAssociada() {
+        return lectureAssociada;
     }
 
-    public void setPalestraAssociada(Palestra palestraAssociada) {
-        this.palestraAssociada = palestraAssociada;
+    public void setPalestraAssociada(Lecture lectureAssociada) {
+        this.lectureAssociada = lectureAssociada;
     }
 
-    public Usuario getAvaliador() {
+    public User getAvaliador() {
         return avaliador;
     }
 
-    public void setAvaliador(Usuario avaliador) {
+    public void setAvaliador(User avaliador) {
         this.avaliador = avaliador;
     }
 
