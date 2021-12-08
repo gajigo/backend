@@ -89,16 +89,14 @@ public class LectureUserDAO {
         }
     }
 
-    public void removeUserPolice (Lecture lecture, User user, Roles police){
+    public void removeUserPolice (Lecture lecture, User user, Roles police)throws SQLException, NullPointerException{
         String sql = "DELETE FROM " + tableName + " WHERE lecture_id = ? AND user_id = ? AND police = ?";
-        try{
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, lecture.getId());
-            statement.setLong(2, user.getUserId());
-            statement.setInt(3, police.ordinal());
-            statement.execute();
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1, lecture.getId());
+        statement.setLong(2, user.getUserId());
+        statement.setInt(3, police.ordinal());
+        statement.execute();
+
     }
 }

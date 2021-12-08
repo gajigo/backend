@@ -131,7 +131,7 @@ public class LectureController {
         dao.addLecturePresenter(lecture,newPresenter);
     }
 
-    public void removePresenter(Lecture lecture, User presenter){
+    public void removePresenter(Lecture lecture, User presenter) throws SQLException{
         dao.removeLecturePresenter(lecture,presenter);
     }
 

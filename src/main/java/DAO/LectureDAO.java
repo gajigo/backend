@@ -134,7 +134,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         lectureUserDAO.addUserPolice(user,lecture,Roles.CLIENTE);
     }
 
-    public void removeLectureAttendee(Lecture lecture, User user){
+    public void removeLectureAttendee(Lecture lecture, User user)throws SQLException, NullPointerException{
         lectureUserDAO.removeUserPolice(lecture,user,Roles.CLIENTE);
     }
 
@@ -146,7 +146,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         lectureUserDAO.addUserPolice(presenter,lecture,Roles.PALESTRANTE);
     }
 
-    public void removeLecturePresenter(Lecture lecture, User presenter){
+    public void removeLecturePresenter(Lecture lecture, User presenter)throws SQLException, NullPointerException{
         lectureUserDAO.removeUserPolice(lecture,presenter,Roles.PALESTRANTE);
     }
 

@@ -419,9 +419,9 @@ public class LectureView {
             User userEscolhido = usuarios.getById(id);
             try {
                 controller.addPresenter(lecture, userEscolhido);
-                System.out.println("Palestrante adicionado");
+                System.out.println("Palestrante Adicionado");
             }catch (SQLException e){
-                System.out.println("Falha ao adicionar palestrante");
+                System.out.println("Falha ao adicionar Palestrante");
             }
         }
 
@@ -430,7 +430,14 @@ public class LectureView {
             System.out.println("Escolha um usuario:");
             int id = reader.nextInt();
             User userEscolhido = usuarios.getById(id);
-            controller.removePresenter(lecture,userEscolhido);
+            try {
+                controller.removePresenter(lecture, userEscolhido);
+                System.out.println("Palestrante Removido");
+            }catch (SQLException e){
+                System.out.println("Falha ao remover Palestrante");
+            }catch (NullPointerException e){
+                System.out.println("Falha ao remover Palestrante");
+            }
         }
     }
 
