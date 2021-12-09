@@ -99,7 +99,7 @@ public class UserDAO extends FileDAO<User> {
                 ResultSet resultSet = statement.getGeneratedKeys();
 
                 while (resultSet.next()) {
-                    user.setUserId(resultSet.getInt(1));
+                    user.setUserId(resultSet.getLong(1));
                 }
 
                 insertUpdateRoles(user.getUserId(), user.getRoles());

@@ -21,7 +21,7 @@ public class EventoDAO extends FileDAO<Event> {
         createEventoTable();
     }
 
-    private String tableName = "eventos";
+    private String tableName = "events";
     private Connection connection = new ConnectionFactory().getConnection();
     private EventUserDAO eventUserDAO = new EventUserDAO();
 
@@ -29,11 +29,11 @@ public class EventoDAO extends FileDAO<Event> {
         String sql = "CREATE SEQUENCE IF NOT EXISTS evento_id_seq;";
 
         sql += "CREATE TABLE IF NOT EXISTS " + tableName + "(" +
-                "eventoId BIGINT PRIMARY KEY DEFAULT nextval('evento_id_seq')," +
-                "nomeEvento TEXT NOT NULL," +
-                "descricao TEXT NOT NULL," +
-                "modalidade SMALLINT," +
-                "dataEvento VARCHAR(10)" + ")";
+                "evento_id BIGINT PRIMARY KEY DEFAULT nextval('evento_id_seq')," +
+                "event_name TEXT NOT NULL," +
+                "description TEXT NOT NULL," +
+                "modality SMALLINT," +
+                "event_date VARCHAR(10)" + ")";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -48,7 +48,7 @@ public class EventoDAO extends FileDAO<Event> {
     public Event createEvento(Event event) {
         if (event != null) {
             String sql = "INSERT INTO " + tableName + " (" +
-                    "nomeEvento, descricao, modalidade, dataEvento)" +
+                    "event_name, description, modality, event_date)" +
                     "VALUES (?, ?, ?, ?)";
 
             try {
@@ -88,11 +88,11 @@ public class EventoDAO extends FileDAO<Event> {
             List<Event> listEvents = new ArrayList<>();
             while (resultSet.next()) {
                 Event novoEvent = new Event();
-                novoEvent.setId(resultSet.getLong("eventoid"));
-                novoEvent.setEventName(resultSet.getString("nomeevento"));
-                novoEvent.setDescription(resultSet.getString("descricao"));
-                novoEvent.setModalidade(Modality.values()[resultSet.getInt("modalidade")]);
-                novoEvent.setDateEvent(resultSet.getString("dataevento"));
+                novoEvent.setId(resultSet.getLong("event_id"));
+                novoEvent.setEventName(resultSet.getString("event_name"));
+                novoEvent.setDescription(resultSet.getString("description"));
+                novoEvent.setModalidade(Modality.values()[resultSet.getInt("modality")]);
+                novoEvent.setDateEvent(resultSet.getString("event_date"));
 
                 listEvents.add(novoEvent);
             }
@@ -104,8 +104,8 @@ public class EventoDAO extends FileDAO<Event> {
     }
 
     public void editEvento(Event event) {
-        String sql = "UPDATE " + tableName + " SET nomeEvento = ?, descricao = ?, modalidade = 2, dataEvento = ?" +
-                " WHERE eventoId = ?";
+        String sql = "UPDATE " + tableName + " SET event_name = ?, description = ?, modality = 2, event_date = ?" +
+                " WHERE event_id = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -123,7 +123,7 @@ public class EventoDAO extends FileDAO<Event> {
     }
 
     public Event getById(Long id) {
-        String sql = "SELECT * FROM eventos WHERE eventoid = ?";
+        String sql = "SELECT * FROM events WHERE event_id = ?";
 
         Event event = null;
         try {
@@ -134,11 +134,11 @@ public class EventoDAO extends FileDAO<Event> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 event = new Event();
-                event.setId(resultSet.getLong("eventoid"));
-                event.setEventName(resultSet.getString("nomeevento"));
-                event.setDescription(resultSet.getString("descricao"));
-//            evento.setModalidade(resultSet.getInt("modalidade"));
-                event.setDateEvent(resultSet.getString("dataevento"));
+                event.setId(resultSet.getLong("event_id"));
+                event.setEventName(resultSet.getString("event_name"));
+                event.setDescription(resultSet.getString("description"));
+//            evento.setModalidade(resultSet.getInt("modality"));
+                event.setDateEvent(resultSet.getString("event_date"));
             }
         }   catch (SQLException e){
             throw new RuntimeException(e);
@@ -150,7 +150,7 @@ public class EventoDAO extends FileDAO<Event> {
 
     public boolean deleteById(Long eventoId) {
         if (eventoId != null) {
-            String sql = "DELETE FROM " + tableName + " WHERE eventoid = ?";
+            String sql = "DELETE FROM " + tableName + " WHERE event_id = ?";
 
             try {
                 PreparedStatement statement = connection.prepareStatement(sql);

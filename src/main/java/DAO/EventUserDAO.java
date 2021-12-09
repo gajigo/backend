@@ -27,7 +27,7 @@ public class EventUserDAO {
                         "REFERENCES users(user_id), " +
                     "CONSTRAINT fk_user_event_event_id " +
                         "FOREIGN KEY (event_id) " +
-                        "REFERENCES eventos(eventoId) " +
+                        "REFERENCES events(event_id) " +
                     ");";
             try{
                 PreparedStatement statement = connection.prepareStatement(sql);

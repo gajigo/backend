@@ -25,10 +25,12 @@ public class LectureUserDAO {
                 "PRIMARY KEY (user_id,lecture_id,police), " +
                 "CONSTRAINT fk_user_lecture_user_id " +
                     "FOREIGN KEY (user_id) " +
-                    "REFERENCES users(user_id), " +
+                    "REFERENCES users(user_id) " +
+                    "ON DELETE CASCADE," +
                 "CONSTRAINT fk_user_lecture_lecture_id " +
                     "FOREIGN KEY (lecture_id) " +
                     "REFERENCES lectures(lecture_id) " +
+                    "ON DELETE CASCADE" +
                 ");";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);

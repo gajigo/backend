@@ -239,16 +239,16 @@ public class EventoView {
             int id = ler.nextInt();
             ler.nextLine();
 
-            User userEscolhido = usuarios.getById(id);
+            User userEscolhido = usuarios.getById((long) id);
             if (userEscolhido == null) {
                 System.out.println("ID invalido!");
                 continue;
             }
 
             if (escolha == 1) {
-                controller.addEventOrganizer(usuarios.getById(id), event);  // coloca aqui a funçao pra add no sql
+                controller.addEventOrganizer(usuarios.getById((long) id), event);  // coloca aqui a funçao pra add no sql
             } else {
-                controller.removeEventOrganizer(usuarios.getById(id), event);
+                controller.removeEventOrganizer(usuarios.getById((long) id), event);
             }
         }
     }
