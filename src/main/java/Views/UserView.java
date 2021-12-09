@@ -106,12 +106,12 @@ public class UserView {
     }
 
     public void deleteMenu() {
-        Scanner scanner = new Scanner(System.in);
-
         if (controller.getModels().size() == 0) {
             System.out.println("Nao existe usuarios para deletar.");
             return;
         }
+
+        Scanner scanner = new Scanner(System.in);
 
         while (true) {
             System.out.println("-Deletar Usuario-");
@@ -122,6 +122,11 @@ public class UserView {
             if (id == -1) {
                 System.out.println("ID Invalido!");
                 continue;
+            }
+
+            if (!login(controller.getById(id))) {
+                System.out.println("Senha incorreta!");
+                return;
             }
 
             if (controller.deleteById(id)) {
