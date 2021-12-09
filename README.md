@@ -60,5 +60,5 @@ EQUIPE:
 
 Abel Chang / CEO & CMO <br />
 Helcio L. do Carmo / CTO & Backend Engineer <br />
-Jean Clayton / Front-end Developer <br />
-Pedro Henrique Garcia / Fullstack Engineer <br />
+Jean Clayton / Full-stack Developer <br />
+Pedro Henrique Garcia / Front-end Developer <br />
