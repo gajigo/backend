@@ -30,3 +30,35 @@ As possibilidades de negócios e surgimentos de novas parcerias comerciais são 
 
 Gajigo.
 A nossa missão é engajar as pessoas de forma inteligente.
+
+
+ROADMAP
+
+2021/Q4
+>
+> 
+> 
+2022/Q1
+>
+> 
+> 
+2022/Q2
+>
+> 
+> 
+2022/Q3
+>
+> 
+> 
+2022/Q4
+>
+> 
+> 
+2023...
+
+EQUIPE:
+
+Abel Chang / CEO & CMO
+Helcio L. do Carmo / CTO & Backend Engineer
+Jean Clayton / Front-end Developer
+Pedro Henrique Garcia / Fullstack Engineer
