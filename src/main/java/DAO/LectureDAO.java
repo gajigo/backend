@@ -34,7 +34,7 @@ public class LectureDAO extends FileDAO<Lecture> {
                 "status BOOLEAN DEFAULT TRUE, " +
                 "CONSTRAINT fk_lecture_event_id " +
                     "FOREIGN KEY (event_id)" +
-                    "REFERENCES eventos(eventoId)" +
+                    "REFERENCES events(event_id)" +
                     "ON DELETE CASCADE" +
                 ");";
         try{
