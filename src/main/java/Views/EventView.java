@@ -7,6 +7,7 @@ import Models.Modality;
 import Models.User;
 
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -211,41 +212,46 @@ public class EventView {
 
         Scanner ler = new Scanner(System.in);
         while (true) {
-            if (usuarios.getModels().size() == 0) {
-                System.out.println("Nao existe usuarios cadastrados!");
-                return;
-            }
+            try {
+                if (usuarios.getModels().size() == 0) {
+                    System.out.println("Nao existe usuarios cadastrados!");
+                    return;
+                }
 
-            System.out.println("Organizadores: " + event.getOrganizers());
-            System.out.println("1 - Adicionar Organizador");
-            System.out.println("2 - Remover Organizador");
-            System.out.println("3 - Confirmar");
 
-            int escolha = ler.nextInt();
-            ler.nextLine();
+                System.out.println("Organizadores: " + event.getOrganizers());
+                System.out.println("1 - Adicionar Organizador");
+                System.out.println("2 - Remover Organizador");
+                System.out.println("3 - Confirmar");
 
-            if (escolha == 3) {
-                return;
-            } else if (escolha < 1 || escolha > 3) {
-                System.out.println("Escolha invalida!");
-                continue;
-            }
+                int escolha = ler.nextInt();
+                ler.nextLine();
 
-            userView.list();
-            System.out.println("Escolha um usuario:");
-            int id = ler.nextInt();
-            ler.nextLine();
+                if (escolha == 3) {
+                    return;
+                } else if (escolha < 1 || escolha > 3) {
+                    System.out.println("Escolha invalida!");
+                    continue;
+                }
 
-            User userEscolhido = usuarios.getById((long) id);
-            if (userEscolhido == null) {
-                System.out.println("ID invalido!");
-                continue;
-            }
+                userView.list();
+                System.out.println("Escolha um usuario:");
+                int id = ler.nextInt();
+                ler.nextLine();
 
-            if (escolha == 1) {
-                controller.addEventOrganizer(usuarios.getById((long) id), event);  // coloca aqui a funçao pra add no sql
-            } else {
-                controller.removeEventOrganizer(usuarios.getById((long) id), event);
+                User userEscolhido = usuarios.getById((long) id);
+                if (userEscolhido == null) {
+                    System.out.println("ID invalido!");
+                    continue;
+                }
+
+                if (escolha == 1) {
+                    controller.addEventOrganizer(usuarios.getById((long) id), event);  // coloca aqui a funçao pra add no sql
+                } else {
+                    controller.removeEventOrganizer(usuarios.getById((long) id), event);
+                }
+            }catch (SQLException e){
+                System.out.println("Falha ao recuperar Usuarios Cadastrados");
             }
         }
     }
