@@ -1,6 +1,8 @@
 import DAO.*;
+import Views.LoginPanelView;
 import Views.MenuView;
 
+import javax.swing.*;
 import java.sql.SQLException;
 
 public class Main {
@@ -19,7 +21,7 @@ public class Main {
 
     public static void startApplication() {
         initDatabase();
-        MenuView.start();
+        new LoginPanelView();
     }
 
     public static void main(String[] args) {

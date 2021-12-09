@@ -17,20 +17,14 @@ public class MenuView {
 
             int escolha = ler.nextInt();
             switch (escolha) {
-                case 0:
+                case 0 -> {
+                    System.exit(0);
                     return;
-                case 1:
-                    menuUsuario();
-                    break;
-                case 2:
-                    menuEvento();
-                    break;
-                case 3:
-                    menuPalestra();
-                    break;
-                default:
-                    System.out.println("Escolha invalida! Tente novamente.");
-                    break;
+                }
+                case 1 -> menuUsuario();
+                case 2 -> menuEvento();
+                case 3 -> menuPalestra();
+                default -> System.out.println("Escolha invalida! Tente novamente.");
             }
         }
     }

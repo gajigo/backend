@@ -14,6 +14,10 @@ public class UserController {
     public UserController() {
     }
 
+    public User loginUser(User user) {
+        return dao.loginUser(user);
+    }
+
     public User addUser(User user) {
         return dao.createUser(user);
     }
