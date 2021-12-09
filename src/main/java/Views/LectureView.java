@@ -91,7 +91,7 @@ public class LectureView {
         System.out.println("0 - Voltar");
         int escolha = reader.nextInt();
 
-        if (escolha == 0){
+        if (escolha == 0 || escolha > nomePalestra.size()){
             return;
         }
         String selected = controller.lectureIntString(nomePalestra, (escolha - 1));
@@ -258,6 +258,8 @@ public class LectureView {
         System.out.println("Duvidas:");
         System.out.println(lecture.getLectureQuestions());
 
+        System.out.println("1 - Enviar Duvida");
+        System.out.println("0 - Voltar");
         int escolha = reader.nextInt();
 
         switch (escolha){
