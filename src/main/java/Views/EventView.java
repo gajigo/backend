@@ -108,28 +108,27 @@ public class EventView {
             Scanner scanner = new Scanner(System.in);
 
             while (true) {
-            System.out.println("-Deletar Evento-");
-            listEvents();
+                System.out.println("-Deletar Evento-");
+                listEvents();
 
-            System.out.println("Escolha um ID:");
-            Long id = (long) ViewUtils.getChoice(scanner);
-            if (id == -1) {
-                System.out.println("ID Invalido!");
-                continue;
-            }
+                System.out.println("Escolha um ID:");
+                Long id = (long) ViewUtils.getChoice(scanner);
+                if (id == -1) {
+                    System.out.println("ID Invalido!");
+                    continue;
+                }
 
-            try{
-                controller.removeEvent(id);
-                System.out.println("Evento deletado com sucesso!");
-            } catch (SQLException e){
-                System.out.println("Falha ao Deletar Evento");
-            }catch (NullPointerException e) {
-                System.out.println("Falha ao Deletar Evento");
+                try {
+                    controller.removeEvent(id);
+                    System.out.println("Evento deletado com sucesso!");
+                } catch (SQLException | NullPointerException e) {
+                    System.out.println("Falha ao Deletar Evento");
+                    continue;
+                }
+                return;
             }
         }catch (SQLException e){
             System.out.println("Falha ao Deletar Evento");
-            }
-            return;
         }
     }
 
@@ -185,8 +184,13 @@ public class EventView {
 
             switch (choice) {
                 case 0:
-                    controller.editEvent(event);
-                    return;
+                    try {
+                        controller.editEvent(event);
+                        System.out.println("Evento Editado com Sucesso");
+                        return;
+                    } catch (SQLException | NullPointerException e) {
+                        System.out.println("Falha ao Salvar Edicao");
+                    }
                 case 1:
                     System.out.println("Escreva um novo nome:");
                     event.setEventName(scanner.nextLine());
@@ -211,14 +215,6 @@ public class EventView {
                     System.out.println("Escolha invalida!");
                     break;
 
-            }
-            try {
-                controller.editEvento(event);
-                System.out.println("Evento Editado com Sucesso");
-            }catch (SQLException e){
-                System.out.println("Falha ao Salvar Edicao");
-            }catch (NullPointerException e){
-                System.out.println("Falha ao Salvar Edicao");
             }
         }
     }

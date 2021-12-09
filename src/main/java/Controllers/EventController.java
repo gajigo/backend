@@ -18,11 +18,11 @@ public class EventController {
         return dao.createEvento(event);
     }
 
-    public boolean removeEvent(Long id) {
+    public boolean removeEvent(Long id) throws SQLException, NullPointerException {
         return deleteById(id);
     }
 
-    public boolean removeEvent(Event event) {
+    public boolean removeEvent(Event event) throws SQLException, NullPointerException {
         return removeEvent(event.getId());
     }
 
