@@ -57,36 +57,33 @@ public class LectureUserDAO {
         }
     }
 
-    public List<User>getUserPolice(Lecture lecture, Roles police){
+    public List<User>getUserPolice(Lecture lecture, Roles police)throws SQLException{
         String sql = "SELECT * FROM  users " +
                 "LEFT JOIN " + tableName +
                 " USING (user_id) " +
                 "WHERE lecture_id = ? " +
                 "AND police = ?";
 
-        try{
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1,lecture.getId());
-            statement.setInt(2, police.ordinal());
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1,lecture.getId());
+        statement.setInt(2, police.ordinal());
 
-            ResultSet resultSet = statement.executeQuery();
-            List<User> usersList = new ArrayList<>();
-            User user;
+        ResultSet resultSet = statement.executeQuery();
+        List<User> usersList = new ArrayList<>();
+        User user;
 
-            while (resultSet.next()){
-                user = new User();
-                user.setUserId(resultSet.getLong("user_id"));
-                user.setName(resultSet.getString("name"));
-                user.setPassword(resultSet.getString("password"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPhone(resultSet.getString("phone"));
+        while (resultSet.next()){
+            user = new User();
+            user.setUserId(resultSet.getLong("user_id"));
+            user.setName(resultSet.getString("name"));
+            user.setPassword(resultSet.getString("password"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPhone(resultSet.getString("phone"));
 
-                usersList.add(user);
-            }
-            return usersList;
-        }catch (SQLException e){
-            throw new RuntimeException(e);
+            usersList.add(user);
         }
+        return usersList;
+
     }
 
     public void removeUserPolice (Lecture lecture, User user, Roles police)throws SQLException, NullPointerException{

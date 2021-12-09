@@ -81,7 +81,13 @@ public class LectureView {
 
     public void selectLecture(){
         Scanner reader = new Scanner(System.in);
-        List<String> nomePalestra = controller.listLectureNames();
+        List<String> nomePalestra;
+        try {
+            nomePalestra = controller.listLectureNames();
+        }catch (SQLException e){
+            System.out.println("Falha ao recuperar a lista de palestras");
+            return;
+        }
         int i = 0;
 
         while (nomePalestra.size() > i){
@@ -96,7 +102,11 @@ public class LectureView {
         }
         String selected = controller.lectureIntString(nomePalestra, (escolha - 1));
         if (escolha <= nomePalestra.size()){
-            chosenLecture(controller.chosenLecture(selected));
+            try {
+                chosenLecture(controller.chosenLecture(selected));
+            }catch (SQLException e){
+                System.out.println("Falha ao escolher palestra");
+            }
         }
     }
 
@@ -145,8 +155,14 @@ public class LectureView {
 
     public void showLecture(Lecture lecture){
         Scanner reader = new Scanner(System.in);
-        Float evaluationValue = controller.averageLectureEvaluation(lecture);
+        Float evaluationValue = 0.0F;
         DecimalFormat format = new DecimalFormat("#.#");
+
+        try{
+            evaluationValue = controller.averageLectureEvaluation(lecture);
+        }catch (SQLException e){
+            System.out.println("Falha ao Recuperar Avaliacoes");
+        }
 
         System.out.println("Nome: " + lecture.getName());
         System.out.println("ID: " + lecture.getId());
@@ -294,8 +310,12 @@ public class LectureView {
         System.out.println("Digite a nota da palestra (Entre 1 e 5)");
         int value = reader.nextInt();
 
-        controller.evaluateLecture(lecture, user_id, value);
-
+        try {
+            controller.evaluateLecture(lecture, user_id, value);
+            System.out.println("Obrigado pela avaliacao");
+        }catch (SQLException e){
+            System.out.println("Falha ao enviar avaliacao");
+        }
     }
 
     public void editEvaluation(Lecture lecture){
@@ -308,8 +328,14 @@ public class LectureView {
         System.out.println("Digite a nota da palestra (Entre 1 e 5)");
         int value = reader.nextInt();
 
-        controller.editEvaluation(lecture, user_id, value);
-
+        try {
+            controller.editEvaluation(lecture, user_id, value);
+            System.out.println("Avaliacao Editada");
+        }catch (SQLException e){
+            System.out.println("Falha ao Editar Avaliacao");
+        }catch (NullPointerException e){
+            System.out.println("Falha ao Editar Avaliacao");
+        }
     }
 
     public void removeEvaluation(Lecture lecture){
@@ -319,12 +345,23 @@ public class LectureView {
         System.out.println("Escolha Seu Usuario");
         Long user_id = reader.nextLong();
 
-        controller.removeEvaluation(lecture, user_id);
+        try {
+            controller.removeEvaluation(lecture, user_id);
+            System.out.println("Avaliacao Removida");
+        }catch (SQLException e){
+            System.out.println("Falha ao Remover Avaliacao");
+        }catch (NullPointerException e){
+            System.out.println("Falha ao Remover Avaliacao");
+        }
     }
 
     public void showAttendees(Lecture lecture){
-        System.out.println("Participantes:");
-        System.out.println(controller.getAttendees(lecture));
+        try {
+            System.out.println("Participantes:");
+            System.out.println(controller.getAttendees(lecture));
+        }catch (SQLException e){
+            System.out.println("Falha ao exibir participantes");
+        }
     }
 
     public void editName(Lecture lecture){
