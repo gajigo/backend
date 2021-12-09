@@ -10,18 +10,9 @@ import java.util.List;
 
 public class UserController {
     private UserDAO dao;
-    private UserView view;
 
     public UserController() {
         this.dao = new UserDAO();
-        this.view = new UserView(this);
-    }
-
-    public void start() {
-        view.menu();
-        if (!this.dao.save()) {
-            System.out.println("Erro ao salvar usuarios!");
-        }
     }
 
     public User register(User user) {

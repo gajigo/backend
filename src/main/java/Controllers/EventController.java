@@ -9,18 +9,9 @@ import java.util.List;
 
 public class EventController {
     private EventDAO dao;
-    private EventView view;
 
     public EventController() {
         this.dao = new EventDAO();
-        this.view = new EventView(this);
-    }
-
-    public void start(){
-        view.menu();
-        if (!dao.save()) {
-            System.out.println("Erro ao salvar eventos!");
-        }
     }
 
     public Event cadastrar(String nomeEvento, String descricao, String dataEvento) {
