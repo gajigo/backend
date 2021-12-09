@@ -2,7 +2,7 @@ package DAO;
 
 import Models.Lecture;
 import Models.User;
-import factory.ConnectionFactory;
+import Factory.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

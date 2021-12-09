@@ -5,7 +5,7 @@ import Models.Modality;
 //import Models.Usuario;
 import Models.Roles;
 import Models.User;
-import factory.ConnectionFactory;
+import Factory.ConnectionFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
