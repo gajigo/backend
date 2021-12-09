@@ -8,7 +8,6 @@ import static java.lang.Math.max;
 
 public class FileDAO<T extends DAOUser> {
     private String filename;
-    private List<T> models;
 
     public FileDAO(String filename) {
         this.filename = filename;
@@ -19,7 +18,6 @@ public class FileDAO<T extends DAOUser> {
         try {
             FileOutputStream file = new FileOutputStream(filename);
             ObjectOutputStream outfile = new ObjectOutputStream(file);
-            outfile.writeObject(models);
 
             outfile.flush();
             outfile.close();
