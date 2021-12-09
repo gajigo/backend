@@ -113,6 +113,7 @@ public class Evento implements DAOUser {
 
     public void addOrganizador(User organizador){
         this.organizadores.add(organizador);
+
     }
 
     public void removeOrganizador(User organizador){

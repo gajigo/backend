@@ -3,6 +3,8 @@ package DAO;
 import Models.Evento;
 import Models.Modalidade;
 //import Models.Usuario;
+import Models.Roles;
+import Models.User;
 import factory.ConnectionFactory;
 
 import java.sql.*;
@@ -21,6 +23,7 @@ public class EventoDAO extends FileDAO<Evento> {
 
     private String tableName = "eventos";
     private Connection connection = new ConnectionFactory().getConnection();
+    private EventUserDAO eventUserDAO = new EventUserDAO();
 
     public void createEventoTable() {
         String sql = "CREATE SEQUENCE IF NOT EXISTS evento_id_seq;";
@@ -160,5 +163,9 @@ public class EventoDAO extends FileDAO<Evento> {
             }
         }
         return false;
+    }
+
+    public void addEventOrganizer(User user, Evento evento){
+        eventUserDAO.addUserRole(user,evento, Roles.ORGANIZADOR);
     }
 }
