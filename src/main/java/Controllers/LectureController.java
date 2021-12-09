@@ -13,7 +13,7 @@ public class LectureController {
     public LectureController() {
     }
 
-    public List<Lecture> getModels(){
+    public List<Lecture> getModels() throws SQLException{
         return dao.listLecture();
     }
 
@@ -33,7 +33,7 @@ public class LectureController {
         return dao.createLectures(newLecture);
     }
 
-    public List<String> listLectureNames() {
+    public List<String> listLectureNames() throws SQLException {
         List<String> listString = new ArrayList<>();
         List<Lecture> lectures = getModels();
 
@@ -49,7 +49,7 @@ public class LectureController {
         return lectureName.get(selected);
     }
 
-    public Lecture chosenLecture(String lectureName){
+    public Lecture chosenLecture(String lectureName) throws SQLException{
         List<Lecture> lectures = getModels();
 
         for (Lecture lecture : lectures) {
@@ -59,7 +59,7 @@ public class LectureController {
         return null;
     }
 
-    public boolean deleteLecture(Lecture lecture)throws SQLException, NullPointerException{
+    public boolean deleteLecture(Lecture lecture) throws SQLException, NullPointerException{
         dao.deleteLecture(lecture);
         return false;
 
@@ -138,23 +138,23 @@ public class LectureController {
         dao.editSeminar(lecture);
     }
 
-    public List<User>getAttendees(Lecture lecture){
+    public List<User>getAttendees(Lecture lecture) throws SQLException{
         return dao.getAttendees(lecture);
     }
 
-    public void evaluateLecture(Lecture lecture, Long user_id, int value){
+    public void evaluateLecture(Lecture lecture, Long user_id, int value) throws SQLException{
         dao.evaluateLecture(lecture,user_id,value);
     }
     
-    public void editEvaluation(Lecture lecture, Long user_id, int value){
+    public void editEvaluation(Lecture lecture, Long user_id, int value) throws SQLException, NullPointerException{
         dao.editEvaluation(lecture,user_id,value);
     }
 
-    public void removeEvaluation(Lecture lecture, Long user_id) {
+    public void removeEvaluation(Lecture lecture, Long user_id) throws SQLException, NullPointerException {
         dao.removeEvaluation(lecture,user_id);
     }
 
-    public float averageLectureEvaluation(Lecture lecture){
+    public float averageLectureEvaluation(Lecture lecture) throws SQLException{
         return dao.averageLectureEvaluation(lecture);
     }
 }

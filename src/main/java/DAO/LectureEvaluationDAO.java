@@ -52,7 +52,7 @@ public class LectureEvaluationDAO {
         statement.execute();
     }
 
-    public void editLectureEvaluation(User user, Lecture lecture, int value) throws SQLException{
+    public void editLectureEvaluation(User user, Lecture lecture, int value) throws SQLException, NullPointerException{
         String sql = "UPDATE " + tableName + " SET evaluation_value = ? WHERE lecture_id = ? AND user_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -64,7 +64,7 @@ public class LectureEvaluationDAO {
         statement.executeUpdate();
     }
 
-    public void removeLectureEvaluation(User user, Lecture lecture) throws SQLException{
+    public void removeLectureEvaluation(User user, Lecture lecture) throws SQLException, NullPointerException{
         String sql = "DELETE FROM " + tableName + " WHERE lecture_id = ? AND user_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
