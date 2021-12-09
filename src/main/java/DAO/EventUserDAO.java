@@ -91,7 +91,7 @@ public class EventUserDAO {
             }
     }
 
-    public void removeUserRole (Event event, User user, Roles roles){
+    public void removeUserRole (User user, Event event, Roles roles){
             String sql = "DELETE FROM " + tableName + " WHERE event_id = ? AND user_id = ? AND role = ?";
             try {
                 PreparedStatement statement = connection.prepareStatement(sql);

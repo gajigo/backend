@@ -168,4 +168,8 @@ public class EventoDAO extends FileDAO<Event> {
     public void addEventOrganizer(User user, Event event){
         eventUserDAO.addUserRole(user, event, Roles.ORGANIZADOR);
     }
+
+    public void removeEventOrganizer(User user, Event event){
+        eventUserDAO.removeUserRole(user, event, Roles.ORGANIZADOR);
+    }
 }

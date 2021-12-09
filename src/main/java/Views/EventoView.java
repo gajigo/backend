@@ -246,10 +246,9 @@ public class EventoView {
             }
 
             if (escolha == 1) {
-                event.addOrganizador(userEscolhido);
                 controller.addEventOrganizer(usuarios.getById(id), event);  // coloca aqui a funçao pra add no sql
             } else {
-                event.removeOrganizador(userEscolhido);
+                controller.removeEventOrganizer(usuarios.getById(id), event);
             }
         }
     }

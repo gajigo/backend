@@ -46,4 +46,5 @@ public class EventoController {
 
     public void addEventOrganizer(User user, Event event) { dao.addEventOrganizer(user, event);}
 
+    public void removeEventOrganizer(User user, Event event) { dao.removeEventOrganizer(user, event);}
 }
