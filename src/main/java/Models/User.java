@@ -1,19 +1,20 @@
 package Models;
 
 
-import DAO.DAOUser;
-
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-public class User implements DAOUser {
-    private static final long serialVersionUID = 2L;
-    private long userId;
+public class User {
+    private Long userId;
     private String name;
     private String password;
     private String statusLogin;
     private String email;
     private String phone;
-    private CartaoVisita businessCard;
+    private BusinessCard businessCard;
     private ArrayList<Roles> roles = new ArrayList<>();
 
     public User() {
@@ -24,13 +25,6 @@ public class User implements DAOUser {
         this();
         this.name = name;
         this.password = password;
-    }
-
-    public User(int userId, String name, String password, String statusLogin, ArrayList<Roles> roles) {
-        this(name, password);
-        this.userId = userId;
-        this.statusLogin = statusLogin;
-        this.roles = roles;
     }
 
     @Override
@@ -73,6 +67,10 @@ public class User implements DAOUser {
         this.password = password;
     }
 
+    public void setNewPassword(String password) {
+        this.setPassword(this.generateHashPassword(password));
+    }
+
     public String getStatusLogin() {
         return statusLogin;
     }
@@ -97,11 +95,11 @@ public class User implements DAOUser {
         this.phone = phone;
     }
 
-    public CartaoVisita getBusinessCard() {
+    public BusinessCard getBusinessCard() {
         return businessCard;
     }
 
-    public void setBusinessCard(CartaoVisita businessCard) {
+    public void setBusinessCard(BusinessCard businessCard) {
         this.businessCard = businessCard;
     }
 
@@ -124,7 +122,22 @@ public class User implements DAOUser {
         this.roles.remove(role);
     }
 
+    protected String generateHashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+
+            byte[] messageDigest = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            return no.toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+    }
+
     public boolean checkLogin(String password) {
-        return password.equals(this.password);
+        String hashPassword = this.generateHashPassword(password);
+        return this.password.equals(hashPassword);
     }
 }

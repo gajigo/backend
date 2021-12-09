@@ -1,54 +1,49 @@
 package Models;
 
 
-import java.io.Serializable;
-
-public class Link implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    private long id;
-    private String icone;
-    private String identificado;
+public class Link {
+    private Long id;
+    private String icon;
+    private String identifier;
 
     public Link() {
     }
 
-    public Link(long id, String icone, String identificado) {
-        this.id = id;
-        this.icone = icone;
-        this.identificado = identificado;
+    public Link(String icon, String identifier) {
+        this.icon = icon;
+        this.identifier = identifier;
     }
 
     @Override
     public String toString() {
         return "Link{" +
                 "id=" + id +
-                ", icone='" + icone + '\'' +
-                ", identificado='" + identificado + '\'' +
+                ", icon='" + icon + '\'' +
+                ", identifier='" + identifier + '\'' +
                 '}';
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getIcone() {
-        return icone;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setIcone(String icone) {
-        this.icone = icone;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public String getIdentificado() {
-        return identificado;
+    public String getIdentifier() {
+        return identifier;
     }
 
-    public void setIdentificado(String identificado) {
-        this.identificado = identificado;
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 }

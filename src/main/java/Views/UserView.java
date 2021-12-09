@@ -62,7 +62,7 @@ public class UserView {
         user.setName(input.nextLine());
 
         System.out.println("Escreva uma senha:");
-        user.setPassword(input.nextLine());
+        user.setNewPassword(input.nextLine());
 
         System.out.println("Escreva um e-mail:");
         user.setEmail(input.nextLine());
@@ -124,7 +124,7 @@ public class UserView {
         System.out.println("Escreva sua senha:");
 
         String password = input.nextLine();
-        return user.getPassword().equals(password);
+        return user.checkLogin(password);
     }
 
     public void edit(User user) {
@@ -155,7 +155,7 @@ public class UserView {
                     break;
                 case 2:
                     System.out.println("Escreva uma nova senha:");
-                    user.setPassword(input.nextLine());
+                    user.setNewPassword(input.nextLine());
                     controller.editUser(user);
                     break;
                 case 3:

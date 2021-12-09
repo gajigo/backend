@@ -60,7 +60,7 @@ public class LectureDAO extends FileDAO<Lecture> {
 
                 statement.setString(1, lecture.getName());
                 statement.setString(2, lecture.getDescription());
-                statement.setString(3, lecture.getInitialDate());
+                statement.setString(3, lecture.getStartDate());
                 statement.setString(4, lecture.getDuration());
                 statement.setLong(5, lecture.getEvent().getId());
                 statement.execute();
@@ -94,10 +94,10 @@ public class LectureDAO extends FileDAO<Lecture> {
                 lecture.setId(resultSet.getLong("lecture_id"));
                 lecture.setName(resultSet.getString("name"));
                 lecture.setDescription(resultSet.getString("description"));
-                lecture.setInitialDate(resultSet.getString("date"));
+                lecture.setStartDate(resultSet.getString("date"));
                 lecture.setDuration(resultSet.getString("duration"));
                 lecture.setStatus(resultSet.getBoolean("status"));
-                lecture.setPresenter(lectureUserDAO.getUserPolice(lecture,Roles.PALESTRANTE));
+                lecture.setPresenters(lectureUserDAO.getUserPolice(lecture,Roles.PALESTRANTE));
                 lecture.setAttendees(lectureUserDAO.getUserPolice(lecture,Roles.CLIENTE));
 
                 listLectures.add(lecture);
@@ -115,7 +115,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         statement.setLong(5, lecture.getId());
         statement.setString(1, lecture.getName());
         statement.setString(2, lecture.getDescription());
-        statement.setString(3, lecture.getInitialDate());
+        statement.setString(3, lecture.getStartDate());
         statement.setString(4, lecture.getDuration());
 
         statement.executeUpdate();

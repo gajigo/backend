@@ -1,10 +1,9 @@
 package DAO;
 
-import Models.Evento;
+import Models.Event;
 import Models.Roles;
 import Models.User;
 import factory.ConnectionFactory;
-import jdk.jfr.Event;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,9 +38,9 @@ public class EventUserDAO {
                 throw new RuntimeException(e);
             }
         }
-    public void addUserRole(User user, Evento evento, Roles roles){
+    public void addUserRole(User user, Event event, Roles roles){
 
-            if(user != null && evento != null && roles != null){
+            if(user != null && event != null && roles != null){
                 String sql = "INSERT INTO " + tableName +
                         "(user_id, event_id, role)" +
                         "VALUES (?, ?, ?)";
@@ -50,7 +49,7 @@ public class EventUserDAO {
                     PreparedStatement statement = connection.prepareStatement(sql);
 
                     statement.setLong(1, user.getUserId());
-                    statement.setLong(2, evento.getId());
+                    statement.setLong(2, event.getId());
                     statement.setLong(3, roles.ordinal());
                     statement.execute();
                 } catch (SQLException e){
@@ -60,7 +59,7 @@ public class EventUserDAO {
 
     }
 
-    public List<User> getUserRole(Evento evento, Roles roles){
+    public List<User> getUserRole(Event event, Roles roles){
             String sql = "SELECT * FROM users " +
                     "LEFT JOIN " + tableName +
                     " ON users.user_id = event_user.user_id " +
@@ -69,7 +68,7 @@ public class EventUserDAO {
 
             try{
                 PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setLong(1, evento.getId());
+                statement.setLong(1, event.getId());
                 statement.setInt(2, roles.ordinal());
 
                 ResultSet resultSet = statement.executeQuery();
@@ -92,11 +91,11 @@ public class EventUserDAO {
             }
     }
 
-    public void removeUserRole (Evento evento, User user, Roles roles){
+    public void removeUserRole (User user, Event event, Roles roles){
             String sql = "DELETE FROM " + tableName + " WHERE event_id = ? AND user_id = ? AND role = ?";
             try {
                 PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setLong(1, evento.getId());
+                statement.setLong(1, event.getId());
                 statement.setLong(2, user.getUserId());
                 statement.setInt(3, roles.ordinal());
                 statement.execute();
