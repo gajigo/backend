@@ -1,7 +1,7 @@
 package Controllers;
 
 import DAO.EventoDAO;
-import Models.Evento;
+import Models.Event;
 import Models.User;
 import Views.EventoView;
 
@@ -23,27 +23,27 @@ public class EventoController {
         }
     }
 
-    public Evento cadastrar(String nomeEvento, String descricao, String dataEvento) {
+    public Event cadastrar(String nomeEvento, String descricao, String dataEvento) {
         // Registramos Evento no DAO e retornamos para ser modificado
-        Evento novoEvento = new Evento(nomeEvento, descricao, dataEvento);
-        return dao.createEvento(novoEvento);
+        Event novoEvent = new Event(nomeEvento, descricao, dataEvento);
+        return dao.createEvento(novoEvent);
 
     }
 
-    public List<Evento> getModels() {
+    public List<Event> getModels() {
         return dao.listEventos();
     }
 
-    public Evento getById(Long id) {
+    public Event getById(Long id) {
         return dao.getById(id);
     }
 
-    public void editEvento(Evento evento){ dao.editEvento(evento);}
+    public void editEvento(Event event){ dao.editEvento(event);}
 
     public boolean deleteById(Long id) {
         return dao.deleteById(id);
     }
 
-    public void addEventOrganizer(User user, Evento evento) { dao.addEventOrganizer(user,evento);}
+    public void addEventOrganizer(User user, Event event) { dao.addEventOrganizer(user, event);}
 
 }

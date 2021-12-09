@@ -1,12 +1,10 @@
 package DAO;
 
-import Models.Idioma;
 import Models.Lecture;
 import Models.Roles;
 import Models.User;
 import factory.ConnectionFactory;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

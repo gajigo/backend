@@ -1,25 +1,21 @@
 package Models;
 
-import DAO.DAOUser;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lecture implements DAOUser {
-
-    private static final long serialVersionUID = 1L;
+public class Lecture {
+    private Long id;
     private String name;
     private String description;
-    private Long id;
-    private String initialDate;
+    private String startDate;
     private String duration;
-    private Evento event;
-    private List<Idioma> language = new ArrayList<>();
-    private List<Assunto> topics = new ArrayList<>();
-    private List<Avaliacao> evaluation = new ArrayList<>();
-    private List<User> presenter = new ArrayList<>();
+    private Event event;
+    private List<Language> language = new ArrayList<>();
+    private List<Topic> topics = new ArrayList<>();
+    private List<Review> evaluation = new ArrayList<>();
+    private List<User> presenters = new ArrayList<>();
     private List<User> attendees = new ArrayList<>();
-    private List<DuvidaPalestra> lectureQuestions = new ArrayList<>();
+    private List<LectureQuestion> lectureQuestions = new ArrayList<>();
     private boolean status;
 
     public Lecture() {
@@ -32,19 +28,29 @@ public class Lecture implements DAOUser {
 
     @Override
     public String toString() {
-        return "Palestra{" +
-                "nome='" + name + '\'' +
-                ", descricao='" + description + '\'' +
-                ", id=" + id +
-                ", data de Inicio=" + initialDate +
-                ", duracao=" + duration +
-                ", idioma=" + language +
-                ", assuntos=" + topics +
-                ", avaliacoes=" + evaluation +
-                ", palestrantes=" + presenter +
-                ", participantes=" + attendees +
-                ", duvidas=" + lectureQuestions +
+        return "Lecture{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", duration='" + duration + '\'' +
+                ", event=" + event +
+                ", language=" + language +
+                ", topics=" + topics +
+                ", evaluation=" + evaluation +
+                ", presenters=" + presenters +
+                ", attendees=" + attendees +
+                ", lectureQuestions=" + lectureQuestions +
+                ", status=" + status +
                 '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -63,20 +69,12 @@ public class Lecture implements DAOUser {
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getInitialDate() {
-        return initialDate;
-    }
-
-    public void setInitialDate(String initialDate) {
-        this.initialDate = initialDate;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getDuration() {
@@ -87,72 +85,44 @@ public class Lecture implements DAOUser {
         this.duration = duration;
     }
 
-    public Evento getEvent() { return event; }
+    public Event getEvent() {
+        return event;
+    }
 
-    public void setEvent(Evento event) { this.event = event; }
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 
-    public List<Idioma> getLanguage() {
+    public List<Language> getLanguage() {
         return language;
     }
 
-    public void setLanguage(List<Idioma> language) {
+    public void setLanguage(List<Language> language) {
         this.language = language;
     }
 
-    public List<Assunto> getTopics() {
+    public List<Topic> getTopics() {
         return topics;
     }
 
-    public void setTopics(List<Assunto> topics) {
+    public void setTopics(List<Topic> topics) {
         this.topics = topics;
     }
 
-    public List<Avaliacao> getEvaluation() {
+    public List<Review> getEvaluation() {
         return evaluation;
     }
 
-    public void setEvaluation(List<Avaliacao> evaluation) {
+    public void setEvaluation(List<Review> evaluation) {
         this.evaluation = evaluation;
     }
 
-    public List<User> getPresenter() {
-        return presenter;
+    public List<User> getPresenters() {
+        return presenters;
     }
 
-    public void setPresenter(List<User> presenter) {
-        this.presenter = presenter;
-    }
-
-    public List<DuvidaPalestra> getLectureQuestions() {
-        return lectureQuestions;
-    }
-
-    public void setLectureQuestions(List<DuvidaPalestra> lectureQuestions) {
-        this.lectureQuestions = lectureQuestions;
-    }
-
-    public void addTopic(Assunto assunto) {
-        this.topics.add(assunto);
-    }
-
-    public void removeTopic(Assunto assunto) {
-        this.topics.remove(assunto);
-    }
-
-    public void addEvaluation(Avaliacao avaliacao) {
-        this.evaluation.add(avaliacao);
-    }
-
-    public void removeEvaluation(Avaliacao avaliacao) {
-        this.evaluation.remove(avaliacao);
-    }
-
-    public void addPresenter(User presenter) {
-        this.presenter.add(presenter);
-    }
-
-    public void removePresenter(User presenter) {
-        this.presenter.remove(presenter);
+    public void setPresenters(List<User> presenters) {
+        this.presenters = presenters;
     }
 
     public List<User> getAttendees() {
@@ -163,12 +133,12 @@ public class Lecture implements DAOUser {
         this.attendees = attendees;
     }
 
-    public void addLectureQuestion(DuvidaPalestra lectureQuestion) {
-        this.lectureQuestions.add(lectureQuestion);
+    public List<LectureQuestion> getLectureQuestions() {
+        return lectureQuestions;
     }
 
-    public void removeLectureQuestion(DuvidaPalestra lectureQuestion) {
-        this.lectureQuestions.remove(lectureQuestion);
+    public void setLectureQuestions(List<LectureQuestion> lectureQuestions) {
+        this.lectureQuestions = lectureQuestions;
     }
 
     public boolean isStatus() {

@@ -1,23 +1,20 @@
 package Models;
 
 
-import DAO.DAOUser;
-
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-public class User implements DAOUser {
-    private static final long serialVersionUID = 2L;
-    private long userId;
+public class User {
+    private Long userId;
     private String name;
     private String password;
     private String statusLogin;
     private String email;
     private String phone;
-    private CartaoVisita businessCard;
+    private BusinessCard businessCard;
     private ArrayList<Roles> roles = new ArrayList<>();
 
     public User() {
@@ -28,13 +25,6 @@ public class User implements DAOUser {
         this();
         this.name = name;
         this.password = password;
-    }
-
-    public User(int userId, String name, String password, String statusLogin, ArrayList<Roles> roles) {
-        this(name, password);
-        this.userId = userId;
-        this.statusLogin = statusLogin;
-        this.roles = roles;
     }
 
     @Override
@@ -105,11 +95,11 @@ public class User implements DAOUser {
         this.phone = phone;
     }
 
-    public CartaoVisita getBusinessCard() {
+    public BusinessCard getBusinessCard() {
         return businessCard;
     }
 
-    public void setBusinessCard(CartaoVisita businessCard) {
+    public void setBusinessCard(BusinessCard businessCard) {
         this.businessCard = businessCard;
     }
 

@@ -1,36 +1,43 @@
 package Models;
 
 
-import java.io.Serializable;
 import java.util.List;
 
-public class CartaoVisita implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
+public class BusinessCard {
+    private Long id;
     private User user;
     private List<Link> links;
 
-    public CartaoVisita() {
+    public BusinessCard() {
     }
 
-    public CartaoVisita(User user, List<Link> links) {
+    public BusinessCard(User user, List<Link> links) {
         this.user = user;
         this.links = links;
     }
 
     @Override
     public String toString() {
-        return "CartaoVisita{" +
-                "usuario=" + user +
+        return "BusinessCard{" +
+                "id=" + id +
+                ", user=" + user +
                 ", links=" + links +
                 '}';
     }
 
-    public User getUsuario() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public void setUsuario(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

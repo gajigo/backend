@@ -1,7 +1,7 @@
 package DAO;
 
-import Models.Evento;
-import Models.Modalidade;
+import Models.Event;
+import Models.Modality;
 //import Models.Usuario;
 import Models.Roles;
 import Models.User;
@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventoDAO extends FileDAO<Evento> {
+public class EventoDAO extends FileDAO<Event> {
     public EventoDAO() {
         super("eventos.txt");
     }
@@ -45,8 +45,8 @@ public class EventoDAO extends FileDAO<Evento> {
         }
     }
 
-    public Evento createEvento(Evento evento) {
-        if (evento != null) {
+    public Event createEvento(Event event) {
+        if (event != null) {
             String sql = "INSERT INTO " + tableName + " (" +
                     "nomeEvento, descricao, modalidade, dataEvento)" +
                     "VALUES (?, ?, ?, ?)";
@@ -54,22 +54,22 @@ public class EventoDAO extends FileDAO<Evento> {
             try {
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-                statement.setString(1, evento.getNomeEvento());
-                statement.setString(2, evento.getDescricao());
-                if (evento.getModalidade() != null) {
-                    statement.setInt(3, evento.getModalidade().ordinal());
+                statement.setString(1, event.getEventName());
+                statement.setString(2, event.getDescription());
+                if (event.getModalidade() != null) {
+                    statement.setInt(3, event.getModalidade().ordinal());
                     } else { statement.setNull(3, Types.NULL); }
 
-                statement.setString(4, evento.getDataEvento());
+                statement.setString(4, event.getDateEvent());
 
                 statement.execute();
 
                 ResultSet resultSet = statement.getGeneratedKeys();
 
                 while (resultSet.next()) {
-                    evento.setId(resultSet.getLong(1));
+                    event.setId(resultSet.getLong(1));
                 }
-                return evento;
+                return event;
             }
             catch (SQLException e){
                 return null;
@@ -78,43 +78,43 @@ public class EventoDAO extends FileDAO<Evento> {
         return null;
     }
 
-    public List<Evento> listEventos() {
+    public List<Event> listEventos() {
         String sql = "SELECT * FROM " + tableName;
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
-            List<Evento> listEventos = new ArrayList<>();
+            List<Event> listEvents = new ArrayList<>();
             while (resultSet.next()) {
-                Evento novoEvento = new Evento();
-                novoEvento.setId(resultSet.getLong("eventoid"));
-                novoEvento.setNomeEvento(resultSet.getString("nomeevento"));
-                novoEvento.setDescricao(resultSet.getString("descricao"));
-                novoEvento.setModalidade(Modalidade.values()[resultSet.getInt("modalidade")]);
-                novoEvento.setDataEvento(resultSet.getString("dataevento"));
+                Event novoEvent = new Event();
+                novoEvent.setId(resultSet.getLong("eventoid"));
+                novoEvent.setEventName(resultSet.getString("nomeevento"));
+                novoEvent.setDescription(resultSet.getString("descricao"));
+                novoEvent.setModalidade(Modality.values()[resultSet.getInt("modalidade")]);
+                novoEvent.setDateEvent(resultSet.getString("dataevento"));
 
-                listEventos.add(novoEvento);
+                listEvents.add(novoEvent);
             }
 
-            return listEventos;
+            return listEvents;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void editEvento(Evento evento) {
+    public void editEvento(Event event) {
         String sql = "UPDATE " + tableName + " SET nomeEvento = ?, descricao = ?, modalidade = 2, dataEvento = ?" +
                 " WHERE eventoId = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, evento.getNomeEvento());
-            statement.setString(2, evento.getDescricao());
+            statement.setString(1, event.getEventName());
+            statement.setString(2, event.getDescription());
 //            statement.setInt(3, evento.getModalidade().ordinal());
-            statement.setString(3, evento.getDataEvento());
+            statement.setString(3, event.getDateEvent());
 
-            statement.setLong(4, evento.getId());
+            statement.setLong(4, event.getId());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -122,10 +122,10 @@ public class EventoDAO extends FileDAO<Evento> {
         }
     }
 
-    public Evento getById(Long id) {
+    public Event getById(Long id) {
         String sql = "SELECT * FROM eventos WHERE eventoid = ?";
 
-        Evento evento = null;
+        Event event = null;
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
@@ -133,17 +133,17 @@ public class EventoDAO extends FileDAO<Evento> {
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                evento = new Evento();
-                evento.setId(resultSet.getLong("eventoid"));
-                evento.setNomeEvento(resultSet.getString("nomeevento"));
-                evento.setDescricao(resultSet.getString("descricao"));
+                event = new Event();
+                event.setId(resultSet.getLong("eventoid"));
+                event.setEventName(resultSet.getString("nomeevento"));
+                event.setDescription(resultSet.getString("descricao"));
 //            evento.setModalidade(resultSet.getInt("modalidade"));
-                evento.setDataEvento(resultSet.getString("dataevento"));
+                event.setDateEvent(resultSet.getString("dataevento"));
             }
         }   catch (SQLException e){
             throw new RuntimeException(e);
         }
-        return evento;
+        return event;
 
 
     }
@@ -165,7 +165,7 @@ public class EventoDAO extends FileDAO<Evento> {
         return false;
     }
 
-    public void addEventOrganizer(User user, Evento evento){
-        eventUserDAO.addUserRole(user,evento, Roles.ORGANIZADOR);
+    public void addEventOrganizer(User user, Event event){
+        eventUserDAO.addUserRole(user, event, Roles.ORGANIZADOR);
     }
 }
