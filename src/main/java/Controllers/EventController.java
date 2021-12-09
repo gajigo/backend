@@ -8,17 +8,13 @@ import Views.EventView;
 import java.util.List;
 
 public class EventController {
-    private EventDAO dao;
+    private EventDAO dao = new EventDAO();
 
     public EventController() {
-        this.dao = new EventDAO();
     }
 
-    public Event cadastrar(String nomeEvento, String descricao, String dataEvento) {
-        // Registramos Evento no DAO e retornamos para ser modificado
-        Event novoEvent = new Event(nomeEvento, descricao, dataEvento);
-        return dao.createEvento(novoEvent);
-
+    public Event addEvent(Event event) {
+        return dao.createEvento(event);
     }
 
     public List<Event> getModels() {

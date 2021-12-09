@@ -61,23 +61,21 @@ public class EventView {
     }
 
     public void menuRegistrar() {
-        Scanner ler = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+
+        Event event = new Event();
         System.out.println("Crie seu Evento");
 
         System.out.println("De um nome ao evento");
-        String nomeEvento = ler.nextLine();
+        event.setEventName(scanner.nextLine());
 
         System.out.println("Adicione uma descricao do evento");
-        String descricao = ler.nextLine();
+        event.setDescription(scanner.nextLine());
 
         System.out.println("Quando sera o evento?");
-        String dataEvento = ler.nextLine();
+        event.setDateEvent(scanner.nextLine());
 
-        Event novoEvent = controller.cadastrar(nomeEvento, descricao, dataEvento);
-
-        //menuModalidade(novoEvento);
-
-        //System.out.println("Evento " + novoEvento.getNomeEvento() + " foi criado!");
+        controller.addEvent(event);
     }
 
     public void menuModalidade(Event event){
@@ -209,8 +207,7 @@ public class EventView {
 
     public void menuOrganizadores(Event event) {
         UserController usuarios = new UserController();
-        UserView userView = new UserView(usuarios);
-
+        UserView userView = new UserView();
 
         Scanner ler = new Scanner(System.in);
         while (true) {

@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class User {
     private Long userId;
@@ -18,13 +19,13 @@ public class User {
     private ArrayList<Roles> roles = new ArrayList<>();
 
     public User() {
-        statusLogin = "logado";
+        setStatusLogin("logado");
     }
 
     public User(String name, String password) {
         this();
-        this.name = name;
-        this.password = password;
+        setName(name);
+        setPassword(password);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase(Locale.ROOT);
     }
 
     public String getPassword() {
@@ -76,7 +77,7 @@ public class User {
     }
 
     public void setStatusLogin(String statusLogin) {
-        this.statusLogin = statusLogin;
+        this.statusLogin = statusLogin.toUpperCase(Locale.ROOT);
     }
 
     public String getEmail() {
@@ -84,7 +85,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase(Locale.ROOT);
     }
 
     public String getPhone() {

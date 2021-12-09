@@ -12,8 +12,8 @@ public class BusinessCard {
     }
 
     public BusinessCard(User user, List<Link> links) {
-        this.user = user;
-        this.links = links;
+        setUser(user);
+        setLinks(links);
     }
 
     @Override

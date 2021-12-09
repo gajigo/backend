@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.Locale;
+
 public class Language {
     private Long id;
     private String name;
@@ -8,7 +10,7 @@ public class Language {
     }
 
     public Language(String name) {
-        this.name = name;
+        setName(name);
     }
 
     @Override
@@ -32,6 +34,6 @@ public class Language {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase(Locale.ROOT);
     }
 }

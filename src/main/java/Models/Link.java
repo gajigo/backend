@@ -1,6 +1,8 @@
 package Models;
 
 
+import java.util.Locale;
+
 public class Link {
     private Long id;
     private String icon;
@@ -10,8 +12,8 @@ public class Link {
     }
 
     public Link(String icon, String identifier) {
-        this.icon = icon;
-        this.identifier = identifier;
+        setIcon(icon);
+        setIdentifier(identifier);
     }
 
     @Override
@@ -36,7 +38,7 @@ public class Link {
     }
 
     public void setIcon(String icon) {
-        this.icon = icon;
+        this.icon = icon.toUpperCase(Locale.ROOT);
     }
 
     public String getIdentifier() {
@@ -44,6 +46,6 @@ public class Link {
     }
 
     public void setIdentifier(String identifier) {
-        this.identifier = identifier;
+        this.identifier = identifier.toUpperCase(Locale.ROOT);
     }
 }

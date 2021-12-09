@@ -2,6 +2,7 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Lecture {
     private Long id;
@@ -22,8 +23,8 @@ public class Lecture {
     }
 
     public Lecture(String name, String description) {
-        this.name = name;
-        this.description = description;
+        setName(name);
+        setDescription(description);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class Lecture {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase(Locale.ROOT);
     }
 
     public String getDescription() {
@@ -66,7 +67,7 @@ public class Lecture {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description.toUpperCase(Locale.ROOT);
     }
 
     public String getStartDate() {
@@ -74,7 +75,7 @@ public class Lecture {
     }
 
     public void setStartDate(String startDate) {
-        this.startDate = startDate;
+        this.startDate = startDate.toUpperCase(Locale.ROOT);
     }
 
     public String getDuration() {
@@ -82,7 +83,7 @@ public class Lecture {
     }
 
     public void setDuration(String duration) {
-        this.duration = duration;
+        this.duration = duration.toUpperCase(Locale.ROOT);
     }
 
     public Event getEvent() {

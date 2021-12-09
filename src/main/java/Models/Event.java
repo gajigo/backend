@@ -2,6 +2,7 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Event {
     private Long id;
@@ -16,9 +17,9 @@ public class Event {
     }
 
     public Event(String eventName, String description, String dateEvent) {
-        this.eventName = eventName;
-        this.description = description;
-        this.dateEvent = dateEvent;
+        setEventName(eventName);
+        setDescription(description);
+        setDateEvent(dateEvent);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class Event {
     }
 
     public void setEventName(String eventName) {
-        this.eventName = eventName;
+        this.eventName = eventName.toUpperCase(Locale.ROOT);
     }
 
     public String getDescription() {
@@ -55,7 +56,7 @@ public class Event {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description.toUpperCase(Locale.ROOT);
     }
 
     public Modality getModalidade() {
@@ -71,7 +72,7 @@ public class Event {
     }
 
     public void setDateEvent(String dateEvent) {
-        this.dateEvent = dateEvent;
+        this.dateEvent = dateEvent.toUpperCase(Locale.ROOT);
     }
 
     public List<User> getOrganizers() {

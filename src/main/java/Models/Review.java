@@ -9,10 +9,10 @@ public class Review {
     private boolean active;
 
     public Review(float rating, Lecture lecture, User reviewer) {
-        this.rating = rating;
-        this.lecture = lecture;
-        this.reviewer = reviewer;
-        this.active = true;
+        setRating(rating);
+        setLecture(lecture);
+        setReviewer(reviewer);
+        setActive(true);
     }
 
     @Override

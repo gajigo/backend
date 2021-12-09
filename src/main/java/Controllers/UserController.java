@@ -9,10 +9,9 @@ import javax.management.relation.Role;
 import java.util.List;
 
 public class UserController {
-    private UserDAO dao;
+    private UserDAO dao = new UserDAO();
 
     public UserController() {
-        this.dao = new UserDAO();
     }
 
     public User register(User user) {

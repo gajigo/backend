@@ -36,13 +36,13 @@ public class MenuView {
     }
 
     public static void menuUsuario() {
-        UserController controller = new UserController();
-        controller.start();
+        UserView view = new UserView();
+        view.menu();
     }
 
     public static void menuEvento() {
-        EventController controller = new EventController();
-        controller.start();
+        EventView view = new EventView();
+        view.menu();
     }
 
     public static void menuPalestra(){

@@ -13,10 +13,9 @@ import java.util.stream.Stream;
 
 public class UserView {
     // salvar coisas foreign como fkID ao invez de objeto
-    private UserController controller;
+    private UserController controller = new UserController();
 
-    public UserView(UserController controller) {
-        this.controller = controller;
+    public UserView() {
     }
 
     public void menu() {

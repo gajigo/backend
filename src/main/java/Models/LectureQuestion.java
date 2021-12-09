@@ -1,25 +1,27 @@
 package Models;
 
 
+import java.util.Locale;
+
 public class LectureQuestion {
     private Long id;
-    private String question;
     private User user;
+    private String question;
 
     public LectureQuestion() {
     }
 
-    public LectureQuestion(String question, User user) {
-        this.question = question;
-        this.user = user;
+    public LectureQuestion(User user, String question) {
+        setUser(user);
+        setQuestion(question);
     }
 
     @Override
     public String toString() {
         return "LectureQuestion{" +
                 "id=" + id +
-                ", question='" + question + '\'' +
                 ", user=" + user +
+                ", question='" + question + '\'' +
                 '}';
     }
 
@@ -36,7 +38,7 @@ public class LectureQuestion {
     }
 
     public void setQuestion(String question) {
-        this.question = question;
+        this.question = question.toUpperCase(Locale.ROOT);
     }
 
     public User getUser() {

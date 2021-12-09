@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class LectureView {
     private LectureController controller = new LectureController();
     UserController userController = new UserController();
-    private UserView viewUser = new UserView(userController);
+    private UserView viewUser = new UserView();
     private UserController usuarios = new UserController();
     private LectureUserDAO lectureUserDAO = new LectureUserDAO();
 

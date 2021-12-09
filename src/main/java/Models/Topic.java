@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.Locale;
+
 // categoria da palestra, ex: Palestra de Tecnologia
 public class Topic {
     private Long id;
@@ -9,14 +11,14 @@ public class Topic {
     }
 
     public Topic(String name) {
-        this.name = name;
+        setName(name);
     }
 
     @Override
     public String toString() {
         return "Assunto{" +
                 "id=" + id +
-                ", nome='" + name + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 
@@ -33,6 +35,6 @@ public class Topic {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase(Locale.ROOT);
     }
 }
