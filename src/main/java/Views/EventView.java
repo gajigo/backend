@@ -5,7 +5,7 @@ import Controllers.UserController;
 import Models.Event;
 import Models.Modality;
 import Models.User;
-import org.postgresql.gss.GSSOutputStream;
+import Utils.ViewUtils;
 
 
 import java.sql.SQLException;

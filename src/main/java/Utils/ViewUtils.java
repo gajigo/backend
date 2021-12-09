@@ -1,4 +1,4 @@
-package Views;
+package Utils;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

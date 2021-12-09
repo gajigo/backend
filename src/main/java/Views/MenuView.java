@@ -1,5 +1,7 @@
 package Views;
 
+import Utils.ViewUtils;
+
 import java.util.Scanner;
 
 public class MenuView {

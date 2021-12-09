@@ -7,6 +7,7 @@ import Models.Event;
 import Models.Language;
 import Models.Lecture;
 import Models.User;
+import Utils.ViewUtils;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
