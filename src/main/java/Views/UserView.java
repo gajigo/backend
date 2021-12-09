@@ -88,57 +88,65 @@ public class UserView {
 
             Scanner scanner = new Scanner(System.in);
 
-            while (true) {System.out.println("-Editar Usuario-");
-            list();
+            while (true) {
+                System.out.println("-Editar Usuario-");
+                list();
 
-            System.out.println("Escolha um ID:");
-            Long id = (long) ViewUtils.getChoice(scanner);
-            if (id == -1) {
-            System.out.println("ID Invalido!");
-                continue;
-            }
+                System.out.println("Escolha um ID:");
+                Long id = (long) ViewUtils.getChoice(scanner);
+                if (id == -1) {
+                    System.out.println("ID Invalido!");
+                    continue;
+                }
 
-            User choice = controller.getById(id);
-            if (choice == null) {
-                System.out.println("Usuario nao encontrado!");
+                User choice = controller.getById(id);
+                if (choice == null) {
+                    System.out.println("Usuario nao encontrado!");
+                    return;
+                }
+
+                edit(choice);
                 return;
             }
-
-            edit(choice);
-            return;
+        }catch (SQLException e){
+            System.out.println("Falha ao Editar Usuario");
         }
     }
 
     public void deleteMenu() {
-        if (controller.getModels().size() == 0) {
-            System.out.println("Nao existe usuarios para deletar.");
-            return;
-        }
-
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("-Deletar Usuario-");
-            list();
-
-            System.out.println("Escolha um ID:");
-            Long id = (long) ViewUtils.getChoice(scanner);
-            if (id == -1) {
-                System.out.println("ID Invalido!");
-                continue;
-            }
-
-            if (!login(controller.getById(id))) {
-                System.out.println("Senha incorreta!");
+        try {
+            if (controller.getModels().size() == 0) {
+                System.out.println("Nao existe usuarios para deletar.");
                 return;
             }
 
-            if (controller.deleteById(id)) {
-                System.out.println("Usuario deletado com sucesso!");
-            } else {
-                System.out.println("Nao foi possivel deletar o Usuario, confirme se escreveu o ID correto.");
+            Scanner scanner = new Scanner(System.in);
+
+            while (true) {
+                System.out.println("-Deletar Usuario-");
+                list();
+
+                System.out.println("Escolha um ID:");
+                Long id = (long) ViewUtils.getChoice(scanner);
+                if (id == -1) {
+                    System.out.println("ID Invalido!");
+                    continue;
+                }
+
+                if (!login(controller.getById(id))) {
+                    System.out.println("Senha incorreta!");
+                    return;
+                }
+
+                if (controller.deleteById(id)) {
+                    System.out.println("Usuario deletado com sucesso!");
+                } else {
+                    System.out.println("Nao foi possivel deletar o Usuario, confirme se escreveu o ID correto.");
+                }
+                return;
             }
-            return;
+        }catch (SQLException e){
+            System.out.println("Falha ao Remover Usuario");
         }
     }
 
