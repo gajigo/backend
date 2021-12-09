@@ -9,7 +9,7 @@ public class ConnectionFactory {
     public Connection getConnection(){
         try {
             return DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:6432/gajigo", "postgres", "postgres");
+                    "jdbc:postgresql://localhost:5432/gajigo", "postgres", "postgres");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -6,7 +6,7 @@ import java.util.List;
 
 import static java.lang.Math.max;
 
-public class FileDAO<T extends DAOUser> {
+public class FileDAO<T> {
     private String filename;
 
     public FileDAO(String filename) {

@@ -150,11 +150,11 @@ public class LectureView {
 
         System.out.println("Nome: " + lecture.getName());
         System.out.println("ID: " + lecture.getId());
-        System.out.println("Data de Inicio: " + lecture.getInitialDate());
+        System.out.println("Data de Inicio: " + lecture.getStartDate());
         System.out.println("Duracao: " + lecture.getDuration());
         System.out.println("Idiomas: " + lecture.getLanguage());
         System.out.println("Assuntos: " + lecture.getTopics());
-        System.out.println("Palestrantes: " + lecture.getPresenter());
+        System.out.println("Palestrantes: " + lecture.getPresenters());
         System.out.println("Avaliacao da Palestra: " + format.format(evaluationValue) );
         System.out.println();
         System.out.println("1 - Listar Duvidas");
@@ -351,7 +351,7 @@ public class LectureView {
     public void editDate(Lecture lecture){
         Scanner reader = new Scanner(System.in);
 
-        System.out.println("Data atual: " + lecture.getInitialDate());
+        System.out.println("Data atual: " + lecture.getStartDate());
         System.out.println("Insira data nova:");
         String novaData = reader.nextLine();
         controller.editDate(lecture,novaData);
@@ -408,7 +408,7 @@ public class LectureView {
     public void editPresenter(Lecture lecture){
         Scanner reader = new Scanner(System.in);
 
-        System.out.println("Palestrante atual: " + lecture.getPresenter());
+        System.out.println("Palestrante atual: " + lecture.getPresenters());
         System.out.println("Deseja ADICIONAR ou REMOVER Palestrante");
         String escolha = reader.nextLine();
 

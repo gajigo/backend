@@ -2,13 +2,11 @@ package Views;
 
 import Controllers.EventoController;
 import Controllers.UserController;
-import Models.Evento;
-import Models.Modalidade;
+import Models.Event;
+import Models.Modality;
 import Models.User;
 
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -75,20 +73,20 @@ public class EventoView {
         System.out.println("Quando sera o evento?");
         String dataEvento = ler.nextLine();
 
-        Evento novoEvento = controller.cadastrar(nomeEvento, descricao, dataEvento);
+        Event novoEvent = controller.cadastrar(nomeEvento, descricao, dataEvento);
 
         //menuModalidade(novoEvento);
 
         //System.out.println("Evento " + novoEvento.getNomeEvento() + " foi criado!");
     }
 
-    public void menuModalidade(Evento evento){
+    public void menuModalidade(Event event){
         Scanner ler = new Scanner(System.in);
         while (true) {
             System.out.println("Qual a modalidade do seu evento?");
 
-            List<String> modalidadesPossiveis = Stream.of(Modalidade.values()).
-                    map(Modalidade::name).
+            List<String> modalidadesPossiveis = Stream.of(Modality.values()).
+                    map(Modality::name).
                     collect(Collectors.toList());
 
             for (int i = 0; i < modalidadesPossiveis.size(); i++){
@@ -99,7 +97,7 @@ public class EventoView {
             ler.nextLine();
 
             if (novaModalidade >= 0 && novaModalidade < modalidadesPossiveis.size()) {
-                evento.setModalidade(Modalidade.valueOf(modalidadesPossiveis.get(novaModalidade)));
+                event.setModalidade(Modality.valueOf(modalidadesPossiveis.get(novaModalidade)));
                 return;
             } else {
                 System.out.println("Modalidade invalida!");
@@ -145,7 +143,7 @@ public class EventoView {
         Long id = ler.nextLong();
         ler.nextLine();
 
-        Evento escolha = controller.getById(id);
+        Event escolha = controller.getById(id);
         if (escolha == null) {
             System.out.println("Evento nao encontrado!");
             return;
@@ -154,17 +152,17 @@ public class EventoView {
         edite(escolha);
     }
 
-    public void edite(Evento evento) {
+    public void edite(Event event) {
         Scanner ler = new Scanner(System.in);
 
         while (true) {
             System.out.println("Informacoes:");
-            System.out.printf("1 - %s: %s\n", "Nome", evento.getNomeEvento());
-            System.out.printf("2 - %s: %s\n", "Descricao", evento.getDescricao());
-            System.out.printf("3 - %s: %s\n", "Data", evento.getDataEvento());
-            System.out.printf("4 - %s: %s\n", "Modalidade", evento.getModalidade());
-            System.out.printf("5 - %s: %s\n", "Organizadores", evento.getOrganizadores());
-            System.out.printf("6 - %s: %s\n", "Palestras", evento.getPalestras());
+            System.out.printf("1 - %s: %s\n", "Nome", event.getEventName());
+            System.out.printf("2 - %s: %s\n", "Descricao", event.getDescription());
+            System.out.printf("3 - %s: %s\n", "Data", event.getDateEvent());
+            System.out.printf("4 - %s: %s\n", "Modalidade", event.getModalidade());
+            System.out.printf("5 - %s: %s\n", "Organizadores", event.getOrganizers());
+            System.out.printf("6 - %s: %s\n", "Palestras", event.getLectures());
             System.out.println("0 - Sair");
 
             System.out.println("Escolha uma opcao para mudar");
@@ -176,21 +174,21 @@ public class EventoView {
                     return;
                 case 1:
                     System.out.println("Escreva um novo nome:");
-                    evento.setNomeEvento(ler.nextLine());
+                    event.setEventName(ler.nextLine());
                     break;
                 case 2:
                     System.out.println("Escreva uma nova descricao:");
-                    evento.setDescricao(ler.nextLine());
+                    event.setDescription(ler.nextLine());
                     break;
                 case 3:
                     System.out.println("Escreva uma nova data:");
-                    evento.setDataEvento(ler.nextLine());
+                    event.setDateEvent(ler.nextLine());
                     break;
                 case 4:
-                    menuModalidade(evento);
+                    menuModalidade(event);
                     break;
                 case 5:
-                    menuOrganizadores(evento);
+                    menuOrganizadores(event);
                     break;
                 case 6:
                     break;
@@ -199,17 +197,17 @@ public class EventoView {
                     break;
 
             }
-            controller.editEvento(evento);
+            controller.editEvento(event);
         }
     }
 
     public void listar() {
-        for (Evento evento: controller.getModels()) {
-            System.out.printf("%d - %s - %s\n", evento.getId(), evento.getNomeEvento(), evento.getModalidade());
+        for (Event event : controller.getModels()) {
+            System.out.printf("%d - %s - %s\n", event.getId(), event.getEventName(), event.getModalidade());
         }
     }
 
-    public void menuOrganizadores(Evento evento) {
+    public void menuOrganizadores(Event event) {
         UserController usuarios = new UserController();
         UserView userView = new UserView(usuarios);
 
@@ -221,7 +219,7 @@ public class EventoView {
                 return;
             }
 
-            System.out.println("Organizadores: " + evento.getOrganizadores());
+            System.out.println("Organizadores: " + event.getOrganizers());
             System.out.println("1 - Adicionar Organizador");
             System.out.println("2 - Remover Organizador");
             System.out.println("3 - Confirmar");
@@ -248,10 +246,9 @@ public class EventoView {
             }
 
             if (escolha == 1) {
-                evento.addOrganizador(userEscolhido);
-                controller.addEventOrganizer(usuarios.getById(id), evento);  // coloca aqui a funçao pra add no sql
+                controller.addEventOrganizer(usuarios.getById(id), event);  // coloca aqui a funçao pra add no sql
             } else {
-                evento.removeOrganizador(userEscolhido);
+                controller.removeEventOrganizer(usuarios.getById(id), event);
             }
         }
     }
