@@ -58,7 +58,7 @@ ROADMAP
 
 EQUIPE:
 
-Abel Chang / CEO & CMO
-Helcio L. do Carmo / CTO & Backend Engineer
-Jean Clayton / Front-end Developer
-Pedro Henrique Garcia / Fullstack Engineer
+Abel Chang / CEO & CMO <br />
+Helcio L. do Carmo / CTO & Backend Engineer <br />
+Jean Clayton / Front-end Developer <br />
+Pedro Henrique Garcia / Fullstack Engineer <br />
