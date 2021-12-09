@@ -8,8 +8,8 @@ import java.sql.SQLException;
 public class Main {
     public static void initDatabase() {
         try {
-            new UserDAO().createUserTable();
             new EventDAO().createEventoTable();
+            new UserDAO().createUserTable();
             new LectureDAO().createLecturesTable();
             new LectureEvaluationDAO().createLectureEvaluationTable();
             new EventUserDAO().createEventUserTable();

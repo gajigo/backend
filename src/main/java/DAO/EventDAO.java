@@ -27,7 +27,7 @@ public class EventDAO {
         String sql = "CREATE SEQUENCE IF NOT EXISTS evento_id_seq;";
 
         sql += "CREATE TABLE IF NOT EXISTS " + tableName + "(" +
-                "evento_id BIGINT PRIMARY KEY DEFAULT nextval('evento_id_seq')," +
+                "event_id BIGINT PRIMARY KEY DEFAULT nextval('evento_id_seq')," +
                 "event_name TEXT NOT NULL," +
                 "description TEXT NOT NULL," +
                 "modality SMALLINT," +

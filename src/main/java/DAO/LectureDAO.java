@@ -51,7 +51,7 @@ public class LectureDAO {
     public Lecture createLectures(Lecture lecture) {
         if (lecture != null){
             String sql = "INSERT INTO " + tableName +
-                    "(name, description, date, duration, event_id)" +
+                    "(name, description, lecture_date, duration, event_id)" +
                     "VALUES (?, ?, ?, ?, ?)";
 
             try {
@@ -93,7 +93,7 @@ public class LectureDAO {
             lecture.setId(resultSet.getLong("lecture_id"));
             lecture.setName(resultSet.getString("name"));
             lecture.setDescription(resultSet.getString("description"));
-            lecture.setStartDate(resultSet.getString("date"));
+            lecture.setStartDate(resultSet.getString("lecture_date"));
             lecture.setDuration(resultSet.getString("duration"));
             lecture.setStatus(resultSet.getBoolean("status"));
             lecture.setPresenters(lectureUserDAO.getUserPolice(lecture,Roles.PALESTRANTE));
@@ -106,7 +106,7 @@ public class LectureDAO {
     }
 
     public void editSeminar(Lecture lecture) throws SQLException, NullPointerException{
-        String sql = "UPDATE " + tableName + " SET name = ?, description = ?, date = ?, duration = ? WHERE lecture_id = ?";
+        String sql = "UPDATE " + tableName + " SET name = ?, description = ?, lecture_date = ?, duration = ? WHERE lecture_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setLong(5, lecture.getId());
