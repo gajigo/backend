@@ -20,7 +20,7 @@ public class LectureController {
     public Lecture createLecture(String name, String description, String date, String duration, String language, Long event) throws SQLException {
         Lecture newLecture = new Lecture();
         Language newLanguage = new Language();
-        EventoController newEvent = new EventoController();
+        EventController newEvent = new EventController();
 
         newLecture.setName(name);
         newLecture.setDescription(description);

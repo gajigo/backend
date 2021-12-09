@@ -1,6 +1,6 @@
 package Views;
 
-import Controllers.EventoController;
+import Controllers.EventController;
 import Controllers.UserController;
 import Models.Event;
 import Models.Modality;
@@ -12,15 +12,15 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class EventoView {
-    private EventoController controller;
+public class EventView {
+    private EventController controller;
 
-    public EventoView(EventoController controller) {
+    public EventView(EventController controller) {
         this.controller = controller;
     }
 
-    public EventoView() {
-        controller = new EventoController();
+    public EventView() {
+        controller = new EventController();
     }
 
     public void menu() {
