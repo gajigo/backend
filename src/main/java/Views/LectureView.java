@@ -67,7 +67,7 @@ public class LectureView {
 
         System.out.println("Escolha o Evento");
         eventoView.listar();
-        int evento = reader.nextInt();
+        Long evento = reader.nextLong();
 
         try{
             System.out.println(controller.createLecture(nome,descricao,data,duracao,idioma,evento).getName() + " criada com sucesso");
@@ -184,8 +184,6 @@ public class LectureView {
            System.out.println("Palestra Deletada");
         }catch (SQLException e){
             System.out.println("Erro ao Deletar");
-        }catch (NullPointerException e){
-           System.out.println("Erro ao Deletar");
        }
     }
 
@@ -236,8 +234,6 @@ public class LectureView {
                 controller.editLecture(lecture);
                 System.out.println("Editado com Sucesso");
             }catch (SQLException e){
-                System.out.println("Falha ao Editar Palestra");
-            }catch (NullPointerException e){
                 System.out.println("Falha ao Editar Palestra");
             }
         }
@@ -291,7 +287,7 @@ public class LectureView {
 
         viewUser.list();
         System.out.println("Escolha Seu Usuario");
-        long user_id = reader.nextLong();
+        Long user_id = reader.nextLong();
 
         System.out.println("Digite a nota da palestra (Entre 1 e 5)");
         int value = reader.nextInt();
@@ -305,7 +301,7 @@ public class LectureView {
 
         viewUser.list();
         System.out.println("Escolha Seu Usuario");
-        long user_id = reader.nextLong();
+        Long user_id = reader.nextLong();
 
         System.out.println("Digite a nota da palestra (Entre 1 e 5)");
         int value = reader.nextInt();
@@ -319,7 +315,7 @@ public class LectureView {
 
         viewUser.list();
         System.out.println("Escolha Seu Usuario");
-        long user_id = reader.nextLong();
+        Long user_id = reader.nextLong();
 
         controller.removeEvaluation(lecture, user_id);
     }
@@ -416,7 +412,7 @@ public class LectureView {
             viewUser.list();
             System.out.println("Escolha um usuario:");
             int id = reader.nextInt();
-            User userEscolhido = usuarios.getById(id);
+            User userEscolhido = usuarios.getById((long) id);
             try {
                 controller.addPresenter(lecture, userEscolhido);
                 System.out.println("Palestrante Adicionado");
@@ -429,13 +425,11 @@ public class LectureView {
             viewUser.list();
             System.out.println("Escolha um usuario:");
             int id = reader.nextInt();
-            User userEscolhido = usuarios.getById(id);
+            User userEscolhido = usuarios.getById((long) id);
             try {
                 controller.removePresenter(lecture, userEscolhido);
                 System.out.println("Palestrante Removido");
-            }catch (SQLException e){
-                System.out.println("Falha ao remover Palestrante");
-            }catch (NullPointerException e){
+            }catch (SQLException e) {
                 System.out.println("Falha ao remover Palestrante");
             }
         }
