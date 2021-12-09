@@ -20,7 +20,7 @@ public class Topic {
                 '}';
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

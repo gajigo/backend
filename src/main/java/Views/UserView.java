@@ -85,7 +85,7 @@ public class UserView {
         list();
 
         System.out.println("Escolha um ID:");
-        int id = input.nextInt();
+        Long id = input.nextLong();
         input.nextLine();
 
         User choice = controller.getById(id);

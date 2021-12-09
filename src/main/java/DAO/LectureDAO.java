@@ -49,7 +49,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         lectureUserDAO.createUserLectureTable();
     }
 
-    public Lecture createLectures(Lecture lecture) throws SQLException, NullPointerException {
+    public Lecture createLectures(Lecture lecture) {
         if (lecture != null){
             String sql = "INSERT INTO " + tableName +
                     "(name, description, date, duration, event_id)" +
@@ -72,8 +72,8 @@ public class LectureDAO extends FileDAO<Lecture> {
                     lecture.setStatus(resultSet.getBoolean("status"));
                 }
                 return lecture;
-            }catch (SQLException e){
-                return null;
+            } catch (SQLException e){
+                throw new RuntimeException(e);
             }
         }
         return null;
@@ -151,7 +151,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         lectureUserDAO.removeUserPolice(lecture,presenter,Roles.PALESTRANTE);
     }
 
-    public void evaluateLecture(Lecture lecture, long user_id, int value){
+    public void evaluateLecture(Lecture lecture, Long user_id, int value){
         UserDAO user = new UserDAO();
         try {
             lectureEvaluationDAO.addLectureEvaluation(user.getUserById(user_id), lecture, value);
@@ -160,7 +160,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         }
     }
 
-    public void editEvaluation(Lecture lecture, long user_id, int value) {
+    public void editEvaluation(Lecture lecture, Long user_id, int value) {
         UserDAO user = new UserDAO();
         try {
             lectureEvaluationDAO.editLectureEvaluation(user.getUserById(user_id), lecture, value);
@@ -169,7 +169,7 @@ public class LectureDAO extends FileDAO<Lecture> {
         }
     }
 
-    public void removeEvaluation(Lecture lecture, long user_id) {
+    public void removeEvaluation(Lecture lecture, Long user_id) {
         UserDAO user = new UserDAO();
         
         try{

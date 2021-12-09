@@ -39,7 +39,7 @@ public class UserController {
         return this.dao.listUsers();
     }
 
-    public User getById(long id) {
+    public User getById(Long id) {
         return this.dao.getUserById(id);
     }
 

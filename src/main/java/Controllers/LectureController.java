@@ -17,7 +17,7 @@ public class LectureController {
         return dao.listLecture();
     }
 
-    public Lecture createLecture(String name, String description, String date, String duration, String language, long event) throws SQLException {
+    public Lecture createLecture(String name, String description, String date, String duration, String language, Long event) throws SQLException {
         Lecture newLecture = new Lecture();
         Language newLanguage = new Language();
         EventoController newEvent = new EventoController();
@@ -73,7 +73,7 @@ public class LectureController {
 
     public void joinLecture(Lecture lecture, int user_id) throws SQLException{
         UserController userController = new UserController();
-        User user = userController.getById(user_id);
+        User user = userController.getById((long) user_id);
         dao.addLectureAttendee(lecture,user);
     }
 
@@ -142,15 +142,15 @@ public class LectureController {
         return dao.getAttendees(lecture);
     }
 
-    public void evaluateLecture(Lecture lecture, long user_id, int value){
+    public void evaluateLecture(Lecture lecture, Long user_id, int value){
         dao.evaluateLecture(lecture,user_id,value);
     }
     
-    public void editEvaluation(Lecture lecture, long user_id, int value){
+    public void editEvaluation(Lecture lecture, Long user_id, int value){
         dao.editEvaluation(lecture,user_id,value);
     }
 
-    public void removeEvaluation(Lecture lecture, long user_id) {
+    public void removeEvaluation(Lecture lecture, Long user_id) {
         dao.removeEvaluation(lecture,user_id);
     }
 
