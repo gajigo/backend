@@ -13,10 +13,8 @@ import java.util.Scanner;
 
 public class LectureView {
     private LectureController controller = new LectureController();
-    UserController userController = new UserController();
     private UserView viewUser = new UserView();
     private UserController usuarios = new UserController();
-    private LectureUserDAO lectureUserDAO = new LectureUserDAO();
 
     public LectureView() {
     }
@@ -451,8 +449,8 @@ public class LectureView {
             viewUser.list();
             System.out.println("Escolha um usuario:");
             int id = reader.nextInt();
-            User userEscolhido = usuarios.getById((long) id);
             try {
+                User userEscolhido = usuarios.getById((long) id);
                 controller.addPresenter(lecture, userEscolhido);
                 System.out.println("Palestrante Adicionado");
             }catch (SQLException e){
@@ -464,8 +462,8 @@ public class LectureView {
             viewUser.list();
             System.out.println("Escolha um usuario:");
             int id = reader.nextInt();
-            User userEscolhido = usuarios.getById((long) id);
             try {
+                User userEscolhido = usuarios.getById((long) id);
                 controller.removePresenter(lecture, userEscolhido);
                 System.out.println("Palestrante Removido");
             }catch (SQLException e) {
