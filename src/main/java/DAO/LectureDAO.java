@@ -29,12 +29,13 @@ public class LectureDAO extends FileDAO<Lecture> {
                 "event_id BIGINT NOT NULL, " +
                 "name TEXT, " +
                 "description TEXT," +
-                "date VARCHAR(10) ," +
+                "lecture_date VARCHAR(10) ," +
                 "duration VARCHAR(10)," +
                 "status BOOLEAN DEFAULT TRUE, " +
                 "CONSTRAINT fk_lecture_event_id " +
                     "FOREIGN KEY (event_id)" +
                     "REFERENCES eventos(eventoId)" +
+                    "ON DELETE CASCADE" +
                 ");";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -122,7 +123,7 @@ public class LectureDAO extends FileDAO<Lecture> {
     }
 
     public void deleteLecture(Lecture lecture)throws SQLException, NullPointerException{
-        String sql = "DELETE FROM " + tableName + " WHERE id = ?";
+        String sql = "DELETE FROM " + tableName + " WHERE lecture_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setLong(1, lecture.getId());
