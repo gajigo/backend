@@ -7,13 +7,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LectureDAO extends FileDAO<Lecture> {
+public class LectureDAO {
     public LectureDAO() {
-        super("lectures.txt");
         createLecturesTable();
     }
     public LectureDAO(String filename) {
-        super(filename);
+
     }
 
     private String tableName = "lectures";

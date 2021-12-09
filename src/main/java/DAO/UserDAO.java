@@ -8,13 +8,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO extends FileDAO<User> {
+public class UserDAO {
+    private LoggerDAO logger = new LoggerDAO("usuario.txt");
+
     public UserDAO() {
-        super("usuarios.txt");
+
     }
 
     public UserDAO(String filename) {
-        super(filename);
         createUserTable();
     }
 
@@ -104,12 +105,41 @@ public class UserDAO extends FileDAO<User> {
 
                 insertUpdateRoles(user.getUserId(), user.getRoles());
 
+                logger.logOperation("INSERÇÃO", user.toString());
+
                 return user;
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
         return null;
+    }
+
+    public User loginUser(User user) {
+        User authenticatedUser = null;
+        String sql = "SELECT * FROM " + tableName + " " +
+                "WHERE email = ? " +
+                "AND password = ?;";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getPassword());
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                authenticatedUser = new User();
+                authenticatedUser.setId(resultSet.getLong("user_id"));
+                authenticatedUser.setName(resultSet.getString("name"));
+                authenticatedUser.setPassword(resultSet.getString("password"));
+                authenticatedUser.setEmail(resultSet.getString("email"));
+                authenticatedUser.setPhone(resultSet.getString("phone"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return authenticatedUser;
     }
 
     public List<User> listUsers() {
