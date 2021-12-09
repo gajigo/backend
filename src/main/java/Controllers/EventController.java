@@ -3,7 +3,6 @@ package Controllers;
 import DAO.EventDAO;
 import Models.Event;
 import Models.User;
-import Views.EventView;
 
 import java.util.List;
 
@@ -17,6 +16,14 @@ public class EventController {
         return dao.createEvento(event);
     }
 
+    public boolean removeEvent(Long id) {
+        return dao.deleteById(id);
+    }
+
+    public boolean removeEvent(Event event) {
+        return removeEvent(event.getId());
+    }
+
     public List<Event> getModels() {
         return dao.listEventos();
     }
@@ -25,11 +32,7 @@ public class EventController {
         return dao.getById(id);
     }
 
-    public void editEvento(Event event){ dao.editEvento(event);}
-
-    public boolean deleteById(Long id) {
-        return dao.deleteById(id);
-    }
+    public void editEvent(Event event){ dao.editEvent(event);}
 
     public void addEventOrganizer(User user, Event event) { dao.addEventOrganizer(user, event);}
 

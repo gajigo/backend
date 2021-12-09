@@ -6,7 +6,6 @@ import Models.User;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 public class LoginPanelView extends JFrame {
     private UserController controller = new UserController();
@@ -38,7 +37,7 @@ public class LoginPanelView extends JFrame {
 
                 if (controller.loginUser(user) != null) {
                     frame.setVisible(false);
-                    MenuView.start();
+                    MenuView.menu();
                 } else {
                     JOptionPane.showMessageDialog(loginPanel, "Usuário ou senha incorreta!");
                 }

@@ -148,9 +148,8 @@ public class LectureDAO {
         lectureUserDAO.removeUserPolice(lecture,presenter,Roles.PALESTRANTE);
     }
 
-    public void evaluateLecture(Lecture lecture, Long user_id, int value)throws SQLException{
-        UserDAO user = new UserDAO();
-        lectureEvaluationDAO.addLectureEvaluation(user.getUserById(user_id), lecture, value);
+    public void reviewLecture(Lecture lecture, User user, int value)throws SQLException{
+        lectureEvaluationDAO.addLectureEvaluation(user, lecture, value);
     }
 
     public void editEvaluation(Lecture lecture, Long user_id, int value) throws SQLException, NullPointerException {

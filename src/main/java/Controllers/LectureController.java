@@ -17,20 +17,8 @@ public class LectureController {
         return dao.listLecture();
     }
 
-    public Lecture createLecture(String name, String description, String date, String duration, String language, Long event) throws SQLException {
-        Lecture newLecture = new Lecture();
-        Language newLanguage = new Language();
-        EventController newEvent = new EventController();
-
-        newLecture.setName(name);
-        newLecture.setDescription(description);
-        newLecture.setStartDate(date);
-        newLecture.setDuration(duration);
-        newLanguage.setName(language);
-        newLecture.getLanguage().add(newLanguage);
-        newLecture.setEvent(newEvent.getById(event));
-
-        return dao.createLectures(newLecture);
+    public Lecture createLecture(Lecture lecture) throws SQLException {
+        return dao.createLectures(lecture);
     }
 
     public List<String> listLectureNames() throws SQLException {
@@ -71,10 +59,8 @@ public class LectureController {
         lecture.getLectureQuestions().add(newQuestion);
     }
 
-    public void joinLecture(Lecture lecture, int user_id) throws SQLException{
-        UserController userController = new UserController();
-        User user = userController.getById((long) user_id);
-        dao.addLectureAttendee(lecture,user);
+    public void joinLecture(Lecture lecture, User user) throws SQLException{
+        dao.addLectureAttendee(lecture, user);
     }
 
     public void editName(Lecture lecture, String newName){
@@ -142,8 +128,8 @@ public class LectureController {
         return dao.getAttendees(lecture);
     }
 
-    public void evaluateLecture(Lecture lecture, Long user_id, int value) throws SQLException{
-        dao.evaluateLecture(lecture,user_id,value);
+    public void reviewLecture(Lecture lecture, User user, int value) throws SQLException{
+        dao.reviewLecture(lecture, user, value);
     }
     
     public void editEvaluation(Lecture lecture, Long user_id, int value) throws SQLException, NullPointerException{

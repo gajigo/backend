@@ -5,7 +5,6 @@ import Models.Roles;
 import Models.User;
 
 import java.sql.SQLException;
-import javax.swing.text.View;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -37,17 +36,17 @@ public class UserView {
                 case 0:
                     return;
                 case 1:
-                    registrationMenu();
+                    menuCreate();
                     break;
                 case 2:
-                    editMenu();
+                    menuEdit();
                     break;
                 case 3:
-                    deleteMenu();
+                    menuDelete();
                     break;
                 case 4:
                     System.out.println("-Usuarios Cadastrados-");
-                    list();
+                    listUsers();
                     break;
                 default:
                     System.out.println("Escolha invalida!");
@@ -56,7 +55,7 @@ public class UserView {
         }
     }
 
-    public void registrationMenu() {
+    public void menuCreate() {
         Scanner scanner = new Scanner(System.in);
         User user = new User();
 
@@ -70,16 +69,16 @@ public class UserView {
         System.out.println("Escreva um e-mail:");
         user.setEmail(scanner.nextLine());
 
-        rolesMenu(user);
+        menuRoles(user);
         try {
-            User novoUser = controller.addUser(user);
-            System.out.println("Usuario " + novoUser.getId() + " registrado com sucesso!");
+            user = controller.addUser(user);
+            System.out.println("Usuario com ID " + user.getId() + " registrado com sucesso!");
         }catch (SQLException e){
             System.out.println("Falha ao registrar Usuario");
         }
     }
 
-    public void editMenu() {
+    public void menuEdit() {
         try {
             if (controller.getModels().size() == 0) {
                 System.out.println("Nao existe usuarios para editar.");
@@ -90,7 +89,7 @@ public class UserView {
 
             while (true) {
                 System.out.println("-Editar Usuario-");
-                list();
+                listUsers();
 
                 System.out.println("Escolha um ID:");
                 Long id = (long) ViewUtils.getChoice(scanner);
@@ -99,13 +98,13 @@ public class UserView {
                     continue;
                 }
 
-                User choice = controller.getById(id);
-                if (choice == null) {
+                User user = controller.getById(id);
+                if (user == null) {
                     System.out.println("Usuario nao encontrado!");
                     return;
                 }
 
-                edit(choice);
+                edit(user);
                 return;
             }
         }catch (SQLException e){
@@ -113,7 +112,7 @@ public class UserView {
         }
     }
 
-    public void deleteMenu() {
+    public void menuDelete() {
         try {
             if (controller.getModels().size() == 0) {
                 System.out.println("Nao existe usuarios para deletar.");
@@ -124,7 +123,7 @@ public class UserView {
 
             while (true) {
                 System.out.println("-Deletar Usuario-");
-                list();
+                listUsers();
 
                 System.out.println("Escolha um ID:");
                 Long id = (long) ViewUtils.getChoice(scanner);
@@ -167,9 +166,9 @@ public class UserView {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Informacoes:");
-            System.out.printf("1 - %s: %s\n", "Nome", user.getName());
-            System.out.printf("2 - %s: %s\n", "Senha", user.getPassword());
-            System.out.printf("3 - %s: %s\n", "Cargos", user.getRoles());
+            System.out.printf("1 - Nome: %s\n", user.getName());
+            System.out.printf("2 - Senha: %s\n", user.getPassword());
+            System.out.printf("3 - Cargos: %s\n", user.getRoles());
             System.out.println("0 - Sair");
 
             System.out.println("Escolha uma opcao para mudar");
@@ -186,28 +185,26 @@ public class UserView {
                     case 1:
                         System.out.println("Escreva um novo nome:");
                         user.setName(scanner.nextLine());
-                        controller.editUser(user);
                         break;
                     case 2:
                         System.out.println("Escreva uma nova senha:");
                         user.setNewPassword(scanner.nextLine());
-                        controller.editUser(user);
                         break;
                     case 3:
-                        rolesMenu(user);
-                        controller.editUser(user);
+                        menuRoles(user);
                         break;
                     default:
                         System.out.println("Escolha invalida!");
                         break;
                 }
+                controller.editUser(user);
             }catch (SQLException e){
                 System.out.println("Falha ao editar Usuario");
             }
         }
     }
 
-    public void list() {
+    public void listUsers() {
         try {
             for (User user : controller.getModels()) {
                 System.out.printf("%d - %s\n", user.getId(), user.getName());
@@ -217,7 +214,7 @@ public class UserView {
         }
     }
 
-    public void rolesMenu(User user) {
+    public void menuRoles(User user) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Cargos: " + user.getRoles());

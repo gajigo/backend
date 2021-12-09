@@ -101,7 +101,7 @@ public class EventDAO {
         }
     }
 
-    public void editEvento(Event event) {
+    public void editEvent(Event event) {
         String sql = "UPDATE " + tableName + " SET event_name = ?, description = ?, modality = 2, event_date = ?" +
                 " WHERE event_id = ?";
 
