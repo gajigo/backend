@@ -111,17 +111,6 @@ public class User {
         this.roles = roles;
     }
 
-    public void addRole(Roles newRole) {
-        if (this.roles.contains(newRole)) {
-            return;
-        }
-        this.roles.add(newRole);
-    }
-
-    public void removeRole(Roles role) {
-        this.roles.remove(role);
-    }
-
     protected String generateHashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-512");

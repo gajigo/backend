@@ -1,6 +1,8 @@
 package Views;
 
 import Controllers.UserController;
+import DAO.EventUserDAO;
+import DAO.UserDAO;
 import Models.Roles;
 import Models.User;
 
@@ -207,9 +209,9 @@ public class UserView {
                 Roles role = Roles.valueOf(possibleRoles.get(selectedRole));
 
                 if (choice == 1) {
-                    user.addRole(role);
+                    controller.addRole(user, role);
                 } else {
-                    user.removeRole(role);
+                    controller.removeRole(user, role);
                 }
             } else {
                 System.out.println("Cargo invalido!");
