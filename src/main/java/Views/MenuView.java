@@ -1,8 +1,7 @@
 package Views;
 
-import Controllers.EventoController;
+import Controllers.EventController;
 import Controllers.UserController;
-import Controllers.LectureController;
 
 import java.util.Scanner;
 
@@ -42,7 +41,7 @@ public class MenuView {
     }
 
     public static void menuEvento() {
-        EventoController controller = new EventoController();
+        EventController controller = new EventController();
         controller.start();
     }
 

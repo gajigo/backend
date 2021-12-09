@@ -1,19 +1,19 @@
 package Controllers;
 
-import DAO.EventoDAO;
+import DAO.EventDAO;
 import Models.Event;
 import Models.User;
-import Views.EventoView;
+import Views.EventView;
 
 import java.util.List;
 
-public class EventoController {
-    private EventoDAO dao;
-    private EventoView view;
+public class EventController {
+    private EventDAO dao;
+    private EventView view;
 
-    public EventoController() {
-        this.dao = new EventoDAO();
-        this.view = new EventoView(this);
+    public EventController() {
+        this.dao = new EventDAO();
+        this.view = new EventView(this);
     }
 
     public void start(){

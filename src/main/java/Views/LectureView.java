@@ -48,7 +48,7 @@ public class LectureView {
 
     public void createLecture(){
         Scanner reader = new Scanner(System.in);
-        EventoView eventoView = new EventoView();
+        EventView eventView = new EventView();
 
         System.out.println("Digite o nome da palestra");
         String nome = reader.nextLine();
@@ -66,7 +66,7 @@ public class LectureView {
         String idioma =  reader.nextLine();
 
         System.out.println("Escolha o Evento");
-        eventoView.listar();
+        eventView.listar();
         Long evento = reader.nextLong();
 
         try{

@@ -11,12 +11,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventoDAO extends FileDAO<Event> {
-    public EventoDAO() {
+public class EventDAO extends FileDAO<Event> {
+    public EventDAO() {
         super("eventos.txt");
     }
 
-    public EventoDAO(String filename) {
+    public EventDAO(String filename) {
         super(filename);
         createEventoTable();
     }
