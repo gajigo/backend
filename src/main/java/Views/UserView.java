@@ -1,8 +1,6 @@
 package Views;
 
 import Controllers.UserController;
-import DAO.EventUserDAO;
-import DAO.UserDAO;
 import Models.Roles;
 import Models.User;
 
@@ -69,7 +67,7 @@ public class UserView {
         user.setEmail(input.nextLine());
 
         rolesMenu(user);
-        User novoUser = controller.register(user);
+        User novoUser = controller.addUser(user);
 
         System.out.println("Usuario " + novoUser.getId() + " registrado com sucesso!");
     }

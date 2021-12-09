@@ -14,29 +14,24 @@ public class UserController {
     public UserController() {
     }
 
-    public User register(User user) {
-        // Registramos o usuario com nome e senha na DAO
-        // e retornamos para o usuario modificar.
-        return this.dao.createUser(user);
+    public User addUser(User user) {
+        return dao.createUser(user);
     }
 
     public User editUser(User user) {
-        if (user != null) {
-            return this.dao.updateUser(user);
-        }
-        return null;
+        return dao.updateUser(user);
     }
 
     public List<User> getModels() {
-        return this.dao.listUsers();
+        return dao.listUsers();
     }
 
     public User getById(Long id) {
-        return this.dao.getUserById(id);
+        return dao.getUserById(id);
     }
 
     public boolean deleteById(Long id) {
-        return this.dao.deleteUserById(id);
+        return dao.deleteUserById(id);
     }
 
     public void addRole(User user, Roles roles) {
