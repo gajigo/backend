@@ -35,24 +35,22 @@ A nossa missão é engajar as pessoas de forma inteligente.
 ROADMAP
 
 2021/Q4
->
-> 
+> Levantamento de requisitos e dsenvolvimento de protótipo funcional 
 > 
 2022/Q1
->
-> 
+> Criação da identidade visual e protótipos de alta fidelidade com foco na experiência do usuário
 > 
 2022/Q2
 >
-> 
+> Desenvolvimento do backend e módulo administrativo
 > 
 2022/Q3
 >
-> 
+> Desenvolvimento frontend com módulos de interação do usuário e controle de presença
 > 
 2022/Q4
 >
-> 
+> Conclusão do MVP do produto para inicio de testes
 > 
 2023...
 
