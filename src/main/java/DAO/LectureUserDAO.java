@@ -57,7 +57,7 @@ public class LectureUserDAO {
         }
     }
 
-    public List<User>getUserPolice(Lecture lecture, Roles police)throws SQLException{
+    public List<User>getUserPolice(Lecture lecture, Roles police) throws SQLException{
         String sql = "SELECT * FROM  users " +
                 "LEFT JOIN " + tableName +
                 " USING (user_id) " +
@@ -86,7 +86,7 @@ public class LectureUserDAO {
 
     }
 
-    public void removeUserPolice (Lecture lecture, User user, Roles police)throws SQLException, NullPointerException{
+    public void removeUserPolice(Lecture lecture, User user, Roles police) throws SQLException, NullPointerException{
         String sql = "DELETE FROM " + tableName + " WHERE lecture_id = ? AND user_id = ? AND police = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
