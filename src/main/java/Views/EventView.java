@@ -5,6 +5,7 @@ import Controllers.UserController;
 import Models.Event;
 import Models.Modality;
 import Models.User;
+import org.postgresql.gss.GSSOutputStream;
 
 
 import java.sql.SQLException;
@@ -93,18 +94,20 @@ public class EventView {
             } else {
                 System.out.println("Modalidade invalida!");
             }
+
         }
     }
 
     public void menuDelete() {
-        if (controller.getModels().size() == 0) {
-            System.out.println("Nao existe eventos para deletar.");
-            return;
-        }
+        try {
+            if (controller.getModels().size() == 0) {
+                System.out.println("Nao existe eventos para deletar.");
+                return;
+            }
 
-        Scanner scanner = new Scanner(System.in);
+            Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+            while (true) {
             System.out.println("-Deletar Evento-");
             listEvents();
 
@@ -115,42 +118,52 @@ public class EventView {
                 continue;
             }
 
-            if (controller.removeEvent(id)) {
+            try{
+                controller.removeEvent(id);
                 System.out.println("Evento deletado com sucesso!");
-            } else {
-                System.out.println("Nao foi possivel deletar o Evento, confirme se escreveu o ID correto.");
+            } catch (SQLException e){
+                System.out.println("Falha ao Deletar Evento");
+            }catch (NullPointerException e) {
+                System.out.println("Falha ao Deletar Evento");
+            }
+        }catch (SQLException e){
+            System.out.println("Falha ao Deletar Evento");
             }
             return;
         }
     }
 
     public void menuEdit() {
-        if (controller.getModels().size() == 0) {
-            System.out.println("Nao existe eventos para editar.");
-            return;
-        }
-
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("-Editar Evento-");
-            listEvents();
-
-            System.out.println("Escolha um ID:");
-            Long id = (long) ViewUtils.getChoice(scanner);
-            if (id == -1) {
-                System.out.println("ID Invalido!");
-                continue;
-            }
-
-            Event event = controller.getById(id);
-            if (event == null) {
-                System.out.println("Evento nao encontrado!");
+        try {
+            if (controller.getModels().size() == 0) {
+                System.out.println("Nao existe eventos para editar.");
                 return;
             }
 
-            edit(event);
-            return;
+            Scanner scanner = new Scanner(System.in);
+
+            while (true) {
+                System.out.println("-Editar Evento-");
+                listEvents();
+
+                System.out.println("Escolha um ID:");
+                Long id = (long) ViewUtils.getChoice(scanner);
+                if (id == -1) {
+                    System.out.println("ID Invalido!");
+                    continue;
+                }
+
+                Event event = controller.getById(id);
+                if (event == null) {
+                    System.out.println("Evento nao encontrado!");
+                    return;
+                }
+
+                edit(event);
+                return;
+            }
+        } catch (SQLException e) {
+            System.out.println("Falha ao editar Evento");
         }
     }
 
@@ -197,13 +210,26 @@ public class EventView {
                 default:
                     System.out.println("Escolha invalida!");
                     break;
+
+            }
+            try {
+                controller.editEvento(event);
+                System.out.println("Evento Editado com Sucesso");
+            }catch (SQLException e){
+                System.out.println("Falha ao Salvar Edicao");
+            }catch (NullPointerException e){
+                System.out.println("Falha ao Salvar Edicao");
             }
         }
     }
 
     public void listEvents() {
-        for (Event event : controller.getModels()) {
-            System.out.printf("%d - %s - %s\n", event.getId(), event.getEventName(), event.getModalidade());
+        try {
+            for (Event event : controller.getModels()) {
+                System.out.printf("%d - %s - %s\n", event.getId(), event.getEventName(), event.getModalidade());
+            }
+        }catch (SQLException e){
+            System.out.println("Falha ao Listar Arquivos");
         }
     }
 
@@ -243,7 +269,11 @@ public class EventView {
                 }
 
                 if (choice == 1) {
-                    controller.addEventOrganizer(userController.getById(id), event);
+                    try {
+                        controller.addEventOrganizer(userController.getById(id), event);  // coloca aqui a funçao pra add no sql
+                    }catch (SQLException e){
+                        System.out.println("Falha ao Adicionar Organizador");
+                    }
                 } else {
                     controller.removeEventOrganizer(userController.getById(id), event);
                 }

@@ -76,98 +76,80 @@ public class EventDAO {
         return null;
     }
 
-    public List<Event> listEventos() {
+    public List<Event> listEventos() throws SQLException{
         String sql = "SELECT * FROM " + tableName;
 
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
 
-            List<Event> listEvents = new ArrayList<>();
-            while (resultSet.next()) {
-                Event novoEvent = new Event();
-                novoEvent.setId(resultSet.getLong("event_id"));
-                novoEvent.setEventName(resultSet.getString("event_name"));
-                novoEvent.setDescription(resultSet.getString("description"));
-                novoEvent.setModalidade(Modality.values()[resultSet.getInt("modality")]);
-                novoEvent.setDateEvent(resultSet.getString("event_date"));
+        List<Event> listEvents = new ArrayList<>();
+        while (resultSet.next()) {
+            Event novoEvent = new Event();
+            novoEvent.setId(resultSet.getLong("event_id"));
+            novoEvent.setEventName(resultSet.getString("event_name"));
+            novoEvent.setDescription(resultSet.getString("description"));
+            novoEvent.setModalidade(Modality.values()[resultSet.getInt("modality")]);
+            novoEvent.setDateEvent(resultSet.getString("event_date"));
 
-                listEvents.add(novoEvent);
-            }
-
-            return listEvents;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            listEvents.add(novoEvent);
         }
+
+        return listEvents;
     }
 
-    public void editEvent(Event event) {
+    public void editEvent(Event event) throws SQLException, NullPointerException {
         String sql = "UPDATE " + tableName + " SET event_name = ?, description = ?, modality = 2, event_date = ?" +
                 " WHERE event_id = ?";
 
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, event.getEventName());
-            statement.setString(2, event.getDescription());
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, event.getEventName());
+        statement.setString(2, event.getDescription());
 //            statement.setInt(3, evento.getModalidade().ordinal());
-            statement.setString(3, event.getDateEvent());
+        statement.setString(3, event.getDateEvent());
 
-            statement.setLong(4, event.getId());
+        statement.setLong(4, event.getId());
 
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        statement.executeUpdate();
     }
 
-    public Event getById(Long id) {
+    public Event getById(Long id) throws SQLException {
         String sql = "SELECT * FROM events WHERE event_id = ?";
 
         Event event = null;
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, id);
 
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1, id);
 
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                event = new Event();
-                event.setId(resultSet.getLong("event_id"));
-                event.setEventName(resultSet.getString("event_name"));
-                event.setDescription(resultSet.getString("description"));
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            event = new Event();
+            event.setId(resultSet.getLong("event_id"));
+            event.setEventName(resultSet.getString("event_name"));
+            event.setDescription(resultSet.getString("description"));
 //            evento.setModalidade(resultSet.getInt("modality"));
-                event.setDateEvent(resultSet.getString("event_date"));
-            }
-        }   catch (SQLException e){
-            throw new RuntimeException(e);
+            event.setDateEvent(resultSet.getString("event_date"));
         }
         return event;
-
-
     }
 
-    public boolean deleteById(Long eventoId) {
+    public boolean deleteById(Long eventoId) throws SQLException, NullPointerException{
         if (eventoId != null) {
             String sql = "DELETE FROM " + tableName + " WHERE event_id = ?";
 
-            try {
-                PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setLong(1, eventoId);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, eventoId);
 
-                statement.execute();
-                return true;
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            statement.execute();
+            return true;
         }
         return false;
     }
 
-    public void addEventOrganizer(User user, Event event){
+    public void addEventOrganizer(User user, Event event) throws SQLException{
         eventUserDAO.addUserRole(user, event, Roles.ORGANIZADOR);
     }
 
-    public void removeEventOrganizer(User user, Event event){
+    public void removeEventOrganizer(User user, Event event) throws SQLException, NullPointerException{
         eventUserDAO.removeUserRole(user, event, Roles.ORGANIZADOR);
     }
 }
