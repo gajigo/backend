@@ -1,14 +1,12 @@
 package Views;
 
-import Controllers.EventoController;
-import Controllers.UserController;
-import Controllers.LectureController;
+import Utils.ViewUtils;
 
 import java.util.Scanner;
 
 public class MenuView {
-    public static void start() {
-        Scanner ler = new Scanner(System.in);
+    public static void menu() {
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("-Menu Principal-");
             System.out.println("1 - Menu Usuario");
@@ -16,38 +14,29 @@ public class MenuView {
             System.out.println("3 - Menu Palestra");
             System.out.println("0 - Sair");
 
-            int escolha = ler.nextInt();
-            switch (escolha) {
-                case 0:
-                    return;
-                case 1:
-                    menuUsuario();
-                    break;
-                case 2:
-                    menuEvento();
-                    break;
-                case 3:
-                    menuPalestra();
-                    break;
-                default:
-                    System.out.println("Escolha invalida! Tente novamente.");
-                    break;
+            int choice = ViewUtils.getChoice(scanner);
+            switch (choice) {
+                case 0 -> System.exit(0);
+                case 1 -> menuUser();
+                case 2 -> menuEvent();
+                case 3 -> menuLecture();
+                default -> System.out.println("Escolha invalida! Tente novamente.");
             }
         }
     }
 
-    public static void menuUsuario() {
-        UserController controller = new UserController();
-        controller.start();
+    public static void menuUser() {
+        UserView view = new UserView();
+        view.menu();
     }
 
-    public static void menuEvento() {
-        EventoController controller = new EventoController();
-        controller.start();
+    public static void menuEvent() {
+        EventView view = new EventView();
+        view.menu();
     }
 
-    public static void menuPalestra(){
+    public static void menuLecture(){
         LectureView view = new LectureView();
-        view.initialMenu();
+        view.menu();
     }
 }

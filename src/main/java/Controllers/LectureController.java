@@ -2,7 +2,6 @@ package Controllers;
 
 import DAO.LectureDAO;
 import Models.*;
-import Views.LectureView;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,27 +13,15 @@ public class LectureController {
     public LectureController() {
     }
 
-    public List<Lecture> getModels(){
+    public List<Lecture> getModels() throws SQLException{
         return dao.listLecture();
     }
 
-    public Lecture createLecture(String name, String description, String date, String duration, String language, long event) throws SQLException {
-        Lecture newLecture = new Lecture();
-        Idioma newLanguage = new Idioma();
-        EventoController newEvent = new EventoController();
-
-        newLecture.setName(name);
-        newLecture.setDescription(description);
-        newLecture.setInitialDate(date);
-        newLecture.setDuration(duration);
-        newLanguage.setNome(language);
-        newLecture.getLanguage().add(newLanguage);
-        newLecture.setEvent(newEvent.getById(event));
-
-        return dao.createLectures(newLecture);
+    public Lecture createLecture(Lecture lecture) throws SQLException {
+        return dao.createLectures(lecture);
     }
 
-    public List<String> listLectureNames() {
+    public List<String> listLectureNames() throws SQLException {
         List<String> listString = new ArrayList<>();
         List<Lecture> lectures = getModels();
 
@@ -50,7 +37,7 @@ public class LectureController {
         return lectureName.get(selected);
     }
 
-    public Lecture chosenLecture(String lectureName){
+    public Lecture chosenLecture(String lectureName) throws SQLException{
         List<Lecture> lectures = getModels();
 
         for (Lecture lecture : lectures) {
@@ -60,22 +47,20 @@ public class LectureController {
         return null;
     }
 
-    public boolean deleteLecture(Lecture lecture)throws SQLException, NullPointerException{
+    public boolean deleteLecture(Lecture lecture) throws SQLException, NullPointerException{
         dao.deleteLecture(lecture);
         return false;
 
     }
 
     public void sendLectureQuestion(Lecture lecture, String lectureQuestion){
-        DuvidaPalestra newQuestion = new DuvidaPalestra();
-        newQuestion.setDuvida(lectureQuestion);
+        LectureQuestion newQuestion = new LectureQuestion();
+        newQuestion.setQuestion(lectureQuestion);
         lecture.getLectureQuestions().add(newQuestion);
     }
 
-    public void joinLecture(Lecture lecture, int user_id) throws SQLException{
-        UserController userController = new UserController();
-        User user = userController.getById(user_id);
-        dao.addLectureAttendee(lecture,user);
+    public void joinLecture(Lecture lecture, User user) throws SQLException{
+        dao.addLectureAttendee(lecture, user);
     }
 
     public void editName(Lecture lecture, String newName){
@@ -87,7 +72,7 @@ public class LectureController {
     }
 
     public void editDate(Lecture lecture, String newDate){
-        lecture.setInitialDate(newDate);
+        lecture.setStartDate(newDate);
     }
 
     public void editDescription(Lecture lecture, String newDescription){
@@ -95,7 +80,7 @@ public class LectureController {
     }
 
     public void addLanguage(Lecture lecture, String newLanguage){
-        Idioma language = new Idioma(newLanguage);
+        Language language = new Language(newLanguage);
         lecture.getLanguage().add(language);
     }
 
@@ -103,7 +88,7 @@ public class LectureController {
         int i = 0;
 
         while(lecture.getLanguage().size() > i){
-            if(lecture.getLanguage().get(i).getNome().compareToIgnoreCase(language) != 0){
+            if(lecture.getLanguage().get(i).getName().compareToIgnoreCase(language) != 0){
                 lecture.getLanguage().remove(i);
             }
             i = i + 1;
@@ -111,16 +96,16 @@ public class LectureController {
     }
 
     public void addTopic(Lecture lecture, String newTopic){
-        Assunto assunto = new Assunto();
-        assunto.setNome(newTopic);
-        lecture.getTopics().add(assunto);
+        Topic topic = new Topic();
+        topic.setName(newTopic);
+        lecture.getTopics().add(topic);
     }
 
     public void removeTopic(Lecture lecture, String topic){
         int i = 0;
 
         while(lecture.getTopics().size() > i){
-            if(lecture.getTopics().get(i).getNome().compareToIgnoreCase(topic) != 0){
+            if(lecture.getTopics().get(i).getName().compareToIgnoreCase(topic) != 0){
                 lecture.getTopics().remove(i);
             }
             i = i + 1;
@@ -139,23 +124,23 @@ public class LectureController {
         dao.editSeminar(lecture);
     }
 
-    public List<User>getAttendees(Lecture lecture){
+    public List<User>getAttendees(Lecture lecture) throws SQLException{
         return dao.getAttendees(lecture);
     }
 
-    public void evaluateLecture(Lecture lecture, long user_id, int value){
-        dao.evaluateLecture(lecture,user_id,value);
+    public void reviewLecture(Lecture lecture, User user, int value) throws SQLException{
+        dao.reviewLecture(lecture, user, value);
     }
     
-    public void editEvaluation(Lecture lecture, long user_id, int value){
+    public void editEvaluation(Lecture lecture, Long user_id, int value) throws SQLException, NullPointerException{
         dao.editEvaluation(lecture,user_id,value);
     }
 
-    public void removeEvaluation(Lecture lecture, long user_id) {
+    public void removeEvaluation(Lecture lecture, Long user_id) throws SQLException, NullPointerException {
         dao.removeEvaluation(lecture,user_id);
     }
 
-    public float averageLectureEvaluation(Lecture lecture){
+    public float averageLectureEvaluation(Lecture lecture) throws SQLException{
         return dao.averageLectureEvaluation(lecture);
     }
 }

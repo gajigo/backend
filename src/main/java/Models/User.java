@@ -1,36 +1,31 @@
 package Models;
 
 
-import DAO.DAOUser;
-
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class User implements DAOUser {
-    private static final long serialVersionUID = 2L;
-    private long userId;
+public class User {
+    private Long userId;
     private String name;
     private String password;
     private String statusLogin;
     private String email;
     private String phone;
-    private CartaoVisita businessCard;
+    private BusinessCard businessCard;
     private ArrayList<Roles> roles = new ArrayList<>();
 
     public User() {
-        statusLogin = "logado";
+        setStatusLogin("logado");
     }
 
     public User(String name, String password) {
         this();
-        this.name = name;
-        this.password = password;
-    }
-
-    public User(int userId, String name, String password, String statusLogin, ArrayList<Roles> roles) {
-        this(name, password);
-        this.userId = userId;
-        this.statusLogin = statusLogin;
-        this.roles = roles;
+        setName(name);
+        setPassword(password);
     }
 
     @Override
@@ -41,11 +36,11 @@ public class User implements DAOUser {
                 '}';
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -62,7 +57,7 @@ public class User implements DAOUser {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase(Locale.ROOT);
     }
 
     public String getPassword() {
@@ -73,12 +68,16 @@ public class User implements DAOUser {
         this.password = password;
     }
 
+    public void setNewPassword(String password) {
+        this.setPassword(this.generateHashPassword(password));
+    }
+
     public String getStatusLogin() {
         return statusLogin;
     }
 
     public void setStatusLogin(String statusLogin) {
-        this.statusLogin = statusLogin;
+        this.statusLogin = statusLogin.toUpperCase(Locale.ROOT);
     }
 
     public String getEmail() {
@@ -86,7 +85,7 @@ public class User implements DAOUser {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase(Locale.ROOT);
     }
 
     public String getPhone() {
@@ -97,11 +96,11 @@ public class User implements DAOUser {
         this.phone = phone;
     }
 
-    public CartaoVisita getBusinessCard() {
+    public BusinessCard getBusinessCard() {
         return businessCard;
     }
 
-    public void setBusinessCard(CartaoVisita businessCard) {
+    public void setBusinessCard(BusinessCard businessCard) {
         this.businessCard = businessCard;
     }
 
@@ -113,18 +112,22 @@ public class User implements DAOUser {
         this.roles = roles;
     }
 
-    public void addRole(Roles newRole) {
-        if (this.roles.contains(newRole)) {
-            return;
-        }
-        this.roles.add(newRole);
-    }
+    protected String generateHashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
 
-    public void removeRole(Roles role) {
-        this.roles.remove(role);
+            byte[] messageDigest = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            return no.toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
     }
 
     public boolean checkLogin(String password) {
-        return password.equals(this.password);
+        String hashPassword = this.generateHashPassword(password);
+        return this.password.equals(hashPassword);
     }
 }

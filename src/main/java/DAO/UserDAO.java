@@ -2,19 +2,20 @@ package DAO;
 
 import Models.Roles;
 import Models.User;
-import factory.ConnectionFactory;
+import Factory.ConnectionFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO extends FileDAO<User> {
+public class UserDAO {
+    private LoggerDAO logger = new LoggerDAO("usuario.txt");
+
     public UserDAO() {
-        super("usuarios.txt");
+
     }
 
     public UserDAO(String filename) {
-        super(filename);
         createUserTable();
     }
 
@@ -50,158 +51,167 @@ public class UserDAO extends FileDAO<User> {
         }
     }
 
-    public void insertUpdateRoles(Long userId, List<Roles> roles) {
+    public void insertUpdateRoles(Long userId, List<Roles> roles) throws SQLException {
         String sql = "DELETE FROM roles WHERE user_id = ?";
 
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1, userId);
+
+        statement.execute();
+
+        for (Roles role : roles) {
+            sql = "INSERT INTO roles " +
+                    "(user_id, role)" +
+                    "VALUES (?, ?)";
+
+            statement = connection.prepareStatement(sql);
+
             statement.setLong(1, userId);
+            if (role != null) {
+                statement.setInt(2, role.ordinal());
+            } else {
+                statement.setNull(2, Types.NULL);
+            }
 
             statement.execute();
-
-            for (Roles role : roles) {
-                sql = "INSERT INTO roles " +
-                        "(user_id, role)" +
-                        "VALUES (?, ?)";
-
-                statement = connection.prepareStatement(sql);
-
-                statement.setLong(1, userId);
-                if (role != null) {
-                    statement.setInt(2, role.ordinal());
-                } else {
-                    statement.setNull(2, Types.NULL);
-                }
-
-                statement.execute();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
-    public User createUser(User user) {
+    public User createUser(User user) throws SQLException {
         if (user != null) {
             String sql = "INSERT INTO " + tableName +
                     "(name, password, email, phone)" +
                     "VALUES (?, ?, ?, ?)";
 
-            try {
-                PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-                statement.setString(1, user.getName());
-                statement.setString(2, user.getPassword());
-                statement.setString(3, user.getEmail());
-                statement.setString(4, user.getPhone());
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-                statement.execute();
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getPhone());
 
-                ResultSet resultSet = statement.getGeneratedKeys();
+            statement.execute();
 
-                while (resultSet.next()) {
-                    user.setUserId(resultSet.getInt(1));
-                }
+            ResultSet resultSet = statement.getGeneratedKeys();
 
-                insertUpdateRoles(user.getUserId(), user.getRoles());
+            logger.logOperation("INSERÇÃO", user.toString());
 
-                return user;
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            while (resultSet.next()) {
+                user.setUserId(resultSet.getLong(1));
             }
+
+            insertUpdateRoles(user.getUserId(), user.getRoles());
+
+            return user;
+
         }
         return null;
     }
 
-    public List<User> listUsers() {
-        List<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM " + tableName;
+    public User loginUser(User user) {
+        User authenticatedUser = null;
+        String sql = "SELECT * FROM " + tableName + " " +
+                "WHERE email = ? " +
+                "AND password = ?;";
 
         try {
-            User user;
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getPassword());
+
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                user = new User();
-                user.setId(resultSet.getLong("user_id"));
-                user.setName(resultSet.getString("name"));
-                user.setPassword(resultSet.getString("password"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPhone(resultSet.getString("phone"));
-
-                users.add(user);
+                authenticatedUser = new User();
+                authenticatedUser.setId(resultSet.getLong("user_id"));
+                authenticatedUser.setName(resultSet.getString("name"));
+                authenticatedUser.setPassword(resultSet.getString("password"));
+                authenticatedUser.setEmail(resultSet.getString("email"));
+                authenticatedUser.setPhone(resultSet.getString("phone"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return authenticatedUser;
+    }
+
+    public List<User> listUsers() throws SQLException {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM " + tableName;
+
+        User user;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            user = new User();
+            user.setId(resultSet.getLong("user_id"));
+            user.setName(resultSet.getString("name"));
+            user.setPassword(resultSet.getString("password"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPhone(resultSet.getString("phone"));
+
+            users.add(user);
+        }
+
         return users;
     }
 
-    public User getUserById(Long userId) {
+    public User getUserById(Long userId) throws SQLException {
         User user = null;
         String sql = "SELECT * FROM " + tableName + " WHERE user_id = ?";
 
-        try {
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1, userId);
 
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, userId);
+        ResultSet resultSet = statement.executeQuery();
 
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                user = new User();
-                user.setId(resultSet.getLong("user_id"));
-                user.setName(resultSet.getString("name"));
-                user.setPassword(resultSet.getString("password"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPhone(resultSet.getString("phone"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        while (resultSet.next()) {
+            user = new User();
+            user.setId(resultSet.getLong("user_id"));
+            user.setName(resultSet.getString("name"));
+            user.setPassword(resultSet.getString("password"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPhone(resultSet.getString("phone"));
         }
         return user;
     }
 
-    public boolean deleteUserById(Long userId) {
+    public boolean deleteUserById(Long userId) throws SQLException {
         if (userId != null) {
             String sql = "DELETE FROM " + tableName + " WHERE user_id = ?";
 
-            try {
-                PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setLong(1, userId);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, userId);
 
-                statement.execute();
-                return true;
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            statement.execute();
+            return true;
+
         }
         return false;
     }
 
-    public User updateUser(User user) {
+    public User updateUser(User user) throws SQLException {
         if (user != null) {
             String sql = "UPDATE " + tableName + " SET " +
                     "name = ?, password = ?, email = ?, phone = ? " +
                     "WHERE user_id = ?";
 
-            try {
-                PreparedStatement statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
 
-                statement.setString(1, user.getName());
-                statement.setString(2, user.getPassword());
-                statement.setString(3, user.getEmail());
-                statement.setString(4, user.getPhone());
-                statement.setLong(5, user.getId());
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getPhone());
+            statement.setLong(5, user.getId());
 
-                statement.execute();
+            statement.execute();
 
-                insertUpdateRoles(user.getUserId(), user.getRoles());
+            insertUpdateRoles(user.getUserId(), user.getRoles());
 
-                return user;
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            return user;
+
         }
         return null;
     }

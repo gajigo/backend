@@ -1,6 +1,6 @@
 package Models;
 
-public enum Modalidade {
+public enum Modality {
     ONLINE,
     PRESENCIAL,
     HIBRIDO

@@ -1,19 +1,18 @@
 package DAO;
 
 import Models.*;
-import factory.ConnectionFactory;
+import Factory.ConnectionFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LectureDAO extends FileDAO<Lecture> {
+public class LectureDAO {
     public LectureDAO() {
-        super("lectures.txt");
         createLecturesTable();
     }
     public LectureDAO(String filename) {
-        super(filename);
+
     }
 
     private String tableName = "lectures";
@@ -29,12 +28,13 @@ public class LectureDAO extends FileDAO<Lecture> {
                 "event_id BIGINT NOT NULL, " +
                 "name TEXT, " +
                 "description TEXT," +
-                "date VARCHAR(10) ," +
+                "lecture_date VARCHAR(10) ," +
                 "duration VARCHAR(10)," +
                 "status BOOLEAN DEFAULT TRUE, " +
                 "CONSTRAINT fk_lecture_event_id " +
                     "FOREIGN KEY (event_id)" +
-                    "REFERENCES eventos(eventoId)" +
+                    "REFERENCES events(event_id)" +
+                    "ON DELETE CASCADE" +
                 ");";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -48,10 +48,10 @@ public class LectureDAO extends FileDAO<Lecture> {
         lectureUserDAO.createUserLectureTable();
     }
 
-    public Lecture createLectures(Lecture lecture) throws SQLException, NullPointerException {
+    public Lecture createLectures(Lecture lecture) {
         if (lecture != null){
             String sql = "INSERT INTO " + tableName +
-                    "(name, description, date, duration, event_id)" +
+                    "(name, description, lecture_date, duration, event_id)" +
                     "VALUES (?, ?, ?, ?, ?)";
 
             try {
@@ -59,7 +59,7 @@ public class LectureDAO extends FileDAO<Lecture> {
 
                 statement.setString(1, lecture.getName());
                 statement.setString(2, lecture.getDescription());
-                statement.setString(3, lecture.getInitialDate());
+                statement.setString(3, lecture.getStartDate());
                 statement.setString(4, lecture.getDuration());
                 statement.setLong(5, lecture.getEvent().getId());
                 statement.execute();
@@ -71,58 +71,56 @@ public class LectureDAO extends FileDAO<Lecture> {
                     lecture.setStatus(resultSet.getBoolean("status"));
                 }
                 return lecture;
-            }catch (SQLException e){
-                return null;
+            } catch (SQLException e){
+                throw new RuntimeException(e);
             }
         }
         return null;
     }
 
-    public List<Lecture> listLecture(){
+    public List<Lecture> listLecture() throws SQLException{
         String sql = "SELECT * FROM " + tableName ;
 
-        try{
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
 
-            List<Lecture> listLectures = new ArrayList<>();
-            Lecture lecture;
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
 
-            while(resultSet.next()){
-                lecture = new Lecture();
-                lecture.setId(resultSet.getLong("lecture_id"));
-                lecture.setName(resultSet.getString("name"));
-                lecture.setDescription(resultSet.getString("description"));
-                lecture.setInitialDate(resultSet.getString("date"));
-                lecture.setDuration(resultSet.getString("duration"));
-                lecture.setStatus(resultSet.getBoolean("status"));
-                lecture.setPresenter(lectureUserDAO.getUserPolice(lecture,Roles.PALESTRANTE));
-                lecture.setAttendees(lectureUserDAO.getUserPolice(lecture,Roles.CLIENTE));
+        List<Lecture> listLectures = new ArrayList<>();
+        Lecture lecture;
 
-                listLectures.add(lecture);
-            }
-            return listLectures;
-        }catch(SQLException e){
-            throw new RuntimeException(e);
+        while(resultSet.next()){
+            lecture = new Lecture();
+            lecture.setId(resultSet.getLong("lecture_id"));
+            lecture.setName(resultSet.getString("name"));
+            lecture.setDescription(resultSet.getString("description"));
+            lecture.setStartDate(resultSet.getString("lecture_date"));
+            lecture.setDuration(resultSet.getString("duration"));
+            lecture.setStatus(resultSet.getBoolean("status"));
+            lecture.setPresenters(lectureUserDAO.getUserPolice(lecture,Roles.PALESTRANTE));
+            lecture.setAttendees(lectureUserDAO.getUserPolice(lecture,Roles.CLIENTE));
+
+            listLectures.add(lecture);
         }
+        return listLectures;
+
     }
 
     public void editSeminar(Lecture lecture) throws SQLException, NullPointerException{
-        String sql = "UPDATE " + tableName + " SET name = ?, description = ?, date = ?, duration = ? WHERE lecture_id = ?";
+        String sql = "UPDATE " + tableName + " SET name = ?, description = ?, lecture_date = ?, duration = ? WHERE lecture_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setLong(5, lecture.getId());
         statement.setString(1, lecture.getName());
         statement.setString(2, lecture.getDescription());
-        statement.setString(3, lecture.getInitialDate());
+        statement.setString(3, lecture.getStartDate());
         statement.setString(4, lecture.getDuration());
 
         statement.executeUpdate();
 
     }
 
-    public void deleteLecture(Lecture lecture)throws SQLException, NullPointerException{
-        String sql = "DELETE FROM " + tableName + " WHERE id = ?";
+    public void deleteLecture(Lecture lecture) throws SQLException, NullPointerException{
+        String sql = "DELETE FROM " + tableName + " WHERE lecture_id = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setLong(1, lecture.getId());
@@ -134,11 +132,11 @@ public class LectureDAO extends FileDAO<Lecture> {
         lectureUserDAO.addUserPolice(user,lecture,Roles.CLIENTE);
     }
 
-    public void removeLectureAttendee(Lecture lecture, User user)throws SQLException, NullPointerException{
+    public void removeLectureAttendee(Lecture lecture, User user) throws SQLException, NullPointerException{
         lectureUserDAO.removeUserPolice(lecture,user,Roles.CLIENTE);
     }
 
-    public List<User> getAttendees(Lecture lecture){
+    public List<User> getAttendees(Lecture lecture) throws SQLException{
         return lectureUserDAO.getUserPolice(lecture,Roles.CLIENTE);
     }
 
@@ -146,43 +144,25 @@ public class LectureDAO extends FileDAO<Lecture> {
         lectureUserDAO.addUserPolice(presenter,lecture,Roles.PALESTRANTE);
     }
 
-    public void removeLecturePresenter(Lecture lecture, User presenter)throws SQLException, NullPointerException{
+    public void removeLecturePresenter(Lecture lecture, User presenter) throws SQLException, NullPointerException{
         lectureUserDAO.removeUserPolice(lecture,presenter,Roles.PALESTRANTE);
     }
 
-    public void evaluateLecture(Lecture lecture, long user_id, int value){
-        UserDAO user = new UserDAO();
-        try {
-            lectureEvaluationDAO.addLectureEvaluation(user.getUserById(user_id), lecture, value);
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
+    public void reviewLecture(Lecture lecture, User user, int value)throws SQLException{
+        lectureEvaluationDAO.addLectureEvaluation(user, lecture, value);
     }
 
-    public void editEvaluation(Lecture lecture, long user_id, int value) {
+    public void editEvaluation(Lecture lecture, Long user_id, int value) throws SQLException, NullPointerException {
         UserDAO user = new UserDAO();
-        try {
-            lectureEvaluationDAO.editLectureEvaluation(user.getUserById(user_id), lecture, value);
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
+        lectureEvaluationDAO.editLectureEvaluation(user.getUserById(user_id), lecture, value);
     }
 
-    public void removeEvaluation(Lecture lecture, long user_id) {
+    public void removeEvaluation(Lecture lecture, Long user_id) throws SQLException, NullPointerException{
         UserDAO user = new UserDAO();
-        
-        try{
-            lectureEvaluationDAO.removeLectureEvaluation(user.getUserById(user_id),lecture);
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
+        lectureEvaluationDAO.removeLectureEvaluation(user.getUserById(user_id),lecture);
     }
     
-    public float averageLectureEvaluation(Lecture lecture){
-        try{
-            return lectureEvaluationDAO.averageLectureEvaluation(lecture);
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
+    public float averageLectureEvaluation(Lecture lecture) throws SQLException{
+        return lectureEvaluationDAO.averageLectureEvaluation(lecture);
     }
 }
